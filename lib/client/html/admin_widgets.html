@@ -1,0 +1,51 @@
+<template name="AdminCollectionWidget">
+	{{#each admin_collections}}
+	{{#unless $eq showWidget false}}
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<a href="/admin/{{this.name}}">
+			<div class="small-box bg-{{color}}">
+				<div class="inner">
+					<h3>
+						{{adminCollectionCount name}}
+					</h3>
+					<p>
+						{{this.label}}
+					</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-{{this.icon}}"></i>
+				</div>
+				<a class="small-box-footer">
+					See all <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</a>
+	</div>
+	{{/unless}}
+	{{/each}}
+</template>
+
+<template name="AdminUserWidget">
+	<div class="col-lg-3 col-xs-6">
+		<!-- small box -->
+		<a href="/admin/users">
+			<div class="small-box bg-blue">
+				<div class="inner">
+					<h3>
+						{{adminCollectionCount 'Users'}}
+					</h3>
+					<p>
+						Users
+					</p>
+				</div>
+				<div class="icon">
+					<i class="fa fa-user"></i>
+				</div>
+				<a class="small-box-footer">
+					See all <i class="fa fa-arrow-circle-right"></i>
+				</a>
+			</div>
+		</a>
+	</div>
+</template>

@@ -1,0 +1,19 @@
+{
+      "name": "admin-dashboard",
+      "description": "A complete admin dashboard solution",
+      "homepage": "https://github.com/bpj50/meteor-admin-dashboard",
+      "author": "Ben Jones <ben@code2create.com> (http://code2create.com)",
+      "version": "0.1.0",
+      "git": "https://github.com/bpj50/meteor-admin-dashboard.git",
+      "packages": {
+          "iron-router": {},
+          "meteor-moment": {},
+          "autoform": {},
+          "handlebars-helpers": {},
+          "roles": {},
+          "coffeescript": {},
+          "less": {}
+
+
+    }
+}
