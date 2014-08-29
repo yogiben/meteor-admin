@@ -64,13 +64,16 @@ Meteor.methods
 			label: 'Email user their new password'
 
 	adminCheckAdmin: ->
-		if Roles.userIsInRole this.userId, ['admin']
+		if !Roles.userIsInRole this.userId, ['admin']
+			email = Meteor.users.findOne(_id:this.userId).emails[0].address
 			if typeof AdminConfig != 'undefined' and typeof AdminConfig.adminEmails == 'object'
 				adminEmails = AdminConfig.adminEmails
-
-				if adminEmails.indexOf(Meteor.users.findOne(_id:this.userId).emails[0].address) > -1
-					console.log 'Adding admin user: ' + this.userId
+				if adminEmails.indexOf(email) > -1
+					console.log 'Adding admin user: ' + email
 					Roles.addUsersToRoles this.userId, ['admin']
+			else if this.userId == Meteor.users.findOne({},{sort:{createdAt:1}})._id
+				console.log 'Making first user admin: ' + email
+				Roles.addUsersToRoles this.userId, ['admin']
 
 	adminAddUserToRole: (_id,role)->
 		if Roles.userIsInRole this.userId, ['admin']
