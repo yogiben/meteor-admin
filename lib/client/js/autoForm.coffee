@@ -15,11 +15,8 @@ AutoForm.hooks
 	admin_update:
 		onSubmit: (insertDoc, updateDoc, currentDoc)->
 			Meteor.call 'adminUpdateDoc', updateDoc, Session.get('admin_collection'), Session.get('admin_id'), (e,r)->
-				console.log 'error: ' + e
-				console.log  r
 				unless e
 					$('.btn-primary').removeClass('disabled')
-					AutoForm.resetForm('admin_insert')
 			false
 		beginSubmit: (formId, template)->
 			$('.btn-primary').addClass('disabled')
@@ -27,6 +24,8 @@ AutoForm.hooks
 	admin_update_user:
 		onSubmit: (insertDoc, updateDoc, currentDoc)->
 			Meteor.call 'adminUpdateUser', updateDoc, Session.get('admin_id'), (e,r)->
+				$('.btn-primary').removeClass('disabled')
+			false
 				
 			
 			
