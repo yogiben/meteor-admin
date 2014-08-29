@@ -44,8 +44,7 @@ Package.on_use(function(api){
 
   api.add_files([
     'lib/server/publish.coffee',
-    'lib/server/methods.coffee',
-    'lib/server/startup.coffee'
+    'lib/server/methods.coffee'
     ], 'server');
 
 

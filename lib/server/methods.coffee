@@ -12,10 +12,7 @@ Meteor.methods
 		if Roles.userIsInRole this.userId, ['admin']
 			Future = Npm.require('fibers/future');
 			fut = new Future();
-
 			global[collection].update {_id:_id},modifier,(e,r)->
-				console.log e
-				console.log r
 				fut['return']( {e:e,r:r} )
 			return fut.wait()
 
@@ -48,9 +45,11 @@ Meteor.methods
 
 	adminUpdateUser: (modifier,_id)->
 		if Roles.userIsInRole this.userId, ['admin']
-			console.log modifier
-			console.log _id
-			Meteor.users.update {_id:_id}, modifier, (e,r)->
+			Future = Npm.require('fibers/future');
+			fut = new Future();
+			Meteor.users.update {_id:_id},modifier,(e,r)->
+				fut['return']( {e:e,r:r} )
+			return fut.wait()
 
 	adminSendResetPasswordEmail: (doc)->
 		if Roles.userIsInRole this.userId, ['admin']

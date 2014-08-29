@@ -24,7 +24,7 @@ AutoForm.hooks
 		beginSubmit: (formId, template)->
 			$('.btn-primary').addClass('disabled')
 
-	adminUpdateUser:
+	admin_update_user:
 		onSubmit: (insertDoc, updateDoc, currentDoc)->
 			Meteor.call 'adminUpdateUser', updateDoc, Session.get('admin_id'), (e,r)->
 				
