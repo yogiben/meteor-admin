@@ -44,7 +44,11 @@ UI.registerHelper 'admin_table_value', (field,_id) ->
 			aux_property = window[field.collection].findOne({_id:aux_id})[field.collection_property]
 			'<a class="btn btn-default btn-xs" href="/admin/' +  field.collection + '/' + aux_id + '/edit">' + aux_property + '</a>'
 	else if typeof window[Session.get 'admin_collection'] != 'undefined' and typeof window[Session.get 'admin_collection'].findOne({_id:_id}) != 'undefined'
-		window[Session.get 'admin_collection'].findOne({_id:_id})[field.name]
+		value = window[Session.get 'admin_collection'].findOne({_id:_id})[field.name]
+		if typeof value == 'boolean' && value
+			'<i class="fa fa-check"></i>'
+		else
+			value
 
 UI.registerHelper 'AdminSchemas', ->
 	AdminDashboard.schemas
