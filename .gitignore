@@ -1,3 +1,4 @@
-.build*
+.build
 *.sublime-workspace
 *.sublime-project
+.build*
