@@ -159,7 +159,11 @@ Comments: {
 
 `auxCollections` is an array of the names of the other collections that this collection that this depends on. For example, comments are always associated with posts and so we need to publish and subscribe to the `Posts` collection to display the title etc. in the admin dashboard.
 
-`tableColumns` an array of objects that describe the columns that will appear in the admin dashboard. In the example, the first column will be the `content` property of the document. The second will be the `title` property of the corresponding `Posts` document where the comment's `post` property is the `_id` of that document. The third will display the user's email when the `owner` property is the `_id` of the user.
+`tableColumns` an array of objects that describe the columns that will appear in the admin dashboard.
+
+* `{label: 'Content';name:'content'}` will display the `content` property of the mongo doc.
+* `{label:'Post';name:'post',collection: 'Posts',collection_property:'title'}` will look for a doc in the 'Posts' collection with the `_id` defined by the comment's `post` property. The `title` of this document will be displayed.
+* `{label:'User',name:'owner',collection:'Users'}` will display the user's email when the `owner` property is the `_id` of the user.
 
 `omitFields` hides fields that we don't want appearing in the add / edit screens like 'updatedAt' for example. From [AutoForm](https://github.com/aldeed/meteor-autoform).
 
