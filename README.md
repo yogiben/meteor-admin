@@ -72,3 +72,58 @@ Posts.attachSchema(Schemas.Posts)
 Go to `/admin`.
 
 You should be made an admin if you followed step 2.
+
+### Customization ###
+The admin dashboard is heavily customisable. Most of the possibilities are represented in the config option below.
+```
+AdminConfig =
+    collections : 
+        Posts: {
+            icon: 'pencil'
+            tableColumns: [
+              {label: 'Title',name:'title'}
+              {label: Published',name:'published'
+              {label:'User',name:'owner',collection:'Users'}
+            ]
+            auxCollections: ['Attachments']
+            templates:
+              new:
+                name: 'postWYSIGEditor'
+                data:
+                  post: Session.get 'admin_doc'
+              edit:
+                name: 'postWYSIGEditor'
+                data:
+                  post: Session.get 'admin_doc'
+        },
+        Comments: {
+            icon: 'comment'
+            auxCollections: ['Posts']
+            omitFields: ['owner']
+            tableColumns: [
+              {label: 'Content';name:'content'}
+              {label:'Post';name:'message',collection: 'Posts',collection_property:'title'}
+              {label:'User',name:'owner',collection:'Users'}
+            ]
+            showWidget: false
+        }
+    autoForm: 
+        omitFields: ['createdAt','updatedAt']
+    dashboard:
+        homeUrl: '/dashboard'
+        widgets: [
+                    {
+            template: 'adminCollectionWidget'
+            data:
+              collection: 'Posts'
+              class: 'col-lg-3 col-xs-6'
+          }
+          {
+            template: 'adminUserWidget'
+            data:
+              class: 'col-lg-3 col-xs-6'
+          }
+        ]
+```
+
+#### Collections ####
