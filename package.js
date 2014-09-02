@@ -8,19 +8,21 @@ Package.on_use(function(api){
 
   both = ['client','server']
 
+  api.versionsFrom('METEOR@0.9.0');
+
   api.use(
-    ['iron:router',
+    ['iron:router@0.9.1',
     'coffeescript',
     'accounts-base',
     'accounts-password',
     'underscore',
-    'aldeed:simple-schema',
-    'aldeed:collection2',
-    'alanning:roles'
+    'aldeed:simple-schema@0.7.0',
+    'aldeed:collection2@0.4.6',
+    'alanning:roles@1.2.12'
     ],
     both);
 
-  api.use(['less','session','aldeed:autoform','jquery','templating'],'client')
+  api.use(['less','session','aldeed:autoform@0.17.1','jquery','templating'],'client')
 
   api.use(['email'],'server')
 
