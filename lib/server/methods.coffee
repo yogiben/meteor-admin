@@ -63,7 +63,7 @@ Meteor.methods
 			label: 'Email user their new password'
 
 	adminCheckAdmin: ->
-		if !Roles.userIsInRole this.userId, ['admin']
+		if this.userId and !Roles.userIsInRole this.userId, ['admin']
 			email = Meteor.users.findOne(_id:this.userId).emails[0].address
 			if typeof AdminConfig != 'undefined' and typeof AdminConfig.adminEmails == 'object'
 				adminEmails = AdminConfig.adminEmails
