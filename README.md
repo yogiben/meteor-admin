@@ -1,14 +1,16 @@
-meteor-admin
+Meteor Admin
 ============
 
 **Work in progress**
 
 A complete admin dashboard solution for meteor built off the [roles](https://github.com/alanning/meteor-roles/) and [autoform](https://github.com/aldeed/meteor-autoform) packages and frontend from the open source admin dashboard template, [Admin LTE](https://github.com/almasaeed2010/AdminLTE).
 
+**Feedback Welcome.** Please create an issue.
+
 ### Getting started ###
 
 #### 1. Install ####
-Download to your packages directory and run `meteor add admin` then go to `/admin` for the setup wizzard.
+Download to your packages directory and run `meteor add yogiben:admin` then go to `/admin` for the setup wizzard.
 
 #### 2. Config ####
 The simplest possible config with one, 'Posts', collection.
@@ -69,9 +71,7 @@ Schemas.Posts = new SimpleSchema
 Posts.attachSchema(Schemas.Posts)
 ```
 #### 4. Enjoy ####
-Go to `/admin`.
-
-You should be made an admin if you followed step 2.
+Go to `/admin`. If you are not made an admin, re-read step 2.
 
 ### Customization ###
 The admin dashboard is heavily customisable. Most of the possibilities are represented in the config option below.
@@ -135,7 +135,7 @@ AdminConfig =
     Comments: {}
   }
 ```
-It is possible to configure the way the collection is managed
+It is possible to configure the way the collection is managed.
 ```
 Comments: {
             icon: 'comment'
@@ -152,7 +152,7 @@ Comments: {
 ```
 `icon` is the icon code from [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/).
 
-`auxCollections` is an array of the names of the other collections that this collection that this depends on. For example, comments are always associated with posts and so we need to publish and subscribe to the `Posts` collection to display the title etc. in the admin dashboard
+`auxCollections` is an array of the names of the other collections that this collection that this depends on. For example, comments are always associated with posts and so we need to publish and subscribe to the `Posts` collection to display the title etc. in the admin dashboard.
 
 `tableColumns` an array of objects that describe the columns that will appear in the admin dashboard. In the example, the first column will be the `content` property of the document. The second will be the `title` property of the corresponding `Posts` document where the comment's `post` property is the `_id` of that document. The third will display the user's email when the `owner` property is the `_id` of the user.
 
@@ -166,6 +166,7 @@ Comments: {
 The default admin templates are autoForm instances based on the schemas assigned to the collections. If they don't do the job, you specify a custom template to use for each of the `new`,`edit` and `view` screens for each collection.
 ```
 AdminConfig =
+    ...
     collections : 
         Posts: {
             templates:
@@ -183,17 +184,19 @@ Custom templates are most used when you need to use an {{#autoForm}} instead of 
 #### Autoform ####
 ```
 AdminConfig =
+    ...
     autoForm: 
         omitFields: ['createdAt','updatedAt']
 ```
 Here you can specify globally the fields that should never appear in your `new` and `update` views. This is typically meta information likes dates.
 
-**Important** don't omit fields unless the schema specifies either an `autoValue` or `optional` is set to `true`. See [autoForm](https://github.com/aldeed/meteor-autoform)
+**Important** don't omit fields unless the schema specifies either an `autoValue` or `optional` is set to `true`. See [autoForm](https://github.com/aldeed/meteor-autoform).
 
 #### Dashboard ####
 Here you can customise the look and feel of the dashboard.
 ```
 AdminConfig =
+    ...
     dashboard:
         homeUrl: '/dashboard'
         skin: 'black'
@@ -211,7 +214,7 @@ AdminConfig =
           }
         ]
 ```
-`homeUrl` is the `href` property of the 'Home' button. Defaults to `/`
+`homeUrl` is the `href` property of the 'Home' button. Defaults to `/`.
 
 `skin` defaults to 'blue' but there is also a black skin avaiable.
 
