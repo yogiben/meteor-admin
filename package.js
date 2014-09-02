@@ -1,6 +1,7 @@
 Package.describe({
-  name: "admin",
-  summary: "A complete admin dashboard solution"
+  summary: "A complete admin dashboard solution",
+  version: "0.8.0",
+  git: "https://github.com/yogiben/meteor-admin"
 });
 
 Package.on_use(function(api){
@@ -8,17 +9,18 @@ Package.on_use(function(api){
   both = ['client','server']
 
   api.use(
-    ['iron-router',
+    ['iron:router',
     'coffeescript',
     'accounts-base',
-    'templating',
+    'accounts-password',
     'underscore',
-    'simple-schema',
-    'roles'
+    'aldeed:simple-schema',
+    'aldeed:collection2',
+    'alanning:roles'
     ],
     both);
 
-  api.use(['less','session','autoform','jquery'],'client')
+  api.use(['less','session','aldeed:autoform','jquery','templating'],'client')
 
   api.use(['email'],'server')
 
