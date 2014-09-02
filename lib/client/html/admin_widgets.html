@@ -8,7 +8,7 @@
 </template>
 
 <template name="adminCollectionWidget">
-	<div class="col-lg-3 col-xs-6">
+	<div class="{{#if class}}{{class}}{{else}}col-lg-3 col-xs-6{{/if}}">
 	{{#with adminGetCollection collection}}
 		<a href="/admin/{{this.name}}">
 			<div class="small-box bg-{{color}}">
@@ -33,7 +33,7 @@
 </template>
 
 <template name="adminUserWidget">
-	<div class="col-lg-3 col-xs-6">
+	<div class="{{#if class}}{{class}}{{else}}col-lg-3 col-xs-6{{/if}}">
 		<a href="/admin/users">
 			<div class="small-box bg-blue">
 				<div class="inner">
