@@ -38,7 +38,10 @@ UI.registerHelper 'admin_table_value', (field,_id) ->
 	if typeof field.collection == 'string' && typeof window[Session.get 'admin_collection'].findOne({_id:_id}) != 'undefined'
 		aux_id = window[Session.get 'admin_collection'].findOne({_id:_id})[field.name]
 		if field.collection == 'Users' and typeof Meteor.users.findOne({_id:aux_id}) != 'undefined'
-			aux_property = Meteor.users.findOne({_id:aux_id}).emails[0].address
+			if typeof field.collection_property != 'undefined'
+				aux_property = Meteor.users.findOne({_id:aux_id}).profile[field.collection_property]
+			else
+				aux_property = Meteor.users.findOne({_id:aux_id}).emails[0].address
 			'<a class="btn btn-default btn-xs" href="/admin/' +  'users' + '/' + aux_id + '/edit">' + aux_property + '</a>'
 		else if typeof field.collection_property == 'string' and typeof window[field.collection].findOne({_id:aux_id}) != 'undefined'
 			aux_property = window[field.collection].findOne({_id:aux_id})[field.collection_property]
