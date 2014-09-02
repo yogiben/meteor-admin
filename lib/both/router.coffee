@@ -9,7 +9,7 @@ Router.map ->
       Session.set 'admin_title', 'Dashboard'
       Session.set 'admin_collection', ''
       Session.set 'admin_collection_page', ''
-      this.render()
+      @render()
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
   @route "adminDashboardUsersNew",
@@ -23,7 +23,7 @@ Router.map ->
       Session.set 'admin_subtitle', 'Create new user'
       Session.set 'admin_collection_page', 'New'
       Session.set 'admin_collection', 'Users'
-      this.render()
+      @render()
 
   @route "adminDashboardUsersView",
     path: "/admin/Users/"
@@ -37,7 +37,7 @@ Router.map ->
       Session.set 'admin_subtitle', 'View users'
       Session.set 'admin_collection_page', ''
       Session.set 'admin_collection', 'Users'
-      this.render()
+      @render()
 
   @route "adminDashboardUsersEdit",
     path: "/admin/Users/:_id/edit"
@@ -56,7 +56,7 @@ Router.map ->
       Session.set 'admin_collection', 'Users'
       Session.set 'admin_id', @params._id
       Session.set 'admin_doc', Meteor.users.findOne({_id:@params._id})
-      this.render()
+      @render()
 
   @route "adminDashboardView",
     path: "/admin/:collection/"
@@ -70,7 +70,7 @@ Router.map ->
       Session.set 'admin_subtitle', 'View '
       Session.set 'admin_collection_page', ''
       Session.set 'admin_collection', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
-      this.render()
+      @render()
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
   @route "adminDashboardNew",
@@ -84,7 +84,7 @@ Router.map ->
       Session.set 'admin_subtitle', 'Create new'
       Session.set 'admin_collection_page', 'new'
       Session.set 'admin_collection', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
-      this.render()
+      @render()
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
   @route "adminDashboardEdit",
@@ -100,7 +100,7 @@ Router.map ->
       Session.set 'admin_collection', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
       Session.set 'admin_id', @params._id
       Session.set 'admin_doc', window[@params.collection].findOne _id : @params._id
-      this.render()
+      @render()
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
 
