@@ -127,3 +127,37 @@ AdminConfig =
 ```
 
 #### Collections ####
+`AdminConfig.collections` tells the dashboard which collections to manage based on the global variable name.
+```
+AdminConfig =
+  collections:
+    Posts: {},
+    Comments: {}
+  }
+```
+It is possible to configure the way the collection is managed
+```
+Comments: {
+            icon: 'comment'
+            auxCollections: ['Posts']
+            omitFields: ['updatedAt']
+            tableColumns: [
+              {label: 'Content';name:'content'}
+              {label:'Post';name:'post',collection: 'Posts',collection_property:'title'}
+              {label:'User',name:'owner',collection:'Users'}
+            ]
+            showWidget: false
+            color: 'red'
+        }
+```
+`icon` is the icon code from [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/).
+
+`auxCollections` is an array of the names of the other collections that this collection that this depends on. For example, comments are always associated with posts and so we need to publish and subscribe to the `Posts` collection to display the title etc. in the admin dashboard
+
+`tableColumns` an array of objects that describe the columns that will appear in the admin dashboard. In the example, the first column will be the `content` property of the document. The second will be the `title` property of the corresponding `Posts` document where the comment's `post` property is the `_id` of that document. The third will display the user's email when the `owner` property is the `_id` of the user.
+
+`omitFields` hides fields that we don't want appearing in the add / edit screens like 'updatedAt' for example. From [AutoForm](https://github.com/aldeed/meteor-autoform).
+
+`showWidget` when set to false hides the corresponding widget from the dashboard.
+
+`color` styles the widget. See the [LTE Admin documentation](http://almsaeedstudio.com/preview/).
