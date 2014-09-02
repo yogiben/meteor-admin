@@ -1,5 +1,6 @@
 Meteor Admin
 ============
+`$ meteor add yogiben:admin`
 
 **Work in progress**
 
