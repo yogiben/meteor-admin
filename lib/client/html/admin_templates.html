@@ -1,6 +1,9 @@
 <template name="AdminDashboard">
-	{{> AdminCollectionWidget }}
-	{{> AdminUserWidget}}
+	{{#each adminWidgets}}
+	{{> UI.dynamic template=template data=data}}
+	{{else}}
+	{{> adminDefaultWidgets}}
+	{{/each}}
 </template>
 
 <template name="AdminDashboardNew">

@@ -1,8 +1,15 @@
-<template name="AdminCollectionWidget">
+<template name="adminDefaultWidgets">
 	{{#each admin_collections}}
-	{{#unless $eq showWidget false}}
-	<div class="col-lg-3 col-xs-6">
-		<!-- small box -->
+		{{#unless $eq showWidget false}}
+			{{> adminCollectionWidget collection=name}}
+		{{/unless}}
+	{{/each}}
+	{{> adminUserWidget}}
+</template>
+
+<template name="adminCollectionWidget">
+	<div class="{{#if class}}{{class}}{{else}}col-lg-3 col-xs-6{{/if}}">
+	{{#with adminGetCollection collection}}
 		<a href="/admin/{{this.name}}">
 			<div class="small-box bg-{{color}}">
 				<div class="inner">
@@ -21,14 +28,12 @@
 				</a>
 			</div>
 		</a>
+		{{/with}}
 	</div>
-	{{/unless}}
-	{{/each}}
 </template>
 
-<template name="AdminUserWidget">
-	<div class="col-lg-3 col-xs-6">
-		<!-- small box -->
+<template name="adminUserWidget">
+	<div class="{{#if class}}{{class}}{{else}}col-lg-3 col-xs-6{{/if}}">
 		<a href="/admin/users">
 			<div class="small-box bg-blue">
 				<div class="inner">
