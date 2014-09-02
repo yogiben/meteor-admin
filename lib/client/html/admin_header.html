@@ -1,7 +1,11 @@
 <template name="AdminHeader">
     <header class="header">
         <a href="/admin" class="logo">
-            Champion
+            {{#if AdminConfig.name}}
+            {{AdminConfig.name}}
+            {{else}}
+            Admin
+            {{/if}}
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
