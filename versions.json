@@ -5,12 +5,28 @@
       "1.0.0"
     ],
     [
-      "application-configuration",
+      "accounts-password",
       "1.0.0"
     ],
     [
-      "autoform",
-      "0.0.0"
+      "alanning:roles",
+      "1.2.12"
+    ],
+    [
+      "aldeed:autoform",
+      "0.17.1"
+    ],
+    [
+      "aldeed:collection2",
+      "0.4.6"
+    ],
+    [
+      "aldeed:simple-schema",
+      "0.7.0"
+    ],
+    [
+      "application-configuration",
+      "1.0.0"
     ],
     [
       "binary-heap",
@@ -73,20 +89,20 @@
       "1.0.0"
     ],
     [
-      "iron-core",
-      "0.2.0"
+      "iron:core",
+      "0.3.2"
     ],
     [
-      "iron-dynamic-template",
-      "0.2.1"
+      "iron:dynamic-template",
+      "0.3.0"
     ],
     [
-      "iron-layout",
-      "0.2.0"
+      "iron:layout",
+      "0.3.0"
     ],
     [
-      "iron-router",
-      "0.8.2"
+      "iron:router",
+      "0.9.1"
     ],
     [
       "jquery",
@@ -125,12 +141,16 @@
       "1.0.1"
     ],
     [
-      "moment",
-      "0.0.0"
-    ],
-    [
       "mongo-livedata",
       "1.0.3"
+    ],
+    [
+      "mrt:moment",
+      "2.6.0"
+    ],
+    [
+      "npm-bcrypt",
+      "0.7.7"
     ],
     [
       "observe-sequence",
@@ -153,10 +173,6 @@
       "1.0.0"
     ],
     [
-      "roles",
-      "0.0.0"
-    ],
-    [
       "routepolicy",
       "1.0.0"
     ],
@@ -169,8 +185,8 @@
       "1.0.0"
     ],
     [
-      "simple-schema",
-      "0.0.0"
+      "sha",
+      "1.0.0"
     ],
     [
       "spacebars",
@@ -179,6 +195,10 @@
     [
       "spacebars-compiler",
       "1.0.1"
+    ],
+    [
+      "srp",
+      "1.0.0"
     ],
     [
       "templating",

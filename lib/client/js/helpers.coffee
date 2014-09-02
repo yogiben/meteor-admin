@@ -17,7 +17,7 @@ UI.registerHelper 'admin_current_doc', ->
 	Session.get 'admin_doc'
 
 UI.registerHelper 'admin_omit_fields', ->
-	if typeof AdminConfig != 'undefined' and typeof AdminConfig.autoForm != 'undefined' and typeof AdminConfig.autoForm.omitFields == 'object'
+	if typeof AdminConfig.autoForm != 'undefined' and typeof AdminConfig.autoForm.omitFields == 'object'
 		global = AdminConfig.autoForm.omitFields
 	if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection'].omitFields == 'object'
 		collection = AdminConfig.collections[Session.get 'admin_collection'].omitFields
@@ -83,3 +83,10 @@ UI.registerHelper 'adminCollectionCount', (collection)->
 UI.registerHelper 'adminTemplate', (collection,mode)->
 	if collection.toLowerCase() != 'users' && typeof AdminConfig.collections[collection].templates != 'undefined'
 		AdminConfig.collections[collection].templates[mode]
+
+UI.registerHelper 'adminGetCollection', (collection)->
+	AdminConfig.collections[collection]
+
+UI.registerHelper 'adminWidgets', ->
+	if typeof AdminConfig.dashboard != 'undefined' and typeof AdminConfig.dashboard.widgets != 'undefined'
+		AdminConfig.dashboard.widgets
