@@ -7,6 +7,10 @@ A complete admin dashboard solution for meteor built off the [roles](https://git
 
 **Feedback Welcome.** Please create an issue.
 
+![alt tag](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/screenshot1.png)
+
+![alt tag](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/screenshot2.png)
+
 ### Getting started ###
 
 #### 1. Install ####
