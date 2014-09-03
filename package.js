@@ -18,7 +18,8 @@ Package.on_use(function(api){
     'underscore',
     'aldeed:simple-schema@0.7.0',
     'aldeed:collection2@0.4.6',
-    'alanning:roles@1.2.12'
+    'alanning:roles@1.2.12',
+    'raix:handlebar-helpers@0.1.2'
     ],
     both);
 
