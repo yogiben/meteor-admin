@@ -1,5 +1,5 @@
 UI.registerHelper 'AdminConfig', ->
-	AdminConfig
+	AdminConfig if typeof AdminConfig != 'undefined'
 
 UI.registerHelper 'admin_collections', ->
 	if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
