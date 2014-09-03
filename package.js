@@ -9,14 +9,15 @@ Package.on_use(function(api){
   both = ['client','server']
 
   api.use(
-    ['iron:router',
+    ['iron:router@0.9.1',
     'coffeescript',
     'accounts-base',
     'accounts-password',
     'underscore',
-    'aldeed:simple-schema',
-    'aldeed:collection2',
-    'alanning:roles'
+    'aldeed:simple-schema@0.7.0',
+    'aldeed:collection2@0.4.6',
+    'alanning:roles@1.2.12',
+    'raix:handlebar-helpers@0.1.2'
     ],
     both);
 
