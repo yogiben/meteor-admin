@@ -4,7 +4,7 @@ Meteor Admin
 
 **Work in progress**
 
-A complete admin dashboard solution for meteor built off the [roles](https://github.com/alanning/meteor-roles/) and [autoform](https://github.com/aldeed/meteor-autoform) packages and frontend from the open source admin dashboard template, [Admin LTE](https://github.com/almasaeed2010/AdminLTE).
+A complete admin dashboard solution for meteor built off the [iron-router](https://github.com/EventedMind/iron-router),  [roles](https://github.com/alanning/meteor-roles/) and [autoform](https://github.com/aldeed/meteor-autoform) packages and frontend from the open source admin dashboard template, [Admin LTE](https://github.com/almasaeed2010/AdminLTE).
 
 **Feedback Welcome.** Please create an issue.
 
@@ -16,6 +16,8 @@ A complete admin dashboard solution for meteor built off the [roles](https://git
 
 #### 1. Install ####
 Download to your packages directory and run `meteor add yogiben:admin` then go to `/admin` for the setup wizzard.
+
+**Important:** this is designed to work with a project that has already been set up with Iron Router and an accounts system. It will not work properly with a simple `meteor create project` project.
 
 #### 2. Config ####
 The simplest possible config with one, 'Posts', collection.
