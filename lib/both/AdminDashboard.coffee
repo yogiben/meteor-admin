@@ -1,9 +1,9 @@
 AdminDashboard =
 	schemas: {}
 	alertSuccess: (message)->
-		alert 'Success ' + message
+		Session.set 'adminSuccess', message
 	alertFailure: (message)->
-		alert 'Failure ' + message
+		Session.set 'adminError', message
 	checkAdmin: ->
 		if not Roles.userIsInRole Meteor.userId(), ['admin']
 			Meteor.call 'adminCheckAdmin'

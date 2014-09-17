@@ -161,6 +161,10 @@
       "1.0.0"
     ],
     [
+      "raix:handlebar-helpers",
+      "0.1.2"
+    ],
+    [
       "random",
       "1.0.0"
     ],
