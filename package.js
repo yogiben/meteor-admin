@@ -1,6 +1,6 @@
 Package.describe({
   summary: "A complete admin dashboard solution",
-  version: "0.9.2",
+  version: "0.9.3",
   git: "https://github.com/yogiben/meteor-admin"
 });
 
@@ -39,6 +39,7 @@ Package.on_use(function(api){
     'lib/client/html/admin_sidebar.html',
     'lib/client/html/admin_header.html',
     'lib/client/css/admin-layout.less',
+    'lib/client/css/admin-custom.less',
     'lib/client/js/admin_layout.js',
     'lib/client/js/helpers.coffee',
     'lib/client/js/events.coffee',

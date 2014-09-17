@@ -19,7 +19,7 @@ UI.registerHelper 'admin_current_doc', ->
 UI.registerHelper 'admin_omit_fields', ->
 	if typeof AdminConfig.autoForm != 'undefined' and typeof AdminConfig.autoForm.omitFields == 'object'
 		global = AdminConfig.autoForm.omitFields
-	if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection'].omitFields == 'object'
+	if not Session.equals('admin_collection','Users') and typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection'].omitFields == 'object'
 		collection = AdminConfig.collections[Session.get 'admin_collection'].omitFields
 	if typeof global == 'object' and typeof collection == 'object'
 		_.union global, collection
