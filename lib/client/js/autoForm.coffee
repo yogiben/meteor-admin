@@ -22,14 +22,19 @@ AutoForm.hooks
 					console.log e
 					AdminDashboard.alertFailure 'Error: ' + e
 				else
-					AdminDashboard.alertSuccess 'Success'
+					AdminDashboard.alertSuccess 'Updated'
 					$('.btn-primary').removeClass('disabled')
 					AutoForm.resetForm('admin_insert')
-					Router.go '/admin/' + Session.get('admin_collection')
 					$('.btn-primary').removeClass('disabled')
 			false
 		beginSubmit: (formId, template)->
 			$('.btn-primary').addClass('disabled')
+		onError: (operation, error, template)->
+			AdminDashboard.alertFailure error.message
+
+	adminNewUser:
+		onSuccess: (operation, result, template)->
+			Router.go 'adminDashboardUsersView'
 		onError: (operation, error, template)->
 			AdminDashboard.alertFailure error.message
 
@@ -38,12 +43,6 @@ AutoForm.hooks
 			Meteor.call 'adminUpdateUser', updateDoc, Session.get('admin_id'), (e,r)->
 				$('.btn-primary').removeClass('disabled')
 			false
-		onError: (operation, error, template)->
-			AdminDashboard.alertFailure error.message
-
-	adminNewUser:
-		onSuccess: (operation, result, template)->
-			Router.go 'adminDashboardUsersView'
 		onError: (operation, error, template)->
 			AdminDashboard.alertFailure error.message
 

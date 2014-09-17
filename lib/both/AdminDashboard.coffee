@@ -4,6 +4,10 @@ AdminDashboard =
 		Session.set 'adminSuccess', message
 	alertFailure: (message)->
 		Session.set 'adminError', message
+	clearAlerts: ->
+		Session.set 'adminSuccess', null
+		Session.set 'adminError', null
+
 	checkAdmin: ->
 		if not Roles.userIsInRole Meteor.userId(), ['admin']
 			Meteor.call 'adminCheckAdmin'
