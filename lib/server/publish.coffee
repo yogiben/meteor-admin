@@ -32,5 +32,8 @@ Meteor.publish 'adminUsers', ->
 	else
 		@ready()
 
+Meteor.publish 'adminUser', ->
+	Meteor.users.find this.userId
+
 Meteor.publish null, ->
 	Meteor.roles.find({})

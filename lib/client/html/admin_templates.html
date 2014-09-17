@@ -7,6 +7,7 @@
 </template>
 
 <template name="AdminDashboardNew">
+	{{> adminAlert}}
 	{{#if adminTemplate admin_collection 'new'}}
 		{{#with adminTemplate admin_collection 'new'}}
 		{{> UI.dynamic template=name data=data }}
@@ -17,6 +18,7 @@
 </template>
 
 <template name="AdminDashboardEdit">
+	{{> adminAlert}}
 	{{#if adminTemplate admin_collection 'edit'}}
 		{{#with adminTemplate admin_collection 'edit'}}
 		{{> UI.dynamic template=name data=data }}
@@ -31,6 +33,7 @@
 
 
 <template name="AdminDashboardView">
+	{{> adminAlert}}
 	{{#if adminTemplate admin_collection 'view'}}
 		{{#with adminTemplate admin_collection 'view'}}
 		{{> UI.dynamic template=name data=data }}
@@ -71,7 +74,8 @@
 		{{else}}
 
 		<div class="alert alert-info">
-			There are no visible items in this collection
+			<p>There are no visible items in this collection.</p>
+			<p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add one</a></p>
 		</div>
 
 		{{/if}}
@@ -81,6 +85,7 @@
 
 
 <template name="AdminDashboardUsersNew">
+	{{> adminAlert}}
 	{{# autoForm id="adminNewUser" schema=AdminSchemas.newUser type="method" meteormethod="adminNewUser"}}
 
 	{{>afQuickField name="email"}}
@@ -100,6 +105,7 @@
 </template>
 
 <template name="AdminDashboardUsersView">
+	{{> adminAlert}}
 	<table class="table table-striped">
 
 		<thead>
@@ -135,6 +141,7 @@
 </template>
 
 <template name="AdminDashboardUsersEdit">
+	{{> adminAlert}}
 	{{#if adminUserSchemaExists}}
 	{{> quickForm id="admin_update_user" buttonContent="Update" buttonClasses="btn-sm" collection=adminGetUsers doc=admin_current_doc omitFields="roles,services"}}
 	<hr/>
@@ -176,6 +183,18 @@
 	{{>afQuickField name="password"}}
 	<button type="submit" class="btn btn-primary btn-sm">Change Password</button>
 	{{/autoForm}}
+</template>
 
+<template name="adminAlert">
+	{{#if $.Session.get 'adminSuccess'}}
+	<div class="alert alert-success admin-alert">
+		{{$.Session.get 'adminSuccess'}}
+	</div>
+	{{/if}}
 
+	{{#if $.Session.get 'adminError'}}
+	<div class="alert alert-danger admin-alert">
+		{{$.Session.get 'adminError'}}
+	</div>
+	{{/if}}
 </template>
