@@ -26,6 +26,7 @@ AutoForm.hooks
 					$('.btn-primary').removeClass('disabled')
 					AutoForm.resetForm('admin_insert')
 					$('.btn-primary').removeClass('disabled')
+					Router.go '/admin/' + Session.get('admin_collection')
 			false
 		beginSubmit: (formId, template)->
 			$('.btn-primary').addClass('disabled')
