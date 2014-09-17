@@ -4,7 +4,7 @@ Router.map ->
     template: "AdminDashboard"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe 'adminUsers',Meteor.subscribe 'adminAllCollections']
+      [Meteor.subscribe 'adminUsers',Meteor.subscribe 'adminAllCollections', Meteor.subscribe 'adminUser']
     action: ->
       Session.set 'admin_title', 'Dashboard'
       Session.set 'admin_collection', ''
@@ -17,7 +17,7 @@ Router.map ->
     template: "AdminDashboardUsersNew"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      Meteor.subscribe 'adminUsers'
+      [Meteor.subscribe 'adminUsers', Meteor.subscribe 'adminUser']
     action: -> 
       Session.set 'admin_title', 'Users'
       Session.set 'admin_subtitle', 'Create new user'
@@ -30,7 +30,7 @@ Router.map ->
     template: "AdminDashboardUsersView"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe 'adminUsers']
+      [Meteor.subscribe 'adminUsers', Meteor.subscribe 'adminUser']
     data: -> { users : Meteor.users.find({},{sort: {createdAt: -1}}).fetch() }
     action: -> 
       Session.set 'admin_title', 'Users'
@@ -44,7 +44,7 @@ Router.map ->
     template: "AdminDashboardUsersEdit"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe 'adminUsers']
+      [Meteor.subscribe 'adminUsers', Meteor.subscribe 'adminUser']
     data: ->
       user : Meteor.users.find({_id:@params._id}).fetch()
       roles: Roles.getRolesForUser @params._id
@@ -63,7 +63,7 @@ Router.map ->
     template: "AdminDashboardView"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe('adminCollection', @params.collection), Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers')]
+      [Meteor.subscribe('adminCollection', @params.collection), Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser']
     data: -> { documents : window[ @params.collection ].find({},{sort: {createdAt: -1}}).fetch() }
     action: -> 
       Session.set 'admin_title', AdminDashboard.collectionLabel(@params.collection)
@@ -78,7 +78,7 @@ Router.map ->
     template: "AdminDashboardNew"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers')]
+      [Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser']
     action: ->
       Session.set 'admin_title', AdminDashboard.collectionLabel(@params.collection)
       Session.set 'admin_subtitle', 'Create new'
@@ -92,7 +92,7 @@ Router.map ->
     template: "AdminDashboardEdit"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe('adminCollection', @params.collection), Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers')]
+      [Meteor.subscribe('adminCollection', @params.collection), Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser']
     action: ->
       Session.set 'admin_title', AdminDashboard.collectionLabel(@params.collection)
       Session.set 'admin_subtitle', 'Edit ' + @params._id
