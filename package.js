@@ -1,6 +1,6 @@
 Package.describe({
   summary: "A complete admin dashboard solution",
-  version: "0.9.5",
+  version: "0.9.6",
   git: "https://github.com/yogiben/meteor-admin"
 });
 
@@ -8,7 +8,7 @@ Package.on_use(function(api){
 
   both = ['client','server']
 
-  api.versionsFrom('METEOR@0.9.0');
+  api.versionsFrom('METEOR@0.9.2');
 
   api.use(
     ['iron:router@0.9.3',
@@ -23,7 +23,7 @@ Package.on_use(function(api){
     ],
     both);
 
-  api.use(['less','session','aldeed:autoform@0.17.1','jquery','templating'],'client')
+  api.use(['less','session','jquery','templating'],'client')
 
   api.use(['email'],'server')
 

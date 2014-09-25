@@ -2,27 +2,27 @@
   "dependencies": [
     [
       "accounts-base",
-      "1.0.0"
+      "1.1.0"
     ],
     [
       "accounts-password",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "alanning:roles",
-      "1.2.12"
+      "1.2.13"
     ],
     [
       "aldeed:autoform",
-      "0.17.1"
+      "2.0.2"
     ],
     [
       "aldeed:collection2",
-      "0.4.6"
+      "2.1.0"
     ],
     [
       "aldeed:simple-schema",
-      "0.7.0"
+      "1.0.3"
     ],
     [
       "application-configuration",
@@ -34,7 +34,7 @@
     ],
     [
       "blaze",
-      "1.0.3"
+      "2.0.0"
     ],
     [
       "blaze-tools",
@@ -50,15 +50,19 @@
     ],
     [
       "coffeescript",
-      "1.0.2"
+      "1.0.3"
+    ],
+    [
+      "ddp",
+      "1.0.1-ekate"
     ],
     [
       "deps",
-      "1.0.1"
+      "1.0.2"
     ],
     [
       "ejson",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "email",
@@ -70,10 +74,6 @@
     ],
     [
       "geojson-utils",
-      "1.0.0"
-    ],
-    [
-      "handlebars",
       "1.0.0"
     ],
     [
@@ -90,19 +90,19 @@
     ],
     [
       "iron:core",
-      "0.3.2"
+      "0.3.4"
     ],
     [
       "iron:dynamic-template",
-      "0.3.0"
+      "0.4.1"
     ],
     [
       "iron:layout",
-      "0.3.0"
+      "0.4.1"
     ],
     [
       "iron:router",
-      "0.9.1"
+      "0.9.3"
     ],
     [
       "jquery",
@@ -114,11 +114,11 @@
     ],
     [
       "less",
-      "1.0.6"
+      "1.0.8"
     ],
     [
       "livedata",
-      "1.0.7"
+      "1.0.8"
     ],
     [
       "localstorage",
@@ -126,7 +126,7 @@
     ],
     [
       "logging",
-      "1.0.2"
+      "1.0.2-cordova1"
     ],
     [
       "meteor",
@@ -134,15 +134,19 @@
     ],
     [
       "minifiers",
-      "1.0.2"
+      "1.0.2-glasser1"
     ],
     [
       "minimongo",
-      "1.0.1"
+      "1.0.1-cordova1"
+    ],
+    [
+      "mongo",
+      "1.0.4-rc0"
     ],
     [
       "mongo-livedata",
-      "1.0.3"
+      "1.0.4"
     ],
     [
       "mrt:moment",
@@ -170,7 +174,11 @@
     ],
     [
       "reactive-dict",
-      "1.0.0"
+      "1.0.1"
+    ],
+    [
+      "reactive-var",
+      "1.0.1-rc0"
     ],
     [
       "retry",
@@ -178,7 +186,7 @@
     ],
     [
       "routepolicy",
-      "1.0.0"
+      "1.0.0-cordova1"
     ],
     [
       "service-configuration",
@@ -186,7 +194,7 @@
     ],
     [
       "session",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "sha",
@@ -206,11 +214,15 @@
     ],
     [
       "templating",
-      "1.0.4"
+      "1.0.6"
+    ],
+    [
+      "tracker",
+      "1.0.2"
     ],
     [
       "ui",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "underscore",
@@ -218,10 +230,10 @@
     ],
     [
       "webapp",
-      "1.0.2"
+      "1.0.3"
     ]
   ],
   "pluginDependencies": [],
-  "toolVersion": "meteor-tool@1.0.26",
+  "toolVersion": "meteor-tool@1.0.31",
   "format": "1.0"
 }
