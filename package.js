@@ -11,15 +11,14 @@ Package.on_use(function(api){
   api.versionsFrom('METEOR@0.9.0');
 
   api.use(
-    ['iron:router@0.9.1',
+    ['iron:router@0.9.3',
     'coffeescript',
     'accounts-base',
     'accounts-password',
     'underscore',
-    'aldeed:simple-schema@0.7.0',
-    'aldeed:collection2@0.4.6',
-    'aldeed:autoform@0.17.1',
-    'alanning:roles@1.2.12',
+    'aldeed:collection2@2.1.0',
+    'aldeed:autoform@2.0.2',
+    'alanning:roles@1.2.13',
     'raix:handlebar-helpers@0.1.2'
     ],
     both);
