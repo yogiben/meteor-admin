@@ -90,6 +90,7 @@ Go to `/admin`. If you are not made an admin, re-read step 2.
 The admin dashboard is heavily customisable. Most of the possibilities are represented in the config option below.
 ```
 AdminConfig =
+    nonAdminRedirectRoute: 'entrySignIn',
     collections : 
         Posts: {
             icon: 'pencil'

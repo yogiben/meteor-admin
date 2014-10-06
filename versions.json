@@ -2,11 +2,11 @@
   "dependencies": [
     [
       "accounts-base",
-      "1.1.0"
+      "1.1.1"
     ],
     [
       "accounts-password",
-      "1.0.1"
+      "1.0.2"
     ],
     [
       "alanning:roles",
@@ -14,7 +14,7 @@
     ],
     [
       "aldeed:autoform",
-      "2.0.2"
+      "3.2.0"
     ],
     [
       "aldeed:collection2",
@@ -26,6 +26,10 @@
     ],
     [
       "application-configuration",
+      "1.0.2"
+    ],
+    [
+      "base64",
       "1.0.0"
     ],
     [
@@ -34,10 +38,14 @@
     ],
     [
       "blaze",
-      "2.0.0"
+      "2.0.1"
     ],
     [
       "blaze-tools",
+      "1.0.0"
+    ],
+    [
+      "boilerplate-generator",
       "1.0.0"
     ],
     [
@@ -46,7 +54,7 @@
     ],
     [
       "check",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "coffeescript",
@@ -54,23 +62,23 @@
     ],
     [
       "ddp",
-      "1.0.1-ekate"
+      "1.0.9"
     ],
     [
       "deps",
-      "1.0.2"
+      "1.0.4"
     ],
     [
       "ejson",
-      "1.0.1"
+      "1.0.3"
     ],
     [
       "email",
-      "1.0.2"
+      "1.0.3"
     ],
     [
       "follower-livedata",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "geojson-utils",
@@ -78,11 +86,11 @@
     ],
     [
       "html-tools",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "htmljs",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "id-map",
@@ -102,7 +110,7 @@
     ],
     [
       "iron:router",
-      "0.9.3"
+      "0.9.4"
     ],
     [
       "jquery",
@@ -114,11 +122,11 @@
     ],
     [
       "less",
-      "1.0.8"
+      "1.0.9"
     ],
     [
       "livedata",
-      "1.0.8"
+      "1.0.10"
     ],
     [
       "localstorage",
@@ -126,31 +134,31 @@
     ],
     [
       "logging",
-      "1.0.2-cordova1"
+      "1.0.3"
     ],
     [
       "meteor",
-      "1.0.2"
+      "1.1.1"
     ],
     [
       "minifiers",
-      "1.0.2-glasser1"
+      "1.1.0"
     ],
     [
       "minimongo",
-      "1.0.1-cordova1"
+      "1.0.3"
     ],
     [
       "mongo",
-      "1.0.4-rc0"
+      "1.0.6"
     ],
     [
       "mongo-livedata",
-      "1.0.4"
+      "1.0.5"
     ],
     [
       "mrt:moment",
-      "2.6.0"
+      "2.8.1"
     ],
     [
       "npm-bcrypt",
@@ -158,7 +166,7 @@
     ],
     [
       "observe-sequence",
-      "1.0.1"
+      "1.0.2"
     ],
     [
       "ordered-dict",
@@ -174,11 +182,11 @@
     ],
     [
       "reactive-dict",
-      "1.0.1"
+      "1.0.3"
     ],
     [
       "reactive-var",
-      "1.0.1-rc0"
+      "1.0.2"
     ],
     [
       "retry",
@@ -186,15 +194,15 @@
     ],
     [
       "routepolicy",
-      "1.0.0-cordova1"
+      "1.0.1"
     ],
     [
       "service-configuration",
-      "1.0.0"
+      "1.0.1"
     ],
     [
       "session",
-      "1.0.1"
+      "1.0.2"
     ],
     [
       "sha",
@@ -202,11 +210,11 @@
     ],
     [
       "spacebars",
-      "1.0.0"
+      "1.0.2"
     ],
     [
       "spacebars-compiler",
-      "1.0.1"
+      "1.0.2"
     ],
     [
       "srp",
@@ -214,7 +222,7 @@
     ],
     [
       "templating",
-      "1.0.6"
+      "1.0.7"
     ],
     [
       "tracker",
@@ -222,7 +230,7 @@
     ],
     [
       "ui",
-      "1.0.1"
+      "1.0.3"
     ],
     [
       "underscore",
@@ -230,10 +238,14 @@
     ],
     [
       "webapp",
-      "1.0.3"
+      "1.1.2"
+    ],
+    [
+      "webapp-hashing",
+      "1.0.0"
     ]
   ],
   "pluginDependencies": [],
-  "toolVersion": "meteor-tool@1.0.31",
+  "toolVersion": "meteor-tool@1.0.33",
   "format": "1.0"
 }

@@ -11,6 +11,8 @@ AdminDashboard =
 	checkAdmin: ->
 		if not Roles.userIsInRole Meteor.userId(), ['admin']
 			Meteor.call 'adminCheckAdmin'
+			if (typeof AdminConfig?.nonAdminRedirectRoute == "string")
+			  Router.go AdminConfig.nonAdminRedirectRoute 
 	adminRoutes: ['adminDashboard','adminDashboardUsersNew','adminDashboardUsersView','adminDashboardUsersEdit','adminDashboardView','adminDashboardNew','adminDashboardEdit','adminDashboardDetail']
 	collectionLabel: (collection)->
 		if collection == 'Users'
