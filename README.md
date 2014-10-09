@@ -14,10 +14,15 @@ A complete admin dashboard solution for meteor built off the [iron-router](https
 
 ### Getting started ###
 
+#### 0. Prerequisites####
+This package is designed to work with certain types of projects. Your project should be using
+* Iron Router - `meteor add iron:router`
+* An accounts system - e.g. `meteor add accounts-base accounts-password`
+* Bootstrap 3 - e.g. `meteor add bootstrap`
+* Fontawesome - e.g. `meteor add chrismbeckett:fontawesome4`
+
 #### 1. Install ####
 Download to your packages directory and run `meteor add yogiben:admin` then go to `/admin` for the setup wizzard.
-
-**Important:** this is designed to work with a project that has already been set up with Iron Router and an accounts system. It will not work properly with a simple `meteor create project` project.
 
 #### 2. Config ####
 The simplest possible config with one, 'Posts', collection.
@@ -85,6 +90,7 @@ Go to `/admin`. If you are not made an admin, re-read step 2.
 The admin dashboard is heavily customisable. Most of the possibilities are represented in the config option below.
 ```
 AdminConfig =
+    nonAdminRedirectRoute: 'entrySignIn',
     collections : 
         Posts: {
             icon: 'pencil'
