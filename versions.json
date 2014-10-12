@@ -17,10 +17,6 @@
       "3.2.0"
     ],
     [
-      "aldeed:collection2",
-      "2.1.0"
-    ],
-    [
       "aldeed:simple-schema",
       "1.0.3"
     ],
@@ -151,10 +147,6 @@
     [
       "mongo",
       "1.0.6"
-    ],
-    [
-      "mongo-livedata",
-      "1.0.5"
     ],
     [
       "mrt:moment",

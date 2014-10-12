@@ -13,7 +13,7 @@
 		{{> UI.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
-		{{> quickForm id="admin_insert" collection=admin_collection omitFields=admin_omit_fields buttonContent='Create'}}
+		{{> quickForm id="admin_insert" collection=admin_collection fields=admin_fields omitFields=admin_omit_fields buttonContent='Create'}}
 	{{/if}}
 </template>
 
@@ -25,7 +25,7 @@
 		{{/with}}
 	{{else}}
 		{{#if admin_current_doc}}
-		{{> quickForm id="admin_update" collection=admin_collection doc=admin_current_doc omitFields=admin_omit_fields buttonContent='Update'}}
+		{{> quickForm id="admin_update" collection=admin_collection doc=admin_current_doc fields=admin_fields omitFields=admin_omit_fields buttonContent='Update'}}
 		{{/if}}
 	{{/if}}
 </template>
