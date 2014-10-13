@@ -15,7 +15,7 @@ A complete admin dashboard solution for meteor built off the [iron-router](https
 ### Getting started ###
 
 #### 0. Prerequisites####
-This package is designed to work with certain types of projects. Your project should be using
+This package is designed to work with certain types of projects. Your project should be using and have configured
 * Iron Router - `meteor add iron:router`
 * An accounts system - e.g. `meteor add accounts-base accounts-password`
 * Bootstrap 3 - e.g. `meteor add bootstrap`
