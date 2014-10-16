@@ -96,8 +96,8 @@ AdminConfig =
             icon: 'pencil'
             tableColumns: [
               {label: 'Title',name:'title'}
-              {label: Published',name:'published'
-              {label:'User',name:'owner',collection:'Users'}
+              {label: 'Published',name:'published'
+              {label: 'User',name:'owner',collection:'Users'}
             ]
             auxCollections: ['Attachments']
             templates:
@@ -116,8 +116,8 @@ AdminConfig =
             omitFields: ['owner']
             tableColumns: [
               {label: 'Content';name:'content'}
-              {label:'Post';name:'message',collection: 'Posts',collection_property:'title'}
-              {label:'User',name:'owner',collection:'Users'}
+              {label: 'Post';name:'message',collection: 'Posts',collection_property:'title'}
+              {label: 'User',name:'owner',collection:'Users'}
             ]
             showWidget: false
         }
@@ -156,9 +156,9 @@ Comments: {
             auxCollections: ['Posts']
             omitFields: ['updatedAt']
             tableColumns: [
-              {label: 'Content';name:'content'}
-              {label:'Post';name:'post',collection: 'Posts',collection_property:'title'}
-              {label:'User',name:'owner',collection:'Users'}
+              {label: 'Content', name: 'content'}
+              {label: 'Post', name: 'post', collection: 'Posts', collection_property: 'title'}
+              {label: 'User', name: 'owner', collection: 'Users'}
             ]
             showWidget: false
             color: 'red'
@@ -204,7 +204,7 @@ Custom templates are most used when you need to use an {{#autoForm}} instead of 
 AdminConfig =
     ...
     autoForm: 
-        omitFields: ['createdAt','updatedAt']
+        omitFields: ['createdAt', 'updatedAt']
 ```
 Here you can specify globally the fields that should never appear in your `new` and `update` views. This is typically meta information likes dates.
 
