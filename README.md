@@ -57,7 +57,7 @@ Posts = new Meteor.Collection('posts');
 
 Schemas.Posts = new SimpleSchema
 	title:
-		type:String
+		type: String
 		max: 60
 	content:
 		type: String
@@ -91,13 +91,13 @@ The admin dashboard is heavily customisable. Most of the possibilities are repre
 ```
 AdminConfig =
     nonAdminRedirectRoute: 'entrySignIn',
-    collections : 
+    collections: 
         Posts: {
             icon: 'pencil'
             tableColumns: [
-              {label: 'Title',name:'title'}
-              {label: Published',name:'published'
-              {label:'User',name:'owner',collection:'Users'}
+	      {label: 'Title', name: 'title'}
+	      {label: 'Published', name: 'published'}
+	      {label: 'User', name: 'owner', collection: 'Users'}
             ]
             auxCollections: ['Attachments']
             templates:
@@ -115,18 +115,18 @@ AdminConfig =
             auxCollections: ['Posts']
             omitFields: ['owner']
             tableColumns: [
-              {label: 'Content';name:'content'}
-              {label:'Post';name:'message',collection: 'Posts',collection_property:'title'}
-              {label:'User',name:'owner',collection:'Users'}
+              {label: 'Content', name: 'content'}
+              {label: 'Post', name: 'message', collection: 'Posts', collection_property: 'title'}
+              {label: 'User', name: 'owner', collection: 'Users'}
             ]
             showWidget: false
         }
     autoForm: 
-        omitFields: ['createdAt','updatedAt']
+        omitFields: ['createdAt', 'updatedAt']
     dashboard:
         homeUrl: '/dashboard'
         widgets: [
-                    {
+          {
             template: 'adminCollectionWidget'
             data:
               collection: 'Posts'
@@ -156,9 +156,9 @@ Comments: {
             auxCollections: ['Posts']
             omitFields: ['updatedAt']
             tableColumns: [
-              {label: 'Content';name:'content'}
-              {label:'Post';name:'post',collection: 'Posts',collection_property:'title'}
-              {label:'User',name:'owner',collection:'Users'}
+              {label: 'Content', name: 'content'}
+              {label: 'Post', name: 'post', collection: 'Posts', collection_property: 'title'}
+              {label: 'User', name: 'owner', collection:'Users'}
             ]
             showWidget: false
             color: 'red'
@@ -170,9 +170,9 @@ Comments: {
 
 `tableColumns` an array of objects that describe the columns that will appear in the admin dashboard.
 
-* `{label: 'Content';name:'content'}` will display the `content` property of the mongo doc.
-* `{label:'Post';name:'post',collection: 'Posts',collection_property:'title'}` will look for a doc in the 'Posts' collection with the `_id` defined by the comment's `post` property. The `title` of this document will be displayed.
-* `{label:'User',name:'owner',collection:'Users'}` will display the user's email when the `owner` property is the `_id` of the user.
+* `{label: 'Content', name:'content'}` will display the `content` property of the mongo doc.
+* `{label: 'Post', name: 'post', collection: 'Posts', collection_property: 'title'}` will look for a doc in the 'Posts' collection with the `_id` defined by the comment's `post` property. The `title` of this document will be displayed.
+* `{label: 'User', name: 'owner', collection: 'Users'}` will display the user's email when the `owner` property is the `_id` of the user.
 
 `omitFields` hides fields that we don't want appearing in the add / edit screens like 'updatedAt' for example. From [AutoForm](https://github.com/aldeed/meteor-autoform).
 
@@ -185,7 +185,7 @@ The default admin templates are autoForm instances based on the schemas assigned
 ```
 AdminConfig =
     ...
-    collections : 
+    collections: 
         Posts: {
             templates:
               new:
@@ -204,7 +204,7 @@ Custom templates are most used when you need to use an {{#autoForm}} instead of 
 AdminConfig =
     ...
     autoForm: 
-        omitFields: ['createdAt','updatedAt']
+        omitFields: ['createdAt', 'updatedAt']
 ```
 Here you can specify globally the fields that should never appear in your `new` and `update` views. This is typically meta information likes dates.
 
@@ -219,7 +219,7 @@ AdminConfig =
         homeUrl: '/dashboard'
         skin: 'black'
         widgets: [
-                    {
+          {
             template: 'adminCollectionWidget'
             data:
               collection: 'Posts'
