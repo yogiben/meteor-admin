@@ -97,3 +97,11 @@ UI.registerHelper 'adminGetCollection', (collection)->
 UI.registerHelper 'adminWidgets', ->
 	if typeof AdminConfig.dashboard != 'undefined' and typeof AdminConfig.dashboard.widgets != 'undefined'
 		AdminConfig.dashboard.widgets
+		
+UI.registerHelper 'adminUserEmail', (user) ->
+	if user && user.emails && user.emails[0] && user.emails[0].address
+		user.emails[0].address
+	else if user && user.services && user.services.facebook && user.services.facebook.email
+		user.services.facebook.email
+	else if user && user.services && user.services.google && user.services.google.email
+		user.services.google.email
