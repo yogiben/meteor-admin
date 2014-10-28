@@ -174,6 +174,8 @@ Comments: {
 * `{label:'Post';name:'post',collection: 'Posts',collection_property:'title'}` will look for a doc in the 'Posts' collection with the `_id` defined by the comment's `post` property. The `title` of this document will be displayed.
 * `{label:'User',name:'owner',collection:'Users'}` will display the user's email when the `owner` property is the `_id` of the user.
 
+`fields` is an array of field names - set when the form should only show these fields. From [AutoForm](https://github.com/aldeed/meteor-autoform).
+
 `omitFields` hides fields that we don't want appearing in the add / edit screens like 'updatedAt' for example. From [AutoForm](https://github.com/aldeed/meteor-autoform).
 
 `showWidget` when set to false hides the corresponding widget from the dashboard.

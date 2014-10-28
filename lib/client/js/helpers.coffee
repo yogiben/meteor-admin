@@ -16,6 +16,13 @@ UI.registerHelper 'admin_current_id', ->
 UI.registerHelper 'admin_current_doc', ->
 	Session.get 'admin_doc'
 
+
+UI.registerHelper 'admin_fields', ->
+	if not Session.equals('admin_collection','Users') and typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection'].fields == 'object'
+		x = AdminConfig.collections[Session.get 'admin_collection'].fields
+		console.log x
+		x
+
 UI.registerHelper 'admin_omit_fields', ->
 	if typeof AdminConfig.autoForm != 'undefined' and typeof AdminConfig.autoForm.omitFields == 'object'
 		global = AdminConfig.autoForm.omitFields
