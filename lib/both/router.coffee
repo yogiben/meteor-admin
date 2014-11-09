@@ -138,4 +138,4 @@ Router.map ->
       # AccountsEntry.signInRequired this
 
 Router.onBeforeAction AdminDashboard.checkAdmin, {only: AdminDashboard.adminRoutes}
-Router.onBeforeAction AdminDashboard.checkAdmin, {only: AdminDashboard.adminRoutes}
+Router.onBeforeAction AdminDashboard.clearAlerts, {only: AdminDashboard.adminRoutes}
