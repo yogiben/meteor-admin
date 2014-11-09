@@ -4,7 +4,11 @@ Router.map ->
     template: "AdminDashboard"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe 'adminUsers',Meteor.subscribe 'adminAllCollections', Meteor.subscribe 'adminUser']
+      [
+        Meteor.subscribe 'adminUsers'
+        Meteor.subscribe 'adminAllCollections'
+        Meteor.subscribe 'adminUser'
+      ]
     action: ->
       @render()
     onAfterAction: ->
@@ -18,7 +22,10 @@ Router.map ->
     template: "AdminDashboardUsersNew"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe 'adminUsers', Meteor.subscribe 'adminUser']
+      [
+        Meteor.subscribe 'adminUsers'
+        Meteor.subscribe 'adminUser'
+      ]
     action: ->
       @render()
     onAfterAction: ->
@@ -32,7 +39,10 @@ Router.map ->
     template: "AdminDashboardUsersView"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe 'adminUsers', Meteor.subscribe 'adminUser']
+      [
+        Meteor.subscribe 'adminUsers'
+        Meteor.subscribe 'adminUser'
+      ]
     data: -> { users : Meteor.users.find({},{sort: {createdAt: -1}}).fetch() }
     action: ->
       @render()
@@ -47,7 +57,10 @@ Router.map ->
     template: "AdminDashboardUsersEdit"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe 'adminUsers', Meteor.subscribe 'adminUser']
+      [
+        Meteor.subscribe 'adminUsers'
+        Meteor.subscribe 'adminUser'
+      ]
     data: ->
       user : Meteor.users.find({_id:@params._id}).fetch()
       roles: Roles.getRolesForUser @params._id
@@ -67,7 +80,11 @@ Router.map ->
     template: "AdminDashboardView"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe('adminCollection', @params.collection), Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser']
+      [
+        Meteor.subscribe('adminCollection', @params.collection)
+        Meteor.subscribe('adminAuxCollections', @params.collection)
+        Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser'
+      ]
     data: -> { documents : window[ @params.collection ].find({},{sort: {createdAt: -1}}).fetch() }
     action: ->
       @render()
@@ -83,7 +100,11 @@ Router.map ->
     template: "AdminDashboardNew"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser']
+      [
+        Meteor.subscribe('adminAuxCollections', @params.collection)
+        Meteor.subscribe('adminUsers')
+        Meteor.subscribe 'adminUser'
+      ]
     action: ->
       @render()
     onAfterAction: ->
@@ -98,7 +119,12 @@ Router.map ->
     template: "AdminDashboardEdit"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [Meteor.subscribe('adminCollection', @params.collection), Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser']
+      [
+        Meteor.subscribe('adminCollection', @params.collection)
+        Meteor.subscribe('adminAuxCollections', @params.collection)
+        Meteor.subscribe('adminUsers')
+        Meteor.subscribe 'adminUser'
+      ]
     action: ->
       @render()
     onAfterAction: ->
@@ -112,4 +138,4 @@ Router.map ->
       # AccountsEntry.signInRequired this
 
 Router.onBeforeAction AdminDashboard.checkAdmin, {only: AdminDashboard.adminRoutes}
-Router.onBeforeAction AdminDashboard.clearAlerts, {only: AdminDashboard.adminRoutes}
+Router.onBeforeAction AdminDashboard.checkAdmin, {only: AdminDashboard.adminRoutes}
