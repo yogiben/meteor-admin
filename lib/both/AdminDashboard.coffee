@@ -7,14 +7,16 @@ AdminDashboard =
 	clearAlerts: ->
 		Session.set 'adminSuccess', null
 		Session.set 'adminError', null
-		@next()
+		if typeof @.next == 'function'
+			@next()
 
 	checkAdmin: ->
 		if not Roles.userIsInRole Meteor.userId(), ['admin']
 			Meteor.call 'adminCheckAdmin'
 			if (typeof AdminConfig?.nonAdminRedirectRoute == "string")
-			  Router.go AdminConfig.nonAdminRedirectRoute 
-		@next()
+			  Router.go AdminConfig.nonAdminRedirectRoute
+		if typeof @.next == 'function'
+			@next()
 	adminRoutes: ['adminDashboard','adminDashboardUsersNew','adminDashboardUsersView','adminDashboardUsersEdit','adminDashboardView','adminDashboardNew','adminDashboardEdit','adminDashboardDetail']
 	collectionLabel: (collection)->
 		if collection == 'Users'
