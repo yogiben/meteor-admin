@@ -81,11 +81,7 @@ Router.map ->
     layoutTemplate: "AdminLayout"
     waitOn: ->
       [Meteor.subscribe('adminCollection', @params.collection), Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser']
-    data: -> 
-      { 
-        documents : adminCollectionObject(@params.collection).find({},{sort: {createdAt: -1}}).fetch()
-        admin_collection: adminCollectionObject(@params.collection)
-      }
+    data: -> { documents : adminCollectionObject(@params.collection).find({},{sort: {createdAt: -1}}).fetch() }
     action: -> 
       Session.set 'admin_title', AdminDashboard.collectionLabel(@params.collection)
       Session.set 'admin_subtitle', 'View '
