@@ -13,7 +13,7 @@ Router.map ->
       @render()
     onAfterAction: ->
       Session.set 'admin_title', 'Dashboard'
-      Session.set 'admin_collection', ''
+      Session.set 'admin_collection_name', ''
       Session.set 'admin_collection_page', ''
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
@@ -32,7 +32,7 @@ Router.map ->
       Session.set 'admin_title', 'Users'
       Session.set 'admin_subtitle', 'Create new user'
       Session.set 'admin_collection_page', 'New'
-      Session.set 'admin_collection', 'Users'
+      Session.set 'admin_collection_name', 'Users'
 
   @route "adminDashboardUsersView",
     path: "/admin/Users/"
@@ -50,7 +50,7 @@ Router.map ->
       Session.set 'admin_title', 'Users'
       Session.set 'admin_subtitle', 'View users'
       Session.set 'admin_collection_page', ''
-      Session.set 'admin_collection', 'Users'
+      Session.set 'admin_collection_name', 'Users'
 
   @route "adminDashboardUsersEdit",
     path: "/admin/Users/:_id/edit"
@@ -71,7 +71,7 @@ Router.map ->
       Session.set 'admin_title', 'Users'
       Session.set 'admin_subtitle', 'Edit user ' + @params._id
       Session.set 'admin_collection_page', 'edit'
-      Session.set 'admin_collection', 'Users'
+      Session.set 'admin_collection_name', 'Users'
       Session.set 'admin_id', @params._id
       Session.set 'admin_doc', Meteor.users.findOne({_id:@params._id})
 
@@ -80,19 +80,18 @@ Router.map ->
     template: "AdminDashboardView"
     layoutTemplate: "AdminLayout"
     waitOn: ->
-      [
-        Meteor.subscribe('adminCollection', @params.collection)
-        Meteor.subscribe('adminAuxCollections', @params.collection)
-        Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser'
-      ]
-    data: -> { documents : window[ @params.collection ].find({},{sort: {createdAt: -1}}).fetch() }
-    action: ->
-      @render()
-    onAfterAction: ->
+      [Meteor.subscribe('adminCollection', @params.collection), Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser']
+    data: -> 
+      { 
+        documents : adminCollectionObject(@params.collection).find({},{sort: {createdAt: -1}}).fetch()
+        admin_collection: adminCollectionObject(@params.collection)
+      }
+    action: -> 
       Session.set 'admin_title', AdminDashboard.collectionLabel(@params.collection)
       Session.set 'admin_subtitle', 'View '
       Session.set 'admin_collection_page', ''
-      Session.set 'admin_collection', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
+      Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
+      @render()
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
   @route "adminDashboardNew",
@@ -111,7 +110,8 @@ Router.map ->
       Session.set 'admin_title', AdminDashboard.collectionLabel(@params.collection)
       Session.set 'admin_subtitle', 'Create new'
       Session.set 'admin_collection_page', 'new'
-      Session.set 'admin_collection', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
+      Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
+    data: -> { admin_collection: adminCollectionObject(@params.collection) }
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
   @route "adminDashboardEdit",
@@ -131,9 +131,11 @@ Router.map ->
       Session.set 'admin_title', AdminDashboard.collectionLabel(@params.collection)
       Session.set 'admin_subtitle', 'Edit ' + @params._id
       Session.set 'admin_collection_page', 'edit'
-      Session.set 'admin_collection', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
+      Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
+      # Session.set 'admin_collection', adminCollectionObject(@params.collection)
       Session.set 'admin_id', @params._id
-      Session.set 'admin_doc', window[@params.collection].findOne _id : @params._id
+      Session.set 'admin_doc', adminCollectionObject(@params.collection).findOne _id : @params._id
+    data: -> { admin_collection: adminCollectionObject(@params.collection) }
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
 

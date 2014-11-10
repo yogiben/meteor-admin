@@ -8,8 +8,8 @@
 
 <template name="AdminDashboardNew">
 	{{> adminAlert}}
-	{{#if adminTemplate admin_collection 'new'}}
-		{{#with adminTemplate admin_collection 'new'}}
+	{{#if adminTemplate admin_collection_name 'new'}}
+		{{#with adminTemplate admin_collection_name 'new'}}
 		{{> UI.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
@@ -19,8 +19,8 @@
 
 <template name="AdminDashboardEdit">
 	{{> adminAlert}}
-	{{#if adminTemplate admin_collection 'edit'}}
-		{{#with adminTemplate admin_collection 'edit'}}
+	{{#if adminTemplate admin_collection_name 'edit'}}
+		{{#with adminTemplate admin_collection_name 'edit'}}
 		{{> UI.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
@@ -34,8 +34,8 @@
 
 <template name="AdminDashboardView">
 	{{> adminAlert}}
-	{{#if adminTemplate admin_collection 'view'}}
-		{{#with adminTemplate admin_collection 'view'}}
+	{{#if adminTemplate admin_collection_name 'view'}}
+		{{#with adminTemplate admin_collection_name 'view'}}
 		{{> UI.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
@@ -60,8 +60,8 @@
 					<td>{{{admin_table_value this ../_id}}}</td>
 					{{/each}}
 					<td>
-					<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-					<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+					<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+					<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
 					</td>
 					<td>
 						<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
@@ -75,7 +75,7 @@
 
 		<div class="alert alert-info">
 			<p>There are no visible items in this collection.</p>
-			<p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add one</a></p>
+			<p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add one</a></p>
 		</div>
 
 		{{/if}}
@@ -127,8 +127,8 @@
 				<td><a href="mailto:{{adminUserEmail this}}" class="btn btn-default btn-xs"><i class="fa fa-envelope"></i></a></td>
 				<td>{{this.createdAt}}</td>
 				<td>
-					<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-					<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+					<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+					<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
 				</td>
 				<td>
 					<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>

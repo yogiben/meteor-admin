@@ -1,6 +1,6 @@
 Meteor.publish 'adminCollection', (collection) ->
-	if Roles.userIsInRole @userId, ['admin']
-		global[collection].find()
+	if Roles.userIsInRole this.userId, ['admin']
+		adminCollectionObject(collection).find()
 	else
 		@ready()
 
@@ -9,7 +9,7 @@ Meteor.publish 'adminAuxCollections', (collection) ->
 		if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[collection].auxCollections == 'object'
 			subscriptions = []
 			_.each AdminConfig.collections[collection].auxCollections, (collection)->
-				subscriptions.push global[collection].find()
+				subscriptions.push adminCollectionObject(collection).find()
 			subscriptions
 		else
 			@ready()
@@ -21,7 +21,7 @@ Meteor.publish 'adminAllCollections', ->
 		if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
 			subscriptions = []
 			_.map AdminConfig.collections, (obj, key)->
-				subscriptions.push global[key].find()
+				subscriptions.push adminCollectionObject(key).find()
 			subscriptions
 	else
 		@ready()
