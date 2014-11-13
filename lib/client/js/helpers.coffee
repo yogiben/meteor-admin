@@ -18,8 +18,8 @@ UI.registerHelper 'admin_current_doc', ->
 
 
 UI.registerHelper 'admin_fields', ->
-	if not Session.equals('admin_collection','Users') and typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection'].fields == 'object'
-		x = AdminConfig.collections[Session.get 'admin_collection'].fields
+	if not Session.equals('admin_collection','Users') and typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'].fields == 'object'
+		x = AdminConfig.collections[Session.get 'admin_collection_name'].fields
 		console.log x
 		x
 
