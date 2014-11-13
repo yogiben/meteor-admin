@@ -30,7 +30,8 @@ Package.on_use(function(api){
 
   api.add_files([
     'lib/both/AdminDashboard.coffee',
-    'lib/both/router.coffee'
+    'lib/both/router.coffee',
+    'lib/both/utils.coffee'
     ], both);
 
   api.add_files([

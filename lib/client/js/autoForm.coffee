@@ -1,13 +1,13 @@
 AutoForm.hooks
 	admin_insert:
 		onSubmit: (insertDoc, updateDoc, currentDoc)->
-			Meteor.call 'adminInsertDoc', insertDoc, Session.get('admin_collection'), (e,r)->
+			Meteor.call 'adminInsertDoc', insertDoc, Session.get('admin_collection_name'), (e,r)->
 				if e
 					AdminDashboard.alertFailure 'Error: ' + e
 				else
 					$('.btn-primary').removeClass('disabled')
 					AutoForm.resetForm('admin_insert')
-					Router.go '/admin/' + Session.get('admin_collection')
+					Router.go '/admin/' + Session.get('admin_collection_name')
 					AdminDashboard.alertSuccess 'Successfully created'
 			false
 		beginSubmit: (formId, template)->
@@ -17,7 +17,7 @@ AutoForm.hooks
 
 	admin_update:
 		onSubmit: (insertDoc, updateDoc, currentDoc)->
-			Meteor.call 'adminUpdateDoc', updateDoc, Session.get('admin_collection'), Session.get('admin_id'), (e,r)->
+			Meteor.call 'adminUpdateDoc', updateDoc, Session.get('admin_collection_name'), Session.get('admin_id'), (e,r)->
 				if e
 					console.log e
 					AdminDashboard.alertFailure 'Error: ' + e
@@ -26,7 +26,7 @@ AutoForm.hooks
 					$('.btn-primary').removeClass('disabled')
 					AutoForm.resetForm('admin_insert')
 					$('.btn-primary').removeClass('disabled')
-					Router.go '/admin/' + Session.get('admin_collection')
+					Router.go '/admin/' + Session.get('admin_collection_name')
 			false
 		beginSubmit: (formId, template)->
 			$('.btn-primary').addClass('disabled')
