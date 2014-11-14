@@ -1,3 +1,27 @@
+utils = {
+	getTableCols: ->
+		if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection'] != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection'].tableColumns == 'object'
+			cols = AdminConfig.collections[Session.get 'admin_collection'].tableColumns
+		else
+			if Session.get('admin_collection') == 'Users'
+				cols = AdminDashboard.coreColumns.users
+			else
+				cols = [
+					{title: 'ID', data: '_id'},
+					{title: 'Title', data: 'title'},
+					{title: 'Edit', data:'_id', render: AdminDashboard.formatters.edit},
+					{title: 'Delete', data:'_id', render: AdminDashboard.formatters.del}
+				]
+
+		_.map cols, (entry) ->
+			if typeof entry.title == 'undefined'
+				entry.title = entry.label
+			if typeof entry.data == 'undefined'
+				entry.data = entry.name
+
+		cols
+}
+
 UI.registerHelper 'AdminConfig', ->
 	AdminConfig if typeof AdminConfig != 'undefined'
 
@@ -36,10 +60,7 @@ UI.registerHelper 'admin_omit_fields', ->
 		collection
 
 UI.registerHelper 'admin_table_columns', ->
-	if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection'] != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection'].tableColumns == 'object'
-		AdminConfig.collections[Session.get 'admin_collection'].tableColumns
-	else
-		[{label: 'ID';name:'_id'},{label:'Title';name:'title'}]
+	utils.getTableCols()
 
 UI.registerHelper 'admin_table_value', (field,_id) ->
 	if typeof field.collection == 'string' && typeof window[Session.get 'admin_collection'].findOne({_id:_id}) != 'undefined'
@@ -97,11 +118,35 @@ UI.registerHelper 'adminGetCollection', (collection)->
 UI.registerHelper 'adminWidgets', ->
 	if typeof AdminConfig.dashboard != 'undefined' and typeof AdminConfig.dashboard.widgets != 'undefined'
 		AdminConfig.dashboard.widgets
-		
+
 UI.registerHelper 'adminUserEmail', (user) ->
-	if user && user.emails && user.emails[0] && user.emails[0].address
-		user.emails[0].address
-	else if user && user.services && user.services.facebook && user.services.facebook.email
-		user.services.facebook.email
-	else if user && user.services && user.services.google && user.services.google.email
-		user.services.google.email
+	AdminDashboard.helpers.getUserEmail(user)
+
+UI.registerHelper 'adminDataTableOpts', ->
+	cols = utils.getTableCols()
+	opts = _.extend dataTableOptions, { columns: cols }
+	return opts
+
+UI.registerHelper 'adminDataTableData', ->
+	cols = utils.getTableCols()
+	getFields = {}
+	data = null
+
+	_.map cols, (val, key, list) ->
+		getFields[val.data] = 1
+
+	if typeof Session.get 'admin_collection' != 'undefined'
+		if Session.get('admin_collection') == 'Users'
+			data = ->
+				return (
+					Meteor.users.find({}, {fields: getFields }).fetch()
+				)
+		else
+			data = ->
+				return (
+					window[Session.get('admin_collection')].find({}, {fields: getFields }).fetch()
+				)
+
+		data
+	else
+		console.warn 'No Data'

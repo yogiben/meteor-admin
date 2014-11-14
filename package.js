@@ -20,7 +20,9 @@ Package.on_use(function(api){
     'aldeed:collection2@2.2.0',
     'aldeed:autoform@4.0.2',
     'alanning:roles@1.2.13',
-    'raix:handlebar-helpers@0.1.3'
+    'raix:handlebar-helpers@0.1.3',
+    'ephemer:reactive-datatables',
+    'mrt:moment'
     ],
     both);
 
@@ -45,8 +47,14 @@ Package.on_use(function(api){
     'lib/client/js/helpers.coffee',
     'lib/client/js/events.coffee',
     'lib/client/js/slim_scroll.js',
-    'lib/client/js/datatable.js',
     'lib/client/js/autoForm.coffee',
+    'lib/client/css/bootstrap-datatables.css',
+    'lib/client/js/bootstrap-datatables.js',
+    'lib/client/images/sort_asc_disabled.png',
+    'lib/client/images/sort_asc.png',
+    'lib/client/images/sort_both.png',
+    'lib/client/images/sort_desc_disabled.png',
+    'lib/client/images/sort_desc.png'
     ], 'client');
 
   api.add_files([
