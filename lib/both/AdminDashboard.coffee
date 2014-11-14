@@ -30,7 +30,6 @@ formatters = {
 		if viewType == 'display'
 			collection = Session.get 'admin_collection'
 			auxList = AdminConfig.collections[collection].auxCollections
-			console.log AdminConfig.collections[collection].auxCollections, auxList.length
 			if auxList.length > 0
 				if auxList.length == 1
 					item = window[auxList[0]].find(id, {fields: {title: 1, _id: 1}}).fetch()
@@ -65,7 +64,10 @@ formatters = {
 		'<i class="fa fa-' + iconClass + '"></i>';
 
 	isAdmin: (id) ->
-		formatters.icon('check') if Roles.userIsInRole(id, 'admin')
+		if Roles.userIsInRole(id, 'admin')
+			formatters.icon('check')
+		else
+			formatters.icon('times')
 
 	link: (href, content, classes='admin-link', extraLinkParams='') ->
 		'<a href="' + href + '" class="' + classes + '" ' + extraLinkParams + '>' + content + '</a>'
