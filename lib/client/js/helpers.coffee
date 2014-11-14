@@ -9,8 +9,8 @@ utils = {
 				cols = [
 					{title: 'ID', data: '_id'},
 					{title: 'Title', data: 'title'},
-					{title: 'Edit', data:'_id', reder: formatters.edit},
-					{title: 'Delete', data:'_id', reder: formatters.del},
+					{title: 'Edit', data:'_id', render: AdminDashboard.formatters.edit},
+					{title: 'Delete', data:'_id', render: AdminDashboard.formatters.del}
 				]
 
 		_.map cols, (entry) ->
@@ -120,12 +120,7 @@ UI.registerHelper 'adminWidgets', ->
 		AdminConfig.dashboard.widgets
 
 UI.registerHelper 'adminUserEmail', (user) ->
-	if user && user.emails && user.emails[0] && user.emails[0].address
-		user.emails[0].address
-	else if user && user.services && user.services.facebook && user.services.facebook.email
-		user.services.facebook.email
-	else if user && user.services && user.services.google && user.services.google.email
-		user.services.google.email
+	AdminDashboard.helpers.getUserEmail(user)
 
 UI.registerHelper 'adminDataTableOpts', ->
 	cols = utils.getTableCols()

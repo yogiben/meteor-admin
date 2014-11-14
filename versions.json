@@ -14,7 +14,7 @@
     ],
     [
       "aldeed:autoform",
-      "4.0.0"
+      "4.0.2"
     ],
     [
       "aldeed:collection2",
@@ -78,7 +78,7 @@
     ],
     [
       "ephemer:reactive-datatables",
-      "1.0.1"
+      "1.0.0"
     ],
     [
       "follower-livedata",
