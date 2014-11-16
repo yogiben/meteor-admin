@@ -4,7 +4,7 @@ Meteor.methods
 			Future = Npm.require('fibers/future');
 			fut = new Future();
 
-			global[collection].insert doc, (e,_id)->
+			adminCollectionObject(collection).insert doc, (e,_id)->
 				fut['return']( {e:e,_id:_id} )
 			return fut.wait()
 
@@ -12,7 +12,7 @@ Meteor.methods
 		if Roles.userIsInRole this.userId, ['admin']
 			Future = Npm.require('fibers/future');
 			fut = new Future();
-			global[collection].update {_id:_id},modifier,(e,r)->
+			adminCollectionObject(collection).update {_id:_id},modifier,(e,r)->
 				fut['return']( {e:e,r:r} )
 			return fut.wait()
 
@@ -21,7 +21,8 @@ Meteor.methods
 			if collection == 'Users'
 				Meteor.users.remove {_id:_id}
 			else
-				global[collection].remove {_id:_id}
+				# global[collection].remove {_id:_id}
+				adminCollectionObject(collection).remove {_id: _id}
 
 
 	adminNewUser: (doc) ->
