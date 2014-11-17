@@ -66,7 +66,12 @@ Meteor.methods
 	adminCheckAdmin: ->
 		if this.userId and !Roles.userIsInRole this.userId, ['admin']
 			email = Meteor.users.findOne(_id:this.userId).emails[0].address
-			if typeof AdminConfig != 'undefined' and typeof AdminConfig.adminEmails == 'object'
+			if typeof Meteor.settings.adminEmails != 'undefined'
+				adminEmails = Meteor.settings.adminEmails
+				if adminEmails.indexOf(email) > -1
+					console.log 'Adding admin user: ' + email
+					Roles.addUsersToRoles this.userId, ['admin']
+			else if typeof AdminConfig != 'undefined' and typeof AdminConfig.adminEmails == 'object'
 				adminEmails = AdminConfig.adminEmails
 				if adminEmails.indexOf(email) > -1
 					console.log 'Adding admin user: ' + email
