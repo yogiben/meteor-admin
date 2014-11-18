@@ -43,7 +43,7 @@ UI.registerHelper 'admin_table_columns', ->
 
 UI.registerHelper 'admin_table_value', (field,_id) ->
 	if typeof field.collection == 'string' && typeof adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id}) != 'undefined'
-		aux_id = adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id})[field.name]
+		aux_id = lookup field.name, adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id})
 		if field.collection == 'Users' and typeof Meteor.users.findOne({_id:aux_id}) != 'undefined'
 			if typeof field.collection_property != 'undefined'
 				aux_property = Meteor.users.findOne({_id:aux_id}).profile[field.collection_property]
@@ -51,10 +51,10 @@ UI.registerHelper 'admin_table_value', (field,_id) ->
 				aux_property = Meteor.users.findOne({_id:aux_id}).emails[0].address
 			'<a class="btn btn-default btn-xs" href="/admin/' +  'users' + '/' + aux_id + '/edit">' + aux_property + '</a>'
 		else if typeof field.collection_property == 'string' and typeof adminCollectionObject(field.collection).findOne({_id:aux_id}) != 'undefined'
-			aux_property = adminCollectionObject(field.collection).findOne({_id:aux_id})[field.collection_property]
+			aux_property = lookup field.collection_property adminCollectionObject(field.collection).findOne({_id:aux_id})
 			'<a class="btn btn-default btn-xs" href="/admin/' +  field.collection + '/' + aux_id + '/edit">' + aux_property + '</a>'
 	else if typeof adminCollectionObject(Session.get 'admin_collection_name') != 'undefined' and typeof adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id}) != 'undefined'
-		value = adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id})[field.name]
+		value = lookup field.name, adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id})
 		if typeof value == 'boolean' && value
 			'<i class="fa fa-check"></i>'
 		else
