@@ -15,7 +15,7 @@
 		callback args... unless stop
 
 @adminCollectionRoute = (collectionName) ->
-	collectionName.charAt(0).toLowerCase() + collectionName.slice(1) + '_home0'
+	'admin_collections_' + collectionName + '_home0'
 
 @lookup = (obj, ref) ->
 	if typeof ref == 'undefined'
