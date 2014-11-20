@@ -30,8 +30,6 @@
 	{{/if}}
 </template>
 
-
-
 <template name="AdminDashboardView">
 	{{> adminAlert}}
 	{{#if adminTemplate admin_collection_name 'view'}}
@@ -39,50 +37,10 @@
 		{{> UI.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
-		{{#if documents}}
-
-		<table class="table table-striped">
-
-			<thead>
-				<tr>
-					{{#each admin_table_columns}}
-					<th>{{this.label}}</th>
-					{{/each}}
-					<th>Edit</th>
-					<th>Delete</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				{{#each documents}}
-				<tr>
-					{{#each admin_table_columns}}
-					<td>{{{admin_table_value this ../_id}}}</td>
-					{{/each}}
-					<td>
-					<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-					<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-					</td>
-					<td>
-						<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
-						<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
-					</td>
-				</tr>
-				{{/each}}
-			</tbody>
-		</table>
-		{{else}}
-
-		<div class="alert alert-info">
-			<p>There are no visible items in this collection.</p>
-			<p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add one</a></p>
-		</div>
-
-		{{/if}}
+		{{> pages}}
+		{{> pagesNav}}
 	{{/if}}
 </template>
-
-
 
 <template name="AdminDashboardUsersNew">
 	{{> adminAlert}}
@@ -197,4 +155,37 @@
 		{{$.Session.get 'adminError'}}
 	</div>
 	{{/if}}
+</template>
+
+<template name="adminPagesTable">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				{{#each admin_table_columns}}
+				<th>{{this.label}}</th>
+				{{/each}}
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{> _pagesPage}}
+		</tbody>
+	</table>
+</template>
+
+<template name="adminPagesItem">
+	<tr>
+		{{#each admin_table_columns}}
+			<td>{{{admin_table_value this ../_id}}}</td>
+		{{/each}}
+		<td>
+			<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+			<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+		</td>
+		<td>
+			<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
+			<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
+		</td>
+	</tr>
 </template>

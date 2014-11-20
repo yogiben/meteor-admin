@@ -75,21 +75,6 @@ Router.map ->
       Session.set 'admin_id', @params._id
       Session.set 'admin_doc', Meteor.users.findOne({_id:@params._id})
 
-  @route "adminDashboardView",
-    path: "/admin/:collection/"
-    template: "AdminDashboardView"
-    layoutTemplate: "AdminLayout"
-    waitOn: ->
-      [Meteor.subscribe('adminCollection', @params.collection), Meteor.subscribe('adminAuxCollections', @params.collection), Meteor.subscribe('adminUsers'), Meteor.subscribe 'adminUser']
-    data: -> { documents : adminCollectionObject(@params.collection).find({},{sort: {createdAt: -1}}).fetch() }
-    action: -> 
-      Session.set 'admin_title', AdminDashboard.collectionLabel(@params.collection)
-      Session.set 'admin_subtitle', 'View '
-      Session.set 'admin_collection_page', ''
-      Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
-      @render()
-    # onBeforeAction: ->
-      # AccountsEntry.signInRequired this
   @route "adminDashboardNew",
     path: "/admin/:collection/new"
     template: "AdminDashboardNew"
