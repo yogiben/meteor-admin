@@ -23,7 +23,7 @@ AdminDashboard =
 			'Users'
 		else if collection? and typeof AdminConfig.collections[collection].label == 'string'
 			AdminConfig.collections[collection].label
-		else Session.get 'admin_collection'
+		else Session.get 'admin_collection_name'
 
 
 AdminDashboard.schemas.newUser = new SimpleSchema

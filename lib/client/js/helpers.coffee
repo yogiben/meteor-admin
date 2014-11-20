@@ -1,10 +1,13 @@
+# FIXME: this may affect user template
+Template.adminPagesTable.replaces('_pagesTable')
+
 UI.registerHelper 'AdminConfig', ->
 	AdminConfig if typeof AdminConfig != 'undefined'
 
 UI.registerHelper 'admin_collections', ->
 	if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
 		_.map AdminConfig.collections, (obj, key)->
-			obj = _.extend obj, {name:key}
+			obj = _.extend obj, {name:key, routeName: adminCollectionRoute(key)}
 			obj = _.defaults obj, {label: key,icon:'plus',color:'blue'}
 
 UI.registerHelper 'admin_collection_name', ->

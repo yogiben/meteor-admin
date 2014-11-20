@@ -7,6 +7,9 @@
 		else
 			window[collection]
 
+@adminCollectionRoute = (collectionName) ->
+	collectionName.charAt(0).toLowerCase() + collectionName.slice(1) + '_home0'
+
 @lookup = (obj, ref) ->
 	if typeof ref == 'undefined'
 		ref = if Meteor.isServer then global else window

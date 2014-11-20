@@ -19,8 +19,10 @@ Package.on_use(function(api){
     'underscore',
     'aldeed:collection2@2.2.0',
     'aldeed:autoform@4.0.2',
+    'aldeed:template-extension@3.1.1',
     'alanning:roles@1.2.13',
-    'raix:handlebar-helpers@0.1.3'
+    'raix:handlebar-helpers@0.1.3',
+    'alethes:pages@1.7.0'
     ],
     both);
 
@@ -31,7 +33,8 @@ Package.on_use(function(api){
   api.add_files([
     'lib/both/AdminDashboard.coffee',
     'lib/both/router.coffee',
-    'lib/both/utils.coffee'
+    'lib/both/utils.coffee',
+    'lib/both/startup.coffee'
     ], both);
 
   api.add_files([
