@@ -6,3 +6,10 @@
 			global[collection]
 		else
 			window[collection]
+
+@adminCallback = (name, args, callback) ->
+	stop = false
+	if typeof AdminConfig?.callbacks?[name] == 'function'
+		stop = AdminConfig.callbacks[name](args...) is false
+	if typeof callback == 'function'
+		callback args... unless stop

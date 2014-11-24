@@ -7,7 +7,8 @@ AutoForm.hooks
 				else
 					$('.btn-primary').removeClass('disabled')
 					AutoForm.resetForm('admin_insert')
-					Router.go '/admin/' + Session.get('admin_collection_name')
+					adminCallback 'onInsert', [Session.get 'admin_collection_name', insertDoc, updateDoc, currentDoc], (collection) ->
+						Router.go "/admin/#{collection}"
 					AdminDashboard.alertSuccess 'Successfully created'
 			false
 		beginSubmit: (formId, template)->
@@ -26,7 +27,8 @@ AutoForm.hooks
 					$('.btn-primary').removeClass('disabled')
 					AutoForm.resetForm('admin_insert')
 					$('.btn-primary').removeClass('disabled')
-					Router.go '/admin/' + Session.get('admin_collection_name')
+					adminCallback 'onUpdate', [Session.get 'admin_collection_name', insertDoc, updateDoc, currentDoc], (collection) ->
+						Router.go "/admin/#{collection}"
 			false
 		beginSubmit: (formId, template)->
 			$('.btn-primary').addClass('disabled')
