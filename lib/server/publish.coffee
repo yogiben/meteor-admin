@@ -1,10 +1,12 @@
 Meteor.publish 'adminCollection', (collection) ->
+	check collection, String
 	if Roles.userIsInRole this.userId, ['admin']
 		adminCollectionObject(collection).find()
 	else
 		@ready()
 
 Meteor.publish 'adminAuxCollections', (collection) ->
+	check collection, String
 	if Roles.userIsInRole @userId, ['admin']
 		if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[collection].auxCollections == 'object'
 			subscriptions = []
