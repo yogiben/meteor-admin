@@ -47,6 +47,7 @@ Package.on_use(function(api){
     'lib/client/css/admin-custom.less',
     'lib/client/js/admin_layout.js',
     'lib/client/js/helpers.coffee',
+    'lib/client/js/templates.coffee',
     'lib/client/js/events.coffee',
     'lib/client/js/slim_scroll.js',
     'lib/client/js/datatable.js',

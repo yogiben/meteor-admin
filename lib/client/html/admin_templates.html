@@ -129,12 +129,12 @@
 					<th>Admin</th>
 					<th>Email</th>
 					<th>Mail</th>
-					<th>Joined</th>
+					<th>{{> adminPagesSort label="Joined" field="createdAt"}}</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				{{else}}
 					{{#each admin_table_columns}}
-						<th>{{this.label}}</th>
+						<th>{{> adminPagesSort label=this.label field=this.name}}</th>
 					{{/each}}
 					<th>Edit</th>
 					<th>Delete</th>
@@ -182,4 +182,8 @@
 			<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
 		</td>
 	</tr>
+</template>
+
+<template name="adminPagesSort">
+	<span class="admin_pages_sort">{{label}} {{#if icon}}<span class="fa fa-{{icon}}"></span>{{/if}}</span>
 </template>

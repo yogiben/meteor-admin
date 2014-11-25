@@ -86,3 +86,7 @@ Meteor.methods
 	adminRemoveUserToRole: (_id,role)->
 		if Roles.userIsInRole this.userId, ['admin']
 			Roles.removeUsersFromRoles _id, role
+
+	adminSetCollectionSort: (collection, _sort) ->
+		global.AdminPages[collection].set
+			sort: _sort
