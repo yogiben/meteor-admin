@@ -5,10 +5,14 @@ UI.registerHelper 'AdminConfig', ->
 	AdminConfig if typeof AdminConfig != 'undefined'
 
 UI.registerHelper 'admin_collections', ->
+	collections = {}
 	if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
-		_.map AdminConfig.collections, (obj, key)->
-			obj = _.extend obj, {name:key, routeName: adminCollectionRoute(key)}
-			obj = _.defaults obj, {label: key,icon:'plus',color:'blue'}
+		collections = AdminConfig.collections
+	collections.Users = AdminUsersCollection
+
+	_.map collections, (obj, key) ->
+		obj = _.extend obj, {name:key, routeName: adminCollectionRoute(key)}
+		obj = _.defaults obj, {label: key,icon:'plus',color:'blue'}
 
 UI.registerHelper 'admin_collection_name', ->
 	Session.get 'admin_collection_name'
@@ -18,6 +22,9 @@ UI.registerHelper 'admin_current_id', ->
 
 UI.registerHelper 'admin_current_doc', ->
 	Session.get 'admin_doc'
+
+UI.registerHelper 'admin_is_users_collection', ->
+	Session.get('admin_collection_name') == 'Users'
 
 
 UI.registerHelper 'admin_fields', ->

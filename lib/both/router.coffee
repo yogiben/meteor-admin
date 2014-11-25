@@ -34,24 +34,6 @@ Router.map ->
       Session.set 'admin_collection_page', 'New'
       Session.set 'admin_collection_name', 'Users'
 
-  @route "adminDashboardUsersView",
-    path: "/admin/Users/"
-    template: "AdminDashboardUsersView"
-    layoutTemplate: "AdminLayout"
-    waitOn: ->
-      [
-        Meteor.subscribe 'adminUsers'
-        Meteor.subscribe 'adminUser'
-      ]
-    data: -> { users : Meteor.users.find({},{sort: {createdAt: -1}}).fetch() }
-    action: ->
-      @render()
-    onAfterAction: ->
-      Session.set 'admin_title', 'Users'
-      Session.set 'admin_subtitle', 'View users'
-      Session.set 'admin_collection_page', ''
-      Session.set 'admin_collection_name', 'Users'
-
   @route "adminDashboardUsersEdit",
     path: "/admin/Users/:_id/edit"
     template: "AdminDashboardUsersEdit"
