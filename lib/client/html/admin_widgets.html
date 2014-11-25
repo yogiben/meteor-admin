@@ -4,7 +4,6 @@
 			{{> adminCollectionWidget collection=name}}
 		{{/unless}}
 	{{/each}}
-	{{> adminUserWidget}}
 </template>
 
 <template name="adminCollectionWidget">
@@ -29,28 +28,5 @@
 			</div>
 		</a>
 		{{/with}}
-	</div>
-</template>
-
-<template name="adminUserWidget">
-	<div class="{{#if class}}{{class}}{{else}}col-lg-3 col-xs-6{{/if}}">
-		<a href="/admin/users">
-			<div class="small-box bg-blue">
-				<div class="inner">
-					<h3>
-						{{adminCollectionCount 'Users'}}
-					</h3>
-					<p>
-						Users
-					</p>
-				</div>
-				<div class="icon">
-					<i class="fa fa-user"></i>
-				</div>
-				<a class="small-box-footer">
-					See all <i class="fa fa-arrow-circle-right"></i>
-				</a>
-			</div>
-		</a>
 	</div>
 </template>
