@@ -50,7 +50,6 @@ Package.on_use(function(api){
     'lib/client/js/templates.coffee',
     'lib/client/js/events.coffee',
     'lib/client/js/slim_scroll.js',
-    'lib/client/js/datatable.js',
     'lib/client/js/autoForm.coffee',
     ], 'client');
 
