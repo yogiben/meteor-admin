@@ -14,7 +14,7 @@
     ],
     [
       "aldeed:autoform",
-      "4.0.2"
+      "4.0.7"
     ],
     [
       "aldeed:collection2",
@@ -23,6 +23,14 @@
     [
       "aldeed:simple-schema",
       "1.1.0"
+    ],
+    [
+      "aldeed:template-extension",
+      "3.1.1"
+    ],
+    [
+      "alethes:pages",
+      "1.7.1"
     ],
     [
       "application-configuration",
@@ -98,35 +106,35 @@
     ],
     [
       "iron:controller",
-      "1.0.0"
+      "1.0.3"
     ],
     [
       "iron:core",
-      "1.0.0"
+      "1.0.3"
     ],
     [
       "iron:dynamic-template",
-      "1.0.0"
+      "1.0.3"
     ],
     [
       "iron:layout",
-      "1.0.0"
+      "1.0.3"
     ],
     [
       "iron:location",
-      "1.0.1"
+      "1.0.3"
     ],
     [
       "iron:middleware-stack",
-      "1.0.0"
+      "1.0.3"
     ],
     [
       "iron:router",
-      "1.0.1"
+      "1.0.3"
     ],
     [
       "iron:url",
-      "1.0.0"
+      "1.0.3"
     ],
     [
       "jquery",
@@ -174,7 +182,7 @@
     ],
     [
       "mrt:moment",
-      "2.8.1"
+      "2.6.0"
     ],
     [
       "npm-bcrypt",
