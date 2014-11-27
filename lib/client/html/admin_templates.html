@@ -129,12 +129,12 @@
 					<th>Admin</th>
 					<th>Email</th>
 					<th>Mail</th>
-					<th>{{> adminPagesSort label="Joined" field="createdAt"}}</th>
+					<th class="admin-sortable">{{> adminPagesSort label="Joined" field="createdAt"}}</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				{{else}}
 					{{#each admin_table_columns}}
-						<th>{{> adminPagesSort label=this.label field=this.name}}</th>
+						<th class="admin-sortable">{{> adminPagesSort label=this.label field=this.name}}</th>
 					{{/each}}
 					<th>Edit</th>
 					<th>Delete</th>
@@ -185,5 +185,5 @@
 </template>
 
 <template name="adminPagesSort">
-	<span class="admin_pages_sort">{{label}} {{#if icon}}<span class="fa fa-{{icon}}"></span>{{/if}}</span>
+	<div class="admin_pages_sort">{{label}} {{#if icon}}<span class="fa fa-{{icon}}"></span>{{/if}}</div>
 </template>
