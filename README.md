@@ -243,10 +243,18 @@ AdminConfig =
 #### Extending Dashboard ####
 There are few things you can do to integrate your package with meteor-admin. Remember to wrap it in Meteor.startup on client.
 
+#####Create custom path to admin dashboard#####
+
+```
+AdminDashboard.path '/:collection/delete'
+```
+
+Note: you can omit the leading slash (it will be inserted automatically).
+
 #####Add sidebar item with single link#####
 
 ```
-AdminDashboard.addSidebarItem 'New User', '/admin/Users/new', icon: 'plus'
+AdminDashboard.addSidebarItem 'New User', AdminDashboard.path('/Users/new'), icon: 'plus'
 ```
 
 #####Add sidebar item with multiple links#####
@@ -255,14 +263,14 @@ AdminDashboard.addSidebarItem 'New User', '/admin/Users/new', icon: 'plus'
 AdminDashboard.addSidebarItem 'Analytics',
     icon: 'line-chart'
     urls: [
-      { title: 'Statistics', url: '/admin/analytics/statistics' },
-      { title: 'Settings', url: '/admin/analytics/settings' }
+      { title: 'Statistics', url: AdminDashboard.path('/analytics/statistics') },
+      { title: 'Settings', url: AdminDashboard.path('/analytics/settings') }
     ]
 ```
 
 #####Add link to collection item#####
 
-This will iterate through all collection items in sidebar and call your function. If you return an object with `title` and `url` properties the link will be added. Otherwise it will be ignored.
+This will iterate through all collection items in sidebar and call your function. If you return an object with the `title` and `url` properties the link will be added. Otherwise it will be ignored.
 
 ```
 AdminDashboard.addCollectionItem (collection, path) ->

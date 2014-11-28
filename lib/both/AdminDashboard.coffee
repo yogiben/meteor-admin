@@ -40,6 +40,12 @@ AdminDashboard =
 	addCollectionItem: (fn) ->
 		@collectionItems.push fn
 
+	path: (s) ->
+		path = '/admin'
+		if typeof s == 'string' and s.length > 0
+			path += (if s[0] == '/' then '' else '/') + s
+		path
+
 
 AdminDashboard.schemas.newUser = new SimpleSchema
 	email: 
