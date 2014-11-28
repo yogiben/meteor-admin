@@ -29,6 +29,9 @@
 					<ul class="treeview-menu">
 						<li><a href="{{pathFor 'adminDashboardNew' collection=this.name}}"><i class="fa fa-angle-double-right"></i> New</a></li>
 						<li><a href="{{pathFor routeName}}"><i class="fa fa-angle-double-right"></i> View All</a></li>
+						{{#each admin_collection_items}}
+						<li><a href="{{url}}"><i class="fa fa-angle-double-right"></i> {{title}}</a></li>
+						{{/each}}
 					</ul>
 				</li>
 				{{/each}}

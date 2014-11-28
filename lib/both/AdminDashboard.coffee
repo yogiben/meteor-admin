@@ -1,6 +1,7 @@
 AdminDashboard =
 	schemas: {}
 	sidebarItems: []
+	collectionItems: []
 	alertSuccess: (message)->
 		Session.set 'adminSuccess', message
 	alertFailure: (message)->
@@ -35,6 +36,9 @@ AdminDashboard =
 			item.options = options
 
 		@sidebarItems.push item
+
+	addCollectionItem: (fn) ->
+		@collectionItems.push fn
 
 
 AdminDashboard.schemas.newUser = new SimpleSchema

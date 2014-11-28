@@ -29,6 +29,14 @@ UI.registerHelper 'admin_is_users_collection', ->
 UI.registerHelper 'admin_sidebar_items', ->
 	AdminDashboard.sidebarItems
 
+UI.registerHelper 'admin_collection_items', ->
+	items = []
+	_.each AdminDashboard.collectionItems, (fn) =>
+		item = fn @name, '/admin/' + @name
+		if item?.title and item?.url
+			items.push item
+	items
+
 UI.registerHelper 'admin_fields', ->
 	if not Session.equals('admin_collection','Users') and typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'].fields == 'object'
 		x = AdminConfig.collections[Session.get 'admin_collection_name'].fields

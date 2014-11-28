@@ -259,3 +259,14 @@ AdminDashboard.addSidebarItem 'Analytics',
       { title: 'Settings', url: '/admin/analytics/settings' }
     ]
 ```
+
+#####Add link to collection item#####
+
+This will iterate through all collection items in sidebar and call your function. If you return an object with `title` and `url` properties the link will be added. Otherwise it will be ignored.
+
+```
+AdminDashboard.addCollectionItem (collection, path) ->
+    if collection == 'Users'
+        title: 'Delete'
+        url: path + '/delete'
+```
