@@ -26,6 +26,8 @@ UI.registerHelper 'admin_current_doc', ->
 UI.registerHelper 'admin_is_users_collection', ->
 	Session.get('admin_collection_name') == 'Users'
 
+UI.registerHelper 'admin_sidebar_items', ->
+	AdminDashboard.sidebarItems
 
 UI.registerHelper 'admin_fields', ->
 	if not Session.equals('admin_collection','Users') and typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'].fields == 'object'

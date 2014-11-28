@@ -32,7 +32,42 @@
 					</ul>
 				</li>
 				{{/each}}
+				{{#each admin_sidebar_items}}
+					{{#if options.urls}}
+						{{> adminSidebarItemTree}}
+					{{else}}
+						{{> adminSidebarItem}}
+					{{/if}}
+				{{/each}}
 			</ul>
 		</section>
 	</aside>
+</template>
+
+<template name="adminSidebarItem">
+	<li>
+		<a href="{{url}}">
+			{{#if options.icon}}
+			<i class="fa fa-{{options.icon}}"></i>
+			{{/if}}
+			<span>{{title}}</span>
+		</a>
+	</li>
+</template>
+
+<template name="adminSidebarItemTree">
+	<li class="treeview">
+		<a href="#">
+			{{#if options.icon}}
+			<i class="fa fa-{{options.icon}}"></i>
+			{{/if}}
+			<span>{{title}}</span>
+			<i class="fa fa-angle-left pull-right"></i>
+		</a>
+		<ul class="treeview-menu">
+			{{#each options.urls}}
+			<li><a href="{{url}}"><i class="fa fa-angle-double-right"></i>{{title}}</a></li>
+			{{/each}}
+		</ul>
+	</li>
 </template>

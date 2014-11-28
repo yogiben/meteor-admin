@@ -1,5 +1,6 @@
 AdminDashboard =
 	schemas: {}
+	sidebarItems: []
 	alertSuccess: (message)->
 		Session.set 'adminSuccess', message
 	alertFailure: (message)->
@@ -24,6 +25,16 @@ AdminDashboard =
 		else if collection? and typeof AdminConfig.collections[collection].label == 'string'
 			AdminConfig.collections[collection].label
 		else Session.get 'admin_collection_name'
+
+	addSidebarItem: (title, url, options) ->
+		item = title: title
+		if _.isObject(url) and typeof options == 'undefined'
+			item.options = url
+		else
+			item.url = url
+			item.options = options
+
+		@sidebarItems.push item
 
 
 AdminDashboard.schemas.newUser = new SimpleSchema

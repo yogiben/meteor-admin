@@ -239,3 +239,23 @@ AdminConfig =
 `skin` defaults to 'blue' but there is also a black skin avaiable.
 
 `widgets` is an array of objects specifying template names and data contexts. Make sure to specify the `class` in the data context. If set, the `widgets` property will override the collection widgets which appear by default.
+
+#### Extending Dashboard ####
+There are few things you can do to integrate your package with meteor-admin. Remember to wrap it in Meteor.startup on client.
+
+#####Add sidebar item with single link#####
+
+```
+AdminDashboard.addSidebarItem 'New User', '/admin/Users/new', icon: 'plus'
+```
+
+#####Add sidebar item with multiple links#####
+
+```
+AdminDashboard.addSidebarItem 'Analytics',
+    icon: 'line-chart'
+    urls: [
+      { title: 'Statistics', url: '/admin/analytics/statistics' },
+      { title: 'Settings', url: '/admin/analytics/settings' }
+    ]
+```
