@@ -143,6 +143,7 @@
 		</thead>
 		<tbody>
 			{{> _pagesPage}}
+			{{> adminFilters}}
 		</tbody>
 	</table>
 </template>
@@ -186,4 +187,15 @@
 
 <template name="adminPagesSort">
 	<div class="admin_pages_sort">{{label}} {{#if icon}}<span class="fa fa-{{icon}}"></span>{{/if}}</div>
+</template>
+
+<template name="adminFilters">
+	<tr>
+		{{#if admin_is_users_collection}}
+		{{else}}
+		{{#each admin_table_columns}}
+			<td><input type="text" data-field="{{name}}"></td>
+		{{/each}}
+		{{/if}}
+	</tr>
 </template>

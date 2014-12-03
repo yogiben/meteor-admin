@@ -35,6 +35,7 @@ Meteor.startup ->
 				itemTemplate: 'adminPagesItem'
 				availableSettings:
 					sort: true
+					filters: true
 				# force meteor-pages to render a table
 				table: {}
 

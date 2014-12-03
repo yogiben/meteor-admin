@@ -18,3 +18,19 @@ Template.adminPagesSort.events
 			else
 				sort[@field] = if sort[@field] == 1 then -1 else 1
 			AdminPages[collectionName].setSort sort
+
+Template.adminFilters.events
+	'change input': (e) ->
+		collectionName = Session.get 'admin_collection_name'
+		field = e.target.getAttribute 'data-field'
+		value = e.target.value
+
+		filters = _.clone AdminPages[collectionName].page.filters
+		if value.length > 0
+			filters[field] = $regex: value, $options: 'i'
+		else if filters[field]
+			delete filters[field]
+
+		AdminPages[collectionName].page.set
+			filters: filters
+
