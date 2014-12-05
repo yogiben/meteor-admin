@@ -80,6 +80,22 @@ UI.registerHelper 'admin_table_value', (field,_id) ->
 		else
 			value
 
+UI.registerHelper 'admin_table_filters', ->
+	if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'] != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'].tableColumns == 'object'
+		columns = AdminConfig.collections[Session.get 'admin_collection_name'].tableColumns
+		filters = _.map columns, (column) ->
+			filterTemplates =
+				text: 'adminTextFilter'
+				number: 'adminNumberFilter'
+
+			filterType = if typeof column.filterType == 'string' then column.filterType else 'text'
+			{
+				field: column.name
+				label: column.label
+				templateName: filterTemplates[filterType] or filterTemplates.text
+			}
+	filters
+
 UI.registerHelper 'AdminSchemas', ->
 	AdminDashboard.schemas
 
