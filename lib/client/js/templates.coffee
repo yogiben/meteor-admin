@@ -18,3 +18,27 @@ Template.adminPagesSort.events
 			else
 				sort[@field] = if sort[@field] == 1 then -1 else 1
 			AdminPages[collectionName].setSort sort
+
+Template.adminTextFilter.events
+	'change input': (e, t) ->
+		value = t.firstNode.value
+		if value.length > 0
+			AdminPages[Session.get 'admin_collection_name']?.setFilter @field,
+				$regex: value
+				$options: 'i'
+		else
+			AdminPages[Session.get 'admin_collection_name']?.removeFilter @field
+
+Template.adminNumberFilter.events
+	'change input': (e, t) ->
+		min = parseInt t.$('.js-filter-min').val(), 10
+		max = parseInt t.$('.js-filter-max').val(), 10
+
+		filter = {}
+		if min then filter.$gt = min
+		if max then filter.$lt = max
+
+		if min or max
+			AdminPages[Session.get 'admin_collection_name']?.setFilter @field, filter
+		else
+			AdminPages[Session.get 'admin_collection_name']?.removeFilter @field

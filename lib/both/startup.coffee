@@ -35,6 +35,7 @@ Meteor.startup ->
 				itemTemplate: 'adminPagesItem'
 				availableSettings:
 					sort: true
+					filters: true
 				# force meteor-pages to render a table
 				table: {}
 
@@ -46,3 +47,13 @@ Meteor.startup ->
 			AdminPages[collectionName].setSort = (sort) ->
 				@page.set sort: sort
 				@sort.changed()
+
+			AdminPages[collectionName].setFilter = (field, filter) ->
+				filters = _.clone @page.filters
+				filters[field] = filter
+				@page.set filters: filters
+			AdminPages[collectionName].removeFilter = (field) ->
+				filters = _.clone @page.filters
+				if filters[field]
+					delete filters[field]
+					@page.set filters: filters
