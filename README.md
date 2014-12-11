@@ -28,7 +28,7 @@ Download to your packages directory and run `meteor add yogiben:admin` then go t
 The simplest possible config with one, 'Posts', collection.
 #####Both#####
 ```
-AdminConfig = {
+@AdminConfig = {
   collections: {
     Posts: {}
   }
@@ -38,7 +38,7 @@ This config will make the **first user** admin.
 
 You can also set the adminEmails property which will will override this.
 ```
-AdminConfig = {
+@AdminConfig = {
   name: 'My App'
   adminEmails: ['ben@code2create.com']
   collections: {
@@ -51,9 +51,9 @@ If you are unfamiliar with [autoform](https://github.com/aldeed/meteor-autoform)
 
 You need to define and attach a schema to the collections that you want to edit via the admin dashboard. Check out the [documentation](https://github.com/aldeed/meteor-collection2).
 ```
-Schemas = {}
+@Schemas = {}
 
-Posts = new Meteor.Collection('posts');
+@Posts = new Meteor.Collection('posts');
 
 Schemas.Posts = new SimpleSchema
 	title:
@@ -89,26 +89,26 @@ Go to `/admin`. If you are not made an admin, re-read step 2.
 ### Customization ###
 The admin dashboard is heavily customisable. Most of the possibilities are represented in the config option below.
 ```
-AdminConfig =
+@AdminConfig =
     nonAdminRedirectRoute: 'entrySignIn',
     collections: 
         Posts: {
             icon: 'pencil'
             tableColumns: [
-	      {label: 'Title', name: 'title'}
-	      {label: 'Published', name: 'published'}
-	      {label: 'User', name: 'owner', collection: 'Users'}
+              {label: 'Title', name: 'title'}
+	            {label: 'Published', name: 'published'}
+	            {label: 'User', name: 'owner', collection: 'Users'}
             ]
             auxCollections: ['Attachments']
             templates:
               new:
                 name: 'postWYSIGEditor'
                 data:
-                  post: Session.get 'admin_doc'
+                  post: Session.get 'admin_doc' if Meteor.isClient
               edit:
                 name: 'postWYSIGEditor'
                 data:
-                  post: Session.get 'admin_doc'
+                  post: Session.get 'admin_doc' if Meteor.isClient
         },
         Comments: {
             icon: 'comment'
@@ -143,7 +143,7 @@ AdminConfig =
 #### Collections ####
 `AdminConfig.collections` tells the dashboard which collections to manage based on the global variable name.
 ```
-AdminConfig =
+@AdminConfig =
   collections:
     Posts: {},
     Comments: {}
@@ -185,7 +185,7 @@ Comments: {
 #### Custom Templates ####
 The default admin templates are autoForm instances based on the schemas assigned to the collections. If they don't do the job, you specify a custom template to use for each of the `new`,`edit` and `view` screens for each collection.
 ```
-AdminConfig =
+@AdminConfig =
     ...
     collections: 
         Posts: {
@@ -195,7 +195,7 @@ AdminConfig =
               edit:
                 name: 'postWYSIGEditor'
                 data:
-                  post: Session.get 'admin_doc'
+                  post: Session.get 'admin_doc' if Meteor.isClient
 ```
 The `/admin/Posts/new` and `/admin/Posts/edit` will not use the `postWYSIGEditor` template that you've defined somewhere in your code. The `edit` view will be rendered with a data context (here the document being edited).
 
@@ -203,7 +203,7 @@ Custom templates are most used when you need to use an {{#autoForm}} instead of 
 
 #### Autoform ####
 ```
-AdminConfig =
+@AdminConfig =
     ...
     autoForm: 
         omitFields: ['createdAt', 'updatedAt']
@@ -215,7 +215,7 @@ Here you can specify globally the fields that should never appear in your `new` 
 #### Dashboard ####
 Here you can customise the look and feel of the dashboard.
 ```
-AdminConfig =
+@AdminConfig =
     ...
     dashboard:
         homeUrl: '/dashboard'
