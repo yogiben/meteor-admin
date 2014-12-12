@@ -278,3 +278,21 @@ AdminDashboard.addCollectionItem (collection, path) ->
         title: 'Delete'
         url: path + '/delete'
 ```
+
+#####Add custom route#####
+
+If you want to add your own sub route of admin dashboard (using iron:router package) there are three key things to follow
+
+1) Use `AdminDashboard.path` to get the path
+2) Use `AdminLayout` as layout template
+3) Set `admin_title` (and optionally `admin_subtitle`) session variable
+
+e.g.
+
+```
+Router.route 'analytics',
+    path: AdminDashboard.path('analytics')
+    layoutTemplate: 'AdminLayout'
+    onAfterAction: ->
+        Session.set 'admin_title', 'Analytics'
+```
