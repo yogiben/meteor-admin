@@ -40,7 +40,7 @@ Meteor.methods
 					Email.send(
 						to: user.email
 						from: AdminConfig.fromEmail
-						subject: 'Your accout has been created'
+						subject: 'Your account has been created'
 						html: 'You\'ve just had an account created for ' + Meteor.absoluteUrl() + ' with password ' + doc.password
 						)
 
