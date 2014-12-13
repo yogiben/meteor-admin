@@ -104,3 +104,5 @@ Router.map ->
 
 Router.onBeforeAction AdminDashboard.checkAdmin, {only: AdminDashboard.adminRoutes}
 Router.onBeforeAction AdminDashboard.clearAlerts, {only: AdminDashboard.adminRoutes}
+# FIXME: should run only on AdminDashboard specific routes
+Router.onStop AdminDashboard.clearSession

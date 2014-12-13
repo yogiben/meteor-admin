@@ -12,6 +12,14 @@ AdminDashboard =
 		if typeof @.next == 'function'
 			@next()
 
+	clearSession: ->
+		Session.set 'admin_title', ''
+		Session.set 'admin_subtitle', ''
+		Session.set 'admin_collection_page'
+		Session.set 'admin_collection_name'
+		Session.set 'admin_id'
+		Session.set 'admin_doc'
+
 	checkAdmin: ->
 		if not Roles.userIsInRole Meteor.userId(), ['admin']
 			Meteor.call 'adminCheckAdmin'
