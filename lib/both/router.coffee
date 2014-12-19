@@ -6,7 +6,6 @@ Router.map ->
     waitOn: ->
       [
         Meteor.subscribe 'adminUsers'
-        Meteor.subscribe 'adminAllCollections'
         Meteor.subscribe 'adminUser'
       ]
     action: ->

@@ -18,16 +18,6 @@ Meteor.publish 'adminAuxCollections', (collection) ->
 	else
 		@ready()
 
-Meteor.publish 'adminAllCollections', ->
-	if Roles.userIsInRole @userId, ['admin']
-		if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
-			subscriptions = []
-			_.map AdminConfig.collections, (obj, key)->
-				subscriptions.push adminCollectionObject(key).find()
-			subscriptions
-	else
-		@ready()
-
 Meteor.publish 'adminUsers', ->
 	if Roles.userIsInRole @userId, ['admin']
 		Meteor.users.find()

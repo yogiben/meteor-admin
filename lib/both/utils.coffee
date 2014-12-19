@@ -2,10 +2,7 @@
 	if typeof AdminConfig.collections[collection] != 'undefined' and typeof AdminConfig.collections[collection].collectionObject != 'undefined'
 		AdminConfig.collections[collection].collectionObject
 	else
-		if Meteor.isServer
-			global[collection]
-		else
-			window[collection]
+		lookup collection
 
 @adminCallback = (name, args, callback) ->
 	stop = false
@@ -17,14 +14,15 @@
 @adminCollectionRoute = (collectionName) ->
 	'admin_collections_' + collectionName + '_home0'
 
-@lookup = (obj, ref) ->
-	if typeof ref == 'undefined'
-		ref = if Meteor.isServer then global else window
+@lookup = (obj, root) ->
+	if typeof root == 'undefined'
+		root = if Meteor.isServer then global else window
 	if typeof obj == 'string'
+		ref = root
 		arr = obj.split '.'
 		continue while arr.length and (ref = ref[arr.shift()])
 		if not ref
-			throw new Error(obj + ' is not in the ' + ref.toString())
+			throw new Error(obj + ' is not in the ' + root.toString())
 		else
 			return ref
 	return obj
