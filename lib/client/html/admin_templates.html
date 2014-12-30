@@ -87,7 +87,7 @@
 	{{#autoForm id="adminSendResetPasswordEmail" schema=AdminSchemas.sendResetPasswordEmail type="method" meteormethod="adminSendResetPasswordEmail"}}
 	<div class="form-group hidden">
 		<label class="control-label" for="title">ID</label>
-		<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off">
+		<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
 		<span class="help-block"></span>
 	</div>
 	<p>Send a reset password email to {{admin_current_doc.emails.[0].address}}</p>
@@ -99,7 +99,7 @@
 	{{#autoForm id="adminChangePassword" schema=AdminSchemas.changePassword type="method" meteormethod="adminChangePassword"}}
 	<div class="form-group hidden">
 		<label class="control-label" for="title">ID</label>
-		<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off">
+		<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
 		<span class="help-block"></span>
 	</div>
 	{{>afQuickField name="password"}}
@@ -201,12 +201,12 @@
 </template>
 
 <template name="adminTextFilter">
-	<input type="text" class="form-control" placeholder="{{label}}">
+	<input type="text" class="form-control" placeholder="{{label}}" />
 </template>
 
 <template name="adminNumberFilter">
 	<div class="form">
-		<div class="form-group"><input type="text" class="form-control js-filter-min" placeholder="from"></div>
-		<div class="form-group"><input type="text" class="form-control js-filter-max" placeholder="to"></div>
+		<div class="form-group"><input type="text" class="form-control js-filter-min" placeholder="from" /></div>
+		<div class="form-group"><input type="text" class="form-control js-filter-max" placeholder="to" /></div>
 	</div>
 </template>
