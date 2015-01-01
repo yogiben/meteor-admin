@@ -1,5 +1,6 @@
 Meteor.methods
 	adminInsertDoc: (doc,collection)->
+		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
 			Future = Npm.require('fibers/future');
 			fut = new Future();
@@ -9,6 +10,7 @@ Meteor.methods
 			return fut.wait()
 
 	adminUpdateDoc: (modifier,collection,_id)->
+		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
 			Future = Npm.require('fibers/future');
 			fut = new Future();
@@ -17,6 +19,7 @@ Meteor.methods
 			return fut.wait()
 
 	adminRemoveDoc: (collection,_id)->
+		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
 			if collection == 'Users'
 				Meteor.users.remove {_id:_id}
@@ -26,6 +29,7 @@ Meteor.methods
 
 
 	adminNewUser: (doc) ->
+		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
 			emails = doc.email.split(',')
 			_.each emails, (email)->
@@ -45,6 +49,7 @@ Meteor.methods
 						)
 
 	adminUpdateUser: (modifier,_id)->
+		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
 			Future = Npm.require('fibers/future');
 			fut = new Future();
@@ -53,17 +58,20 @@ Meteor.methods
 			return fut.wait()
 
 	adminSendResetPasswordEmail: (doc)->
+		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
 			console.log 'Changing password for user ' + doc._id
 			Accounts.sendResetPasswordEmail(doc._id)
 
 	adminChangePassword: (doc)->
+		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
 			console.log 'Changing password for user ' + doc._id
 			Accounts.setPassword(doc._id, doc.password)
 			label: 'Email user their new password'
 
 	adminCheckAdmin: ->
+		check arguments, [Match.Any]
 		if this.userId and !Roles.userIsInRole this.userId, ['admin']
 			email = Meteor.users.findOne(_id:this.userId).emails[0].address
 			if typeof Meteor.settings.adminEmails != 'undefined'
@@ -81,12 +89,16 @@ Meteor.methods
 				Roles.addUsersToRoles this.userId, ['admin']
 
 	adminAddUserToRole: (_id,role)->
+		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
 			Roles.addUsersToRoles _id, role
+
 	adminRemoveUserToRole: (_id,role)->
+		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, ['admin']
 			Roles.removeUsersFromRoles _id, role
 
 	adminSetCollectionSort: (collection, _sort) ->
+		check arguments, [Match.Any]
 		global.AdminPages[collection].set
 			sort: _sort
