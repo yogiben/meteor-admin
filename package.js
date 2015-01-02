@@ -1,7 +1,7 @@
 Package.describe({
   name: "yogiben:admin",
   summary: "A complete admin dashboard solution",
-  version: "1.0.8",
+  version: "1.0.9",
   git: "https://github.com/yogiben/meteor-admin"
 });
 
