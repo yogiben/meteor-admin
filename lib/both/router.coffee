@@ -1,13 +1,33 @@
+@AdminController = RouteController.extend
+  layoutTemplate: 'AdminLayout'
+  waitOn: ->
+    [
+      Meteor.subscribe 'adminUsers'
+      Meteor.subscribe 'adminUser'
+    ]
+  onBeforeAction: ->
+    Session.set 'adminSuccess', null
+    Session.set 'adminError', null
+
+    Session.set 'admin_title', ''
+    Session.set 'admin_subtitle', ''
+    Session.set 'admin_collection_page', null
+    Session.set 'admin_collection_name', null
+    Session.set 'admin_id', null
+    Session.set 'admin_doc', null
+
+    if not Roles.userIsInRole Meteor.userId(), ['admin']
+      Meteor.call 'adminCheckAdmin'
+      if typeof AdminConfig?.nonAdminRedirectRoute == 'string'
+        Router.go AdminConfig.nonAdminRedirectRoute
+    
+    @next()
+
 Router.map ->
   @route "adminDashboard",
     path: "/admin"
     template: "AdminDashboard"
-    layoutTemplate: "AdminLayout"
-    waitOn: ->
-      [
-        Meteor.subscribe 'adminUsers'
-        Meteor.subscribe 'adminUser'
-      ]
+    controller: "AdminController"
     action: ->
       @render()
     onAfterAction: ->
@@ -19,12 +39,7 @@ Router.map ->
   @route "adminDashboardUsersNew",
     path: "/admin/Users/new"
     template: "AdminDashboardUsersNew"
-    layoutTemplate: "AdminLayout"
-    waitOn: ->
-      [
-        Meteor.subscribe 'adminUsers'
-        Meteor.subscribe 'adminUser'
-      ]
+    controller: 'AdminController'
     action: ->
       @render()
     onAfterAction: ->
@@ -36,12 +51,7 @@ Router.map ->
   @route "adminDashboardUsersEdit",
     path: "/admin/Users/:_id/edit"
     template: "AdminDashboardUsersEdit"
-    layoutTemplate: "AdminLayout"
-    waitOn: ->
-      [
-        Meteor.subscribe 'adminUsers'
-        Meteor.subscribe 'adminUser'
-      ]
+    controller: "AdminController"
     data: ->
       user : Meteor.users.find({_id:@params._id}).fetch()
       roles: Roles.getRolesForUser @params._id
@@ -59,12 +69,10 @@ Router.map ->
   @route "adminDashboardNew",
     path: "/admin/:collection/new"
     template: "AdminDashboardNew"
-    layoutTemplate: "AdminLayout"
+    controller: "AdminController"
     waitOn: ->
       [
         Meteor.subscribe('adminAuxCollections', @params.collection)
-        Meteor.subscribe('adminUsers')
-        Meteor.subscribe 'adminUser'
       ]
     action: ->
       @render()
@@ -79,13 +87,11 @@ Router.map ->
   @route "adminDashboardEdit",
     path: "/admin/:collection/:_id/edit"
     template: "AdminDashboardEdit"
-    layoutTemplate: "AdminLayout"
+    controller: "AdminController"
     waitOn: ->
       [
         Meteor.subscribe('adminCollection', @params.collection)
         Meteor.subscribe('adminAuxCollections', @params.collection)
-        Meteor.subscribe('adminUsers')
-        Meteor.subscribe 'adminUser'
       ]
     action: ->
       @render()
@@ -101,7 +107,6 @@ Router.map ->
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
 
-Router.onBeforeAction AdminDashboard.checkAdmin, {only: AdminDashboard.adminRoutes}
-Router.onBeforeAction AdminDashboard.clearAlerts, {only: AdminDashboard.adminRoutes}
-# FIXME: should run only on AdminDashboard specific routes
-Router.onStop AdminDashboard.clearSession
+# Router.onBeforeAction AdminDashboard.checkAdmin, {only: AdminDashboard.adminRoutes}
+# Router.onBeforeAction AdminDashboard.clearAlerts, {only: AdminDashboard.adminRoutes}
+# Router.onStop AdminDashboard.clearSession
