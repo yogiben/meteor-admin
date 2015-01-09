@@ -19,6 +19,10 @@ Template.adminPagesSort.events
 				sort[@field] = if sort[@field] == 1 then -1 else 1
 			AdminPages[collectionName].setSort sort
 
+Template.adminPagesUserItem.helpers
+	createdAt: ->
+		moment(@createdAt).format('YYYY-MM-DD, h:mm:ss a')
+
 Template.adminTextFilter.events
 	'change input': (e, t) ->
 		value = t.firstNode.value

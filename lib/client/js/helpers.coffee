@@ -77,6 +77,8 @@ UI.registerHelper 'admin_table_value', (field,_id) ->
 		value = lookup field.name, adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id})
 		if typeof value == 'boolean' && value
 			'<i class="fa fa-check"></i>'
+		else if value.constructor.name == 'Date'
+			moment(value).format('YYYY-MM-DD, h:mm:ss a')
 		else
 			value
 
