@@ -173,6 +173,7 @@ Comments: {
 * `{label: 'Content', name:'content'}` will display the `content` property of the mongo doc.
 * `{label: 'Post', name: 'post', collection: 'Posts', collection_property: 'title'}` will look for a doc in the 'Posts' collection with the `_id` defined by the comment's `post` property. The `title` of this document will be displayed.
 * `{label: 'User', name: 'owner', collection: 'Users'}` will display the user's email when the `owner` property is the `_id` of the user.
+* `{label: 'Joined', name: 'createdAt', template: 'prettyDate'}` will display `createdAt` field using `prettyDate` template (value is passed as context to the template)
 
 `fields` is an array of field names - set when the form should only show these fields. From [AutoForm](https://github.com/aldeed/meteor-autoform).
 

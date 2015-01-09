@@ -154,7 +154,11 @@
 	{{else}}
 	<tr>
 		{{#each admin_table_columns}}
+			{{#if template}}
+			<td>{{> Template.dynamic template=template data=value}}</td>
+			{{else}}
 			<td>{{{admin_table_value this ../_id}}}</td>
+			{{/if}}
 		{{/each}}
 		<td>
 			<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
