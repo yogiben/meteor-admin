@@ -1,3 +1,9 @@
+Template.AdminDashboardView.helpers
+	hasDocuments: ->
+		page = AdminPages[Session.get 'admin_collection_name']?.page
+		if page
+			page.Collection.find().count() > 0
+
 Template.adminPagesSort.helpers
 	icon: ->
 		collectionName = Session.get 'admin_collection_name'

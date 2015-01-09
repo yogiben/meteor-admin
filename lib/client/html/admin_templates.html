@@ -37,8 +37,15 @@
 		{{> UI.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
-		{{> pages}}
-		{{> pagesNav}}
+		{{#if hasDocuments}}
+			{{> pages}}
+			{{> pagesNav}}
+		{{else}}
+			<div class="alert alert-info">
+				<p>There are no visible items in this collection.</p>
+				<p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add one</a></p>
+			</div>
+		{{/if}}
 	{{/if}}
 </template>
 
