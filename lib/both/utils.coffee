@@ -14,14 +14,14 @@
 @adminCollectionRoute = (collectionName) ->
 	'admin_collections_' + collectionName + '_home0'
 
-@lookup = (obj, root) ->
+@lookup = (obj, root, required=true) ->
 	if typeof root == 'undefined'
 		root = if Meteor.isServer then global else window
 	if typeof obj == 'string'
 		ref = root
 		arr = obj.split '.'
 		continue while arr.length and (ref = ref[arr.shift()])
-		if not ref
+		if not ref and required
 			throw new Error(obj + ' is not in the ' + root.toString())
 		else
 			return ref
