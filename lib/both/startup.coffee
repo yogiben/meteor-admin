@@ -1,5 +1,7 @@
 @AdminTables = {}
 
+adminTablesDom = '<"box"<"box-header"<"box-toolbar"<"pull-left"<lf>><"pull-right"p>>><"box-body"t>>'
+
 AdminTables.Users = new Tabular.Table
 	name: 'Users'
 	collection: Meteor.users
@@ -44,6 +46,7 @@ AdminTables.Users = new Tabular.Table
 			orderable: false
 		}
 	]
+	dom: adminTablesDom
 
 Meteor.startup ->
 	defaultColumns = [
@@ -63,3 +66,4 @@ Meteor.startup ->
 			name: name
 			collection: adminCollectionObject(name)
 			columns: columns
+			dom: adminTablesDom
