@@ -1,58 +1,18 @@
+Template.AdminDashboardViewWrapper.rendered = ->
+	node = @firstNode
+
+	@autorun ->
+		data = Template.currentData()
+
+		if data.view then Blaze.remove data.view
+		while node.firstChild
+			node.removeChild node.firstChild
+
+		data.view = Blaze.renderWithData Template.AdminDashboardView, data, node
+
+Template.AdminDashboardViewWrapper.destroyed = ->
+	Blaze.remove @data.view
+
 Template.AdminDashboardView.helpers
 	hasDocuments: ->
-		page = AdminPages[Session.get 'admin_collection_name']?.page
-		if page
-			page.Collection.find().count() > 0
-
-Template.adminPagesSort.helpers
-	icon: ->
-		collectionName = Session.get 'admin_collection_name'
-		if collectionName and AdminPages[collectionName]
-			sort = AdminPages[collectionName].getSort()
-			if typeof sort[@field] == 'undefined'
-				false
-			else
-				if sort[@field] == 1 then 'caret-up' else 'caret-down'
-
-Template.adminPagesSort.events
-	'click .admin_pages_sort': (e) ->
-		collectionName = Session.get 'admin_collection_name'
-		if collectionName and AdminPages[collectionName]
-			sort = AdminPages[collectionName].getSort()
-			if sort[@field] == -1
-				delete sort[@field]
-			else
-				sort[@field] = if sort[@field] == 1 then -1 else 1
-			AdminPages[collectionName].setSort sort
-
-Template.adminPagesItem.helpers
-	value: ->
-		Template.instance().data[@name]
-
-Template.adminPagesUserItem.helpers
-	createdAt: ->
-		moment(@createdAt).format('YYYY-MM-DD, h:mm:ss a')
-
-Template.adminTextFilter.events
-	'change input': (e, t) ->
-		value = t.firstNode.value
-		if value.length > 0
-			AdminPages[Session.get 'admin_collection_name']?.setFilter @field,
-				$regex: value
-				$options: 'i'
-		else
-			AdminPages[Session.get 'admin_collection_name']?.removeFilter @field
-
-Template.adminNumberFilter.events
-	'change input': (e, t) ->
-		min = parseInt t.$('.js-filter-min').val(), 10
-		max = parseInt t.$('.js-filter-max').val(), 10
-
-		filter = {}
-		if min then filter.$gt = min
-		if max then filter.$lt = max
-
-		if min or max
-			AdminPages[Session.get 'admin_collection_name']?.setFilter @field, filter
-		else
-			AdminPages[Session.get 'admin_collection_name']?.removeFilter @field
+		AdminCollectionsCount.findOne({collection: Session.get 'admin_collection_name'})?.count > 0

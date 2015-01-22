@@ -1,5 +1,4 @@
-# FIXME: this may affect user template
-Template.adminPagesTable.replaces('_pagesTable')
+Template.registerHelper('AdminTables', AdminTables);
 
 UI.registerHelper 'AdminConfig', ->
 	AdminConfig if typeof AdminConfig != 'undefined'
@@ -8,10 +7,12 @@ UI.registerHelper 'admin_collections', ->
 	collections = {}
 	if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
 		collections = AdminConfig.collections
-	collections.Users = AdminUsersCollection
+	collections.Users =
+		collectionObject: Meteor.users
+		icon: 'user'
 
 	_.map collections, (obj, key) ->
-		obj = _.extend obj, {name:key, routeName: adminCollectionRoute(key)}
+		obj = _.extend obj, {name:key}
 		obj = _.defaults obj, {label: key,icon:'plus',color:'blue'}
 
 UI.registerHelper 'admin_collection_name', ->
@@ -125,7 +126,7 @@ UI.registerHelper 'adminCollectionCount', (collection)->
 	if collection == 'Users'
 		Meteor.users.find().fetch().length
 	else
-		adminCollectionObject(collection).find().fetch().length
+		AdminCollectionsCount.findOne({collection: collection})?.count
 
 UI.registerHelper 'adminTemplate', (collection,mode)->
 	if collection.toLowerCase() != 'users' && typeof AdminConfig.collections[collection].templates != 'undefined'

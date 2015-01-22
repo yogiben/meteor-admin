@@ -1,59 +1,65 @@
+@AdminTables = {}
+
+AdminTables.Users = new Tabular.Table
+	name: 'Users'
+	collection: Meteor.users
+	columns: [
+		{
+			data: '_id'
+			title: 'Admin'
+			# TODO: use `tmpl`
+			createdCell: (node, cellData, rowData) ->
+				$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData}, node)
+			width: '40px'
+		}
+		{
+			data: 'emails'
+			title: 'Email'
+			render: (value) ->
+				value[0].address
+		}
+		{
+			data: 'emails'
+			title: 'Mail'
+			# TODO: use `tmpl`
+			createdCell: (node, cellData, rowData) ->
+				$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData}, node)
+			width: '40px'
+		}
+		{ data: 'createdAt', title: 'Joined' }
+		{
+			data: '_id'
+			title: 'Edit'
+			createdCell: (node, cellData, rowData) ->
+				$(node).html(Blaze.toHTMLWithData Template.adminUsersEditBtn, {_id: cellData}, node)
+			width: '40px'
+			orderable: false
+		}
+		{
+			data: '_id'
+			title: 'Delete'
+			createdCell: (node, cellData, rowData) ->
+				$(node).html(Blaze.toHTMLWithData Template.adminUsersDeleteBtn, {_id: cellData}, node)
+			width: '40px'
+			orderable: false
+		}
+	]
+
 Meteor.startup ->
-	@AdminUsersCollection =
-		collectionObject: Meteor.users
-		icon: 'user'
+	defaultColumns = [
+		{data: '_id', title: 'ID'}
+		{data: 'title', title: 'Title'}
+	]
 
-	if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections != 'undefined'
-		collections = AdminConfig.collections
-	else
-		collections = {}
+	_.each AdminConfig?.collections, (collection, name) ->
+		columns = _.map collection.tableColumns, (column) ->
+			data: column.name
+			title: column.label
 
-	collections.Users = AdminUsersCollection
+		if columns.length == 0
+			columns = defaultColumns
 
-	@AdminPages = {}
-	_.each collections, (collection, collectionName) ->
-		templateName = 'AdminDashboardView_' + collectionName
-		if Meteor.isClient
-			Template.AdminDashboardView.copyAs(templateName)
-
-		AdminPages[collectionName] = 
-			page: new Meteor.Pagination adminCollectionObject(collectionName),
-				name: 'admin_collections_' + collectionName
-				router: 'iron-router'
-				homeRoute: '/admin/' + collectionName
-				route: '/admin/' + collectionName
-				routerTemplate: templateName
-				templateName: templateName
-				routeSettings: (router) ->
-					router.action = ->
-						Session.set 'admin_title', AdminDashboard.collectionLabel(collectionName)
-						Session.set 'admin_subtitle', 'View'
-						Session.set 'admin_collection_page', ''
-						Session.set 'admin_collection_name', collectionName
-						router.render()
-				routerLayout: 'AdminLayout'
-				itemTemplate: 'adminPagesItem'
-				availableSettings:
-					sort: true
-					filters: true
-				# force meteor-pages to render a table
-				table: {}
-
-		if Meteor.isClient
-			AdminPages[collectionName].sort = new Tracker.Dependency
-			AdminPages[collectionName].getSort = ->
-				@sort.depend()
-				_.clone @page.sort
-			AdminPages[collectionName].setSort = (sort) ->
-				@page.set sort: sort
-				@sort.changed()
-
-			AdminPages[collectionName].setFilter = (field, filter) ->
-				filters = _.clone @page.filters
-				filters[field] = filter
-				@page.set filters: filters
-			AdminPages[collectionName].removeFilter = (field) ->
-				filters = _.clone @page.filters
-				if filters[field]
-					delete filters[field]
-					@page.set filters: filters
+		AdminTables[name] = new Tabular.Table
+			name: name
+			collection: adminCollectionObject(name)
+			columns: columns

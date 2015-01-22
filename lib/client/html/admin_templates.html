@@ -30,6 +30,11 @@
 	{{/if}}
 </template>
 
+<template name="AdminDashboardViewWrapper">
+	<div></div>
+	{{! This template is used to manually re-render AdminDashboardView on route transition }}
+</template>
+
 <template name="AdminDashboardView">
 	{{> adminAlert}}
 	{{#if adminTemplate admin_collection_name 'view'}}
@@ -38,14 +43,24 @@
 		{{/with}}
 	{{else}}
 		{{#if hasDocuments}}
-			{{> pages}}
-			{{> pagesNav}}
+			{{> tabular table=admin_table class="table table-striped"}}
 		{{else}}
 			<div class="alert alert-info">
 				<p>There are no visible items in this collection.</p>
 				<p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add one</a></p>
 			</div>
 		{{/if}}
+	{{/if}}
+</template>
+
+<template name="AdminDashboardUsersView">
+	{{> adminAlert}}
+	{{#if adminTemplate admin_collection_name 'view'}}
+		{{#with adminTemplate admin_collection_name 'view'}}
+		{{> UI.dynamic template=name data=data }}
+		{{/with}}
+	{{else}}
+		{{> tabular table=admin_table class="table table-striped"}}
 	{{/if}}
 </template>
 
@@ -128,96 +143,20 @@
 	{{/if}}
 </template>
 
-<template name="adminPagesTable">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				{{#if admin_is_users_collection}}
-					<th>Admin</th>
-					<th>Email</th>
-					<th>Mail</th>
-					<th class="admin-sortable">{{> adminPagesSort label="Joined" field="createdAt"}}</th>
-					<th>Edit</th>
-					<th>Delete</th>
-				{{else}}
-					{{#each admin_table_columns}}
-						<th class="admin-sortable">{{> adminPagesSort label=this.label field=this.name}}</th>
-					{{/each}}
-					<th>Edit</th>
-					<th>Delete</th>
-				{{/if}}
-			</tr>
-		</thead>
-		<tbody>
-			{{> _pagesPage}}
-			{{> adminFilters}}
-		</tbody>
-	</table>
+<template name="adminUsersIsAdmin">
+	{{#if adminIsUserInRole this._id 'admin'}}<i class="fa fa-check"></i>{{/if}}
 </template>
 
-<template name="adminPagesItem">
-	{{#if admin_is_users_collection}}
-		{{> adminPagesUserItem}}
-	{{else}}
-	<tr>
-		{{#each admin_table_columns}}
-			{{#if template}}
-			<td>{{> Template.dynamic template=template data=value}}</td>
-			{{else}}
-			<td>{{{admin_table_value this ../_id}}}</td>
-			{{/if}}
-		{{/each}}
-		<td>
-			<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-			<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-		</td>
-		<td>
-			<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
-			<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
-		</td>
-	</tr>
-	{{/if}}
+<template name="adminUsersMailBtn">
+	<a href="mailto:{{adminUserEmail this}}" class="btn btn-default btn-xs"><i class="fa fa-envelope"></i></a>
 </template>
 
-<template name="adminPagesUserItem">
-	<tr>
-		<td>{{#if adminIsUserInRole this._id 'admin'}}<i class="fa fa-check"></i>{{/if}}</td>
-		<td>{{adminUserEmail this}}</td>
-		<td><a href="mailto:{{adminUserEmail this}}" class="btn btn-default btn-xs"><i class="fa fa-envelope"></i></a></td>
-		<td>{{createdAt}}</td>
-		<td>
-			<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-			<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-		</td>
-		<td>
-			<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
-			<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
-		</td>
-	</tr>
+<template name="adminUsersEditBtn">
+	<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+	<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
 </template>
 
-<template name="adminPagesSort">
-	<div class="admin_pages_sort">{{label}} {{#if icon}}<span class="fa fa-{{icon}}"></span>{{/if}}</div>
-</template>
-
-<template name="adminFilters">
-	<tr>
-		{{#if admin_is_users_collection}}
-		{{else}}
-		{{#each admin_table_filters}}
-			<td>{{> Template.dynamic template=templateName data=this}}</td>
-		{{/each}}
-		{{/if}}
-	</tr>
-</template>
-
-<template name="adminTextFilter">
-	<input type="text" class="form-control" placeholder="{{label}}">
-</template>
-
-<template name="adminNumberFilter">
-	<div class="form">
-		<div class="form-group"><input type="text" class="form-control js-filter-min" placeholder="from"></div>
-		<div class="form-group"><input type="text" class="form-control js-filter-max" placeholder="to"></div>
-	</div>
+<template name="adminUsersDeleteBtn">
+	<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
+	<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
 </template>

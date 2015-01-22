@@ -4,6 +4,7 @@
     [
       Meteor.subscribe 'adminUsers'
       Meteor.subscribe 'adminUser'
+      Meteor.subscribe 'adminCollectionsCount'
     ]
   onBeforeAction: ->
     Session.set 'adminSuccess', null
@@ -36,6 +37,19 @@ Router.map ->
       Session.set 'admin_collection_page', ''
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
+  # @route "adminDashboardUsersView",
+  #   path: "/admin/Users"
+  #   template: "AdminDashboardUsersView"
+  #   controller: "AdminController"
+  #   data: ->
+  #     admin_table: AdminTables.Users
+  #   action: ->
+  #     @render()
+  #   onAfterAction: ->
+  #     Session.set 'admin_title', 'Users'
+  #     Session.set 'admin_subtitle', 'View'
+  #     Session.set 'admin_collection_name', 'Users'
+
   @route "adminDashboardUsersNew",
     path: "/admin/Users/new"
     template: "AdminDashboardUsersNew"
@@ -65,6 +79,20 @@ Router.map ->
       Session.set 'admin_collection_name', 'Users'
       Session.set 'admin_id', @params._id
       Session.set 'admin_doc', Meteor.users.findOne({_id:@params._id})
+
+  @route "adminDashboardView",
+    path: "/admin/:collection"
+    template: "AdminDashboardViewWrapper"
+    controller: "AdminController"
+    data: ->
+      foo: @params.collection
+      admin_table: AdminTables[@params.collection]
+    action: ->
+      @render()
+    onAfterAction: ->
+      Session.set 'admin_title', @params.collection
+      Session.set 'admin_subtitle', 'View'
+      Session.set 'admin_collection_name', @params.collection
 
   @route "adminDashboardNew",
     path: "/admin/:collection/new"
