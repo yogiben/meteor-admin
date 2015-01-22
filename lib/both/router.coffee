@@ -37,18 +37,6 @@ Router.map ->
       Session.set 'admin_collection_page', ''
     # onBeforeAction: ->
       # AccountsEntry.signInRequired this
-  # @route "adminDashboardUsersView",
-  #   path: "/admin/Users"
-  #   template: "AdminDashboardUsersView"
-  #   controller: "AdminController"
-  #   data: ->
-  #     admin_table: AdminTables.Users
-  #   action: ->
-  #     @render()
-  #   onAfterAction: ->
-  #     Session.set 'admin_title', 'Users'
-  #     Session.set 'admin_subtitle', 'View'
-  #     Session.set 'admin_collection_name', 'Users'
 
   @route "adminDashboardUsersNew",
     path: "/admin/Users/new"
