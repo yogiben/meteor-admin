@@ -48,12 +48,10 @@ AdminTables.Users = new Tabular.Table
 	]
 	dom: adminTablesDom
 
-Meteor.startup ->
-	defaultColumns = [
-		{data: '_id', title: 'ID'}
-		{data: 'title', title: 'Title'}
-	]
+adminTablePubName = (collection) ->
+	"admin_tabular_#{collection}"
 
+adminCreateTables = (collections) ->
 	_.each AdminConfig?.collections, (collection, name) ->
 		columns = _.map collection.tableColumns, (column) ->
 			data: column.name
@@ -65,5 +63,26 @@ Meteor.startup ->
 		AdminTables[name] = new Tabular.Table
 			name: name
 			collection: adminCollectionObject(name)
+			pub: collection.children and adminTablePubName(name)
 			columns: columns
+			extraFields: collection.extraFields
 			dom: adminTablesDom
+
+adminPublishTables = (collections) ->
+	_.each collections, (collection, name) ->
+		if not collection.children then return undefined
+		Meteor.publishComposite adminTablePubName(name), (tableName, ids, fields) ->
+			check tableName, String
+			check ids, Array
+			check fields, Match.Optional Object
+
+			@unblock()
+
+			find: ->
+				@unblock()
+				adminCollectionObject(name).find {_id: {$in: ids}}, {fields: fields}
+			children: collection.children
+
+Meteor.startup ->
+	adminCreateTables AdminConfig?.collections
+	adminPublishTables AdminConfig?.collections if Meteor.isServer
