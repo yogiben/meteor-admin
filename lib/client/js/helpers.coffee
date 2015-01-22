@@ -38,69 +38,6 @@ UI.registerHelper 'admin_collection_items', ->
 			items.push item
 	items
 
-UI.registerHelper 'admin_fields', ->
-	if not Session.equals('admin_collection','Users') and typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'].fields == 'object'
-		x = AdminConfig.collections[Session.get 'admin_collection_name'].fields
-		console.log x
-		x
-
-UI.registerHelper 'admin_omit_fields', ->
-	if typeof AdminConfig.autoForm != 'undefined' and typeof AdminConfig.autoForm.omitFields == 'object'
-		global = AdminConfig.autoForm.omitFields
-	if not Session.equals('admin_collection_name','Users') and typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'].omitFields == 'object'
-		collection = AdminConfig.collections[Session.get 'admin_collection_name'].omitFields
-	if typeof global == 'object' and typeof collection == 'object'
-		_.union global, collection
-	else if typeof global == 'object'
-		global
-	else if typeof collection == 'object'
-		collection
-
-UI.registerHelper 'admin_table_columns', ->
-	if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'] != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'].tableColumns == 'object'
-		AdminConfig.collections[Session.get 'admin_collection_name'].tableColumns
-	else
-		[{label: 'ID';name:'_id'},{label:'Title';name:'title'}]
-
-UI.registerHelper 'admin_table_value', (field,_id) ->
-	if typeof field.collection == 'string' && typeof adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id}) != 'undefined'
-		aux_id = lookup field.name, adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id})
-		if field.collection == 'Users' and typeof Meteor.users.findOne({_id:aux_id}) != 'undefined'
-			if typeof field.collection_property != 'undefined'
-				aux_property = Meteor.users.findOne({_id:aux_id}).profile[field.collection_property]
-			else
-				aux_property = Meteor.users.findOne({_id:aux_id}).emails[0].address
-			'<a class="btn btn-default btn-xs" href="/admin/' +  'users' + '/' + aux_id + '/edit">' + aux_property + '</a>'
-		else if typeof field.collection_property == 'string' and typeof adminCollectionObject(field.collection).findOne({_id:aux_id}) != 'undefined'
-			collection = adminCollectionObject(field.collection)
-			aux_property = lookup field.collection_property, collection.findOne({_id:aux_id}), collection._c2._simpleSchema._schema[field.collection_property]?.optional == false
-			'<a class="btn btn-default btn-xs" href="/admin/' +  field.collection + '/' + aux_id + '/edit">' + aux_property + '</a>'
-	else if typeof adminCollectionObject(Session.get 'admin_collection_name') != 'undefined' and typeof adminCollectionObject(Session.get 'admin_collection_name').findOne({_id:_id}) != 'undefined'
-		collection = adminCollectionObject(Session.get 'admin_collection_name')
-		value = lookup field.name, collection.findOne({_id:_id}), collection._c2._simpleSchema._schema[field.name]?.optional == false
-		if typeof value == 'boolean' && value
-			'<i class="fa fa-check"></i>'
-		else if value?.constructor?.name == 'Date'
-			moment(value).format('YYYY-MM-DD, h:mm:ss a')
-		else
-			value
-
-UI.registerHelper 'admin_table_filters', ->
-	if typeof AdminConfig != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'] != 'undefined' and typeof AdminConfig.collections[Session.get 'admin_collection_name'].tableColumns == 'object'
-		columns = AdminConfig.collections[Session.get 'admin_collection_name'].tableColumns
-		filters = _.map columns, (column) ->
-			filterTemplates =
-				text: 'adminTextFilter'
-				number: 'adminNumberFilter'
-
-			filterType = if typeof column.filterType == 'string' then column.filterType else 'text'
-			{
-				field: column.name
-				label: column.label
-				templateName: filterTemplates[filterType] or filterTemplates.text
-			}
-	filters
-
 UI.registerHelper 'AdminSchemas', ->
 	AdminDashboard.schemas
 

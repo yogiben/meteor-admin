@@ -11,9 +11,6 @@
 	if typeof callback == 'function'
 		callback args... unless stop
 
-@adminCollectionRoute = (collectionName) ->
-	'admin_collections_' + collectionName + '_home0'
-
 @lookup = (obj, root, required=true) ->
 	if typeof root == 'undefined'
 		root = if Meteor.isServer then global else window
