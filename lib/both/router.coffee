@@ -102,7 +102,7 @@ Router.map ->
     controller: "AdminController"
     waitOn: ->
       [
-        Meteor.subscribe('adminCollection', @params.collection)
+        Meteor.subscribe('adminCollectionDoc', @params.collection, @params._id)
       ]
     action: ->
       @render()

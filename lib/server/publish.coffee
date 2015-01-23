@@ -1,7 +1,8 @@
-Meteor.publish 'adminCollection', (collection) ->
+Meteor.publish 'adminCollectionDoc', (collection, id) ->
 	check collection, String
+	check id, String
 	if Roles.userIsInRole this.userId, ['admin']
-		adminCollectionObject(collection).find()
+		adminCollectionObject(collection).find(id)
 	else
 		@ready()
 
