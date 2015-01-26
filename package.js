@@ -14,8 +14,6 @@ Package.on_use(function(api){
   api.use(
     ['iron:router@1.0.6',
     'coffeescript',
-    'accounts-base',
-    'accounts-password',
     'underscore',
     'aldeed:collection2@2.3.0',
     'aldeed:autoform@4.2.2',
