@@ -1,11 +1,29 @@
 @AdminTables = {}
 
 adminTablesDom = '<"box"<"box-header"<"box-toolbar"<"pull-left"<lf>><"pull-right"p>>><"box-body"t>>'
+adminEditDelButtons = [
+	{
+		data: '_id'
+		title: 'Edit'
+		createdCell: (node, cellData, rowData) ->
+			$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData}, node)
+		width: '40px'
+		orderable: false
+	}
+	{
+		data: '_id'
+		title: 'Delete'
+		createdCell: (node, cellData, rowData) ->
+			$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData}, node)
+		width: '40px'
+		orderable: false
+	}
+]
 
 AdminTables.Users = new Tabular.Table
 	name: 'Users'
 	collection: Meteor.users
-	columns: [
+	columns: _.union [
 		{
 			data: '_id'
 			title: 'Admin'
@@ -29,23 +47,7 @@ AdminTables.Users = new Tabular.Table
 			width: '40px'
 		}
 		{ data: 'createdAt', title: 'Joined' }
-		{
-			data: '_id'
-			title: 'Edit'
-			createdCell: (node, cellData, rowData) ->
-				$(node).html(Blaze.toHTMLWithData Template.adminUsersEditBtn, {_id: cellData}, node)
-			width: '40px'
-			orderable: false
-		}
-		{
-			data: '_id'
-			title: 'Delete'
-			createdCell: (node, cellData, rowData) ->
-				$(node).html(Blaze.toHTMLWithData Template.adminUsersDeleteBtn, {_id: cellData}, node)
-			width: '40px'
-			orderable: false
-		}
-	]
+	], adminEditDelButtons
 	dom: adminTablesDom
 
 adminTablePubName = (collection) ->
@@ -64,7 +66,7 @@ adminCreateTables = (collections) ->
 			name: name
 			collection: adminCollectionObject(name)
 			pub: collection.children and adminTablePubName(name)
-			columns: columns
+			columns: _.union columns, adminEditDelButtons
 			extraFields: collection.extraFields
 			dom: adminTablesDom
 

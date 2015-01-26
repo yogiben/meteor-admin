@@ -140,12 +140,12 @@
 	<a href="mailto:{{adminUserEmail this}}" class="btn btn-default btn-xs"><i class="fa fa-envelope"></i></a>
 </template>
 
-<template name="adminUsersEditBtn">
-	<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-	<a href="{{pathFor 'adminDashboardUsersEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+<template name="adminEditBtn">
+	<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+	<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
 </template>
 
-<template name="adminUsersDeleteBtn">
+<template name="adminDeleteBtn">
 	<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
 	<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
 </template>
