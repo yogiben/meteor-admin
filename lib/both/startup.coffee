@@ -16,12 +16,12 @@ Meteor.startup ->
 		if Meteor.isClient
 			Template.AdminDashboardView.copyAs(templateName)
 
-		AdminPages[collectionName] = 
+		AdminPages[collectionName] =
 			page: new Meteor.Pagination adminCollectionObject(collectionName),
 				name: 'admin_collections_' + collectionName
 				router: 'iron-router'
-				homeRoute: '/admin/' + collectionName
-				route: '/admin/' + collectionName
+				homeRoute: adminRoute('/' + collectionName)
+				route: adminRoute('/' + collectionName)
 				routerTemplate: templateName
 				templateName: templateName
 				routeSettings: (router) ->

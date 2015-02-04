@@ -33,9 +33,9 @@ Package.on_use(function(api){
   api.use(['email'],'server')
 
   api.add_files([
+    'lib/both/utils.coffee',
     'lib/both/AdminDashboard.coffee',
     'lib/both/router.coffee',
-    'lib/both/utils.coffee',
     'lib/both/startup.coffee'
     ], both);
 

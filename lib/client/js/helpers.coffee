@@ -121,6 +121,9 @@ UI.registerHelper 'adminUserSchemaExists', ->
 UI.registerHelper 'adminCollectionLabel', (collection)->
 	AdminDashboard.collectionLabel(collection) if collection?
 
+UI.registerHelper 'adminRoute', (collection) ->
+  adminRoute('/' + collection)
+
 UI.registerHelper 'adminCollectionCount', (collection)->
 	if collection == 'Users'
 		Meteor.users.find().fetch().length
