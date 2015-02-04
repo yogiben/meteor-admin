@@ -156,27 +156,27 @@
 </template>
 
 <template name="adminPagesItem">
-	{{#if admin_is_users_collection}}
-		{{> adminPagesUserItem}}
-	{{else}}
-	<tr>
-		{{#each admin_table_columns}}
-			{{#if template}}
-			<td>{{> Template.dynamic template=template data=value}}</td>
-			{{else}}
-			<td>{{{admin_table_value this ../_id}}}</td>
-			{{/if}}
-		{{/each}}
-		<td>
-			<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-			<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
-		</td>
-		<td>
-			<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
-			<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
-		</td>
-	</tr>
-	{{/if}}
+	{{> Template.dynamic template=adminItemTemplate data=this}}
+</template>
+
+<template name="adminPagesDefaultItem">
+<tr>
+	{{#each admin_table_columns}}
+		{{#if template}}
+		<td>{{> Template.dynamic template=template data=value}}</td>
+		{{else}}
+		<td>{{{admin_table_value this ../_id}}}</td>
+		{{/if}}
+	{{/each}}
+	<td>
+		<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
+		<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+	</td>
+	<td>
+		<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
+		<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
+	</td>
+</tr>
 </template>
 
 <template name="adminPagesUserItem">
