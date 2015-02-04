@@ -131,6 +131,16 @@ UI.registerHelper 'adminTemplate', (collection,mode)->
 	if collection.toLowerCase() != 'users' && typeof AdminConfig.collections[collection].templates != 'undefined'
 		AdminConfig.collections[collection].templates[mode]
 
+UI.registerHelper 'adminItemTemplate', ->
+	tpl = 'adminPagesDefaultItem'
+	collection = Session.get 'admin_collection_name'
+	if collection.toLowerCase() == 'users'
+		tpl = 'adminPagesUserItem'
+	else if typeof AdminConfig.collections[collection].itemTemplate != 'undefined'
+		tpl = AdminConfig.collections[collection].itemTemplate
+
+	tpl
+
 UI.registerHelper 'adminGetCollection', (collection)->
 	AdminConfig.collections[collection]
 
