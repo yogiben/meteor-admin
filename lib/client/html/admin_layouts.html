@@ -15,17 +15,17 @@
 						</h1>
 						<div class="header-right">
 							<ol class="breadcrumb">
-								<li><a href="/admin/">Dashboard</a></li>
+                <li><a href="{{pathFor 'adminDashboard'}}">Dashboard</a></li>
 								{{#if $.Session.get 'admin_collection'}}
-								<li><a href="/admin/{{admin_collection}}/">{{adminCollectionLabel admin_collection_name}}</a></li>
+                <li><a href="{{adminRoute admin_collection}}">{{adminCollectionLabel admin_collection_name}}</a></li>
 								{{/if}}
 								
 								{{#if $.Session.equals 'admin_collection_page' 'new'}}
-								<li><a href="/admin/{{admin_collection}}/new">New</a></li>
+                <li><a href="{{pathFor 'adminDashboardNew' collection=admin_collection }}">New</a></li>
 								{{/if}}
 
 								{{#if $.Session.equals 'admin_collection_page' 'edit'}}
-								<li><a href="/admin/{{admin_collection}}/edit">Edit</a></li>
+                <li><a href="{{pathFor 'adminDashboardEdit' collection=admin_collection}}">Edit</a></li>
 								{{/if}}
 
 								

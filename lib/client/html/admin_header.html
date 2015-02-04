@@ -1,6 +1,6 @@
 <template name="AdminHeader">
     <header class="header">
-        <a href="/admin" class="logo">
+        <a href="{{pathFor 'adminDashboard'}}" class="logo">
             {{#if AdminConfig.name}}
             {{AdminConfig.name}}
             {{else}}

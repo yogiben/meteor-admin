@@ -4,6 +4,14 @@
 	else
 		lookup collection
 
+@adminRoute = (path = '') ->
+  if typeof AdminConfig?.baseRoute != 'undefined'
+    AdminConfig.baseRoute + path
+  else
+    console.log("Not using AdminConfig", typeof AdminConfig)
+    console.trace()
+    '/admin' + path
+
 @adminCallback = (name, args, callback) ->
 	stop = false
 	if typeof AdminConfig?.callbacks?[name] == 'function'
