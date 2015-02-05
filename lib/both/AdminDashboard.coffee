@@ -32,6 +32,13 @@ AdminDashboard =
 
 		@sidebarItems.push item
 
+	extendSidebarItem: (title, urls) ->
+		if _.isObject(urls) then urls = [urls]
+
+		existing = _.find @sidebarItems, (item) -> item.title == title
+		if existing
+			existing.options.urls = _.union existing.options.urls, urls
+
 	addCollectionItem: (fn) ->
 		@collectionItems.push fn
 

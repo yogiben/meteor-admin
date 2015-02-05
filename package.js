@@ -12,7 +12,7 @@ Package.on_use(function(api){
   api.versionsFrom('METEOR@1.0');
 
   api.use(
-    ['iron:router@1.0.6',
+    ['iron:router@1.0.7',
     'coffeescript',
     'underscore',
     'aldeed:collection2@2.3.0',
