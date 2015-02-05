@@ -56,8 +56,13 @@ adminTablePubName = (collection) ->
 adminCreateTables = (collections) ->
 	_.each AdminConfig?.collections, (collection, name) ->
 		columns = _.map collection.tableColumns, (column) ->
+			if column.template
+				createdCell = (node, cellData, rowData) ->
+					$(node).html(Blaze.toHTMLWithData Template[column.template], rowData, node)
+
 			data: column.name
 			title: column.label
+			createdCell: createdCell
 
 		if columns.length == 0
 			columns = defaultColumns
