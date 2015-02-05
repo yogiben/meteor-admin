@@ -17,6 +17,7 @@ A complete admin dashboard solution for meteor built off the [iron-router](https
 #### 0. Prerequisites####
 This package is designed to work with certain types of projects. Your project should be using and have configured
 * Iron Router - `meteor add iron:router`
+* Collection Helpers - `meteor add dburles:collection-helpers`
 * An accounts system - e.g. `meteor add accounts-base accounts-password`
 * Bootstrap 3 - e.g. `meteor add twbs:bootstrap`
 * Fontawesome - e.g. `meteor add fortawesome:fontawesome`
@@ -47,7 +48,7 @@ You can also set the adminEmails property which will will override this.
 };
 ```
 #### 3. Define your data models ####
-If you are unfamiliar with [autoform](https://github.com/aldeed/meteor-autoform) or [collection2](https://github.com/aldeed/meteor-collection2) you should check them out now.
+If you are unfamiliar with [autoform](https://github.com/aldeed/meteor-autoform) or [collection2](https://github.com/aldeed/meteor-collection2) or [collection-helpers](https://github.com/dburles/meteor-collection-helpers) you should check them out now.
 
 You need to define and attach a schema to the collections that you want to edit via the admin dashboard. Check out the [documentation](https://github.com/aldeed/meteor-collection2).
 ```
@@ -97,9 +98,8 @@ The admin dashboard is heavily customisable. Most of the possibilities are repre
             tableColumns: [
               {label: 'Title', name: 'title'}
 	            {label: 'Published', name: 'published'}
-	            {label: 'User', name: 'owner', collection: 'Users'}
+	            {label: 'User', name: 'owner', template: 'userEmail'}
             ]
-            auxCollections: ['Attachments']
             templates:
               new:
                 name: 'postWYSIGEditor'
@@ -112,12 +112,11 @@ The admin dashboard is heavily customisable. Most of the possibilities are repre
         },
         Comments: {
             icon: 'comment'
-            auxCollections: ['Posts']
             omitFields: ['owner']
             tableColumns: [
               {label: 'Content', name: 'content'}
-              {label: 'Post', name: 'message', collection: 'Posts', collection_property: 'title'}
-              {label: 'User', name: 'owner', collection: 'Users'}
+              {label: 'Post', name: 'postTitle()'}
+              {label: 'User', name: 'owner', template: 'userEmail'}
             ]
             showWidget: false
         }
@@ -138,6 +137,14 @@ The admin dashboard is heavily customisable. Most of the possibilities are repre
               class: 'col-lg-3 col-xs-6'
           }
         ]
+
+Comments.helpers({
+  postTitle: function () {
+    if (this.post) {
+      return Posts.findOne(this.post).title;
+    }
+  }
+})
 ```
 
 #### Collections ####
@@ -153,12 +160,11 @@ It is possible to configure the way the collection is managed.
 ```
 Comments: {
             icon: 'comment'
-            auxCollections: ['Posts']
             omitFields: ['updatedAt']
             tableColumns: [
               {label: 'Content', name: 'content'}
-              {label: 'Post', name: 'post', collection: 'Posts', collection_property: 'title'}
-              {label: 'User', name: 'owner', collection:'Users'}
+              {label: 'Post', name: 'postTitle()'}
+              {label: 'User', name: 'owner', template: 'userEmail'}
             ]
             showWidget: false
             color: 'red'
@@ -166,14 +172,17 @@ Comments: {
 ```
 `icon` is the icon code from [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/).
 
-`auxCollections` is an array of the names of the other collections that this collection that this depends on. For example, comments are always associated with posts and so we need to publish and subscribe to the `Posts` collection to display the title etc. in the admin dashboard.
-
 `tableColumns` an array of objects that describe the columns that will appear in the admin dashboard.
 
 * `{label: 'Content', name:'content'}` will display the `content` property of the mongo doc.
-* `{label: 'Post', name: 'post', collection: 'Posts', collection_property: 'title'}` will look for a doc in the 'Posts' collection with the `_id` defined by the comment's `post` property. The `title` of this document will be displayed.
-* `{label: 'User', name: 'owner', collection: 'Users'}` will display the user's email when the `owner` property is the `_id` of the user.
-* `{label: 'Joined', name: 'createdAt', template: 'prettyDate'}` will display `createdAt` field using `prettyDate` template (value is passed as context to the template)
+* `{label: 'Post', name: 'postTitle()'}` will use `postTitle` collection helper (see `dburles:collection-helpers` package).
+* `{label: 'Joined', name: 'createdAt', template: 'prettyDate'}` will display `createdAt` field using `prettyDate` template. Following object will be set as the context:
+```
+{
+  value: // current cell value
+  doc:   // current document
+}
+```
 
 `fields` is an array of field names - set when the form should only show these fields. From [AutoForm](https://github.com/aldeed/meteor-autoform).
 
