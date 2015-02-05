@@ -15,14 +15,14 @@ Package.on_use(function(api){
     ['iron:router@1.0.7',
     'coffeescript',
     'underscore',
-    'aldeed:collection2@2.3.0',
+    'aldeed:collection2@2.3.2',
     'aldeed:autoform@4.2.2',
     'aldeed:template-extension@3.1.1',
     'alanning:roles@1.2.13',
     'raix:handlebar-helpers@0.2.4',
     'reywood:publish-composite@1.3.5',
     'momentjs:moment@2.9.0',
-    'aldeed:tabular@1.0.4',
+    'aldeed:tabular@1.0.6',
     'meteorhacks:unblock@1.1.0'
     ],
     both);
