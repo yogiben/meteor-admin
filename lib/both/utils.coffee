@@ -23,3 +23,16 @@
 		else
 			return ref
 	return obj
+	
+@parseID = (id) ->
+	if typeof id == 'string'
+		if(id.indexOf("ObjectID") > -1)
+			return new Mongo.ObjectID(id.slice(id.indexOf('"') + 1,id.lastIndexOf('"')))
+		else
+			return id
+	else
+		return id
+
+@parseIDs = (ids) ->
+    return _.map ids, (id) ->
+        parseID id

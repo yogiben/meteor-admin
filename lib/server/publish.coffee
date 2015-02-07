@@ -1,6 +1,6 @@
 Meteor.publish 'adminCollectionDoc', (collection, id) ->
 	check collection, String
-	check id, String
+	check id, Match.OneOf(String, Mongo.ObjectID)
 	if Roles.userIsInRole this.userId, ['admin']
 		adminCollectionObject(collection).find(id)
 	else
