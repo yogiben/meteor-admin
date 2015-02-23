@@ -18,6 +18,7 @@ A complete admin dashboard solution for meteor built off the [iron-router](https
 This package is designed to work with certain types of projects. Your project should be using and have configured
 * Iron Router - `meteor add iron:router`
 * Collection Helpers - `meteor add dburles:collection-helpers`
+* Collection2 - `meteor add aldeed:collection2`
 * An accounts system - e.g. `meteor add accounts-base accounts-password`
 * Roles - `meteor add alanning:roles`
 * Bootstrap 3 - e.g. `meteor add twbs:bootstrap`
