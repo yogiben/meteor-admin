@@ -19,6 +19,7 @@ This package is designed to work with certain types of projects. Your project sh
 * Iron Router - `meteor add iron:router`
 * Collection Helpers - `meteor add dburles:collection-helpers`
 * An accounts system - e.g. `meteor add accounts-base accounts-password`
+* Roles - `meteor add alanning:roles`
 * Bootstrap 3 - e.g. `meteor add twbs:bootstrap`
 * Fontawesome - e.g. `meteor add fortawesome:fontawesome`
 
