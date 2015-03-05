@@ -108,7 +108,7 @@ The admin dashboard is heavily customisable. Most of the possibilities are repre
               edit:
                 name: 'postWYSIGEditor'
                 data:
-                  post: Session.get 'admin_doc' if Meteor.isClient
+                  post: ()-> Session.get 'admin_doc' if Meteor.isClient
         },
         Comments: {
             icon: 'comment'
