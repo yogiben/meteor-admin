@@ -14,7 +14,7 @@ AdminDashboard =
 			  Router.go AdminConfig.nonAdminRedirectRoute
 		if typeof @.next == 'function'
 			@next()
-	adminRoutes: ['adminDashboard','adminDashboardUsersNew','adminDashboardUsersView','adminDashboardUsersEdit','adminDashboardView','adminDashboardNew','adminDashboardEdit','adminDashboardDetail']
+	adminRoutes: ['adminDashboard','adminDashboardUsersNew','adminDashboardUsersEdit','adminDashboardView','adminDashboardNew','adminDashboardEdit']
 	collectionLabel: (collection)->
 		if collection == 'Users'
 			'Users'
