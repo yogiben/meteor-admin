@@ -1,73 +1,64 @@
+# Add hooks used by many forms
+AutoForm.addHooks [
+		'admin_insert',
+		'admin_update',
+		'adminNewUser',
+		'adminUpdateUser',
+		'adminSendResetPasswordEmail',
+		'adminChangePassword'],
+	beginSubmit: ->
+		$('.btn-primary').addClass('disabled')
+	endSubmit: ->
+		$('.btn-primary').removeClass('disabled')
+	onError: (formType, error)->
+		AdminDashboard.alertFailure error.message
+
 AutoForm.hooks
 	admin_insert:
 		onSubmit: (insertDoc, updateDoc, currentDoc)->
+			hook = @
 			Meteor.call 'adminInsertDoc', insertDoc, Session.get('admin_collection_name'), (e,r)->
 				if e
-					AdminDashboard.alertFailure 'Error: ' + e
+					hook.done(e)
 				else
-					$('.btn-primary').removeClass('disabled')
-					AutoForm.resetForm('admin_insert')
 					adminCallback 'onInsert', [Session.get 'admin_collection_name', insertDoc, updateDoc, currentDoc], (collection) ->
-						Router.go "/admin/#{collection}"
-					AdminDashboard.alertSuccess 'Successfully created'
-			false
-		beginSubmit: (formId, template)->
-			$('.btn-primary').addClass('disabled')
-		onError: (operation, error, template)->
-			AdminDashboard.alertFailure error.message
+						hook.done null, collection
+			return false
+		onSuccess: (formType, result)->
+			AdminDashboard.alertSuccess 'Successfully created'
+			Router.go '/admin/#{collection}'
 
 	admin_update:
 		onSubmit: (insertDoc, updateDoc, currentDoc)->
+			hook = @
 			Meteor.call 'adminUpdateDoc', updateDoc, Session.get('admin_collection_name'), Session.get('admin_id'), (e,r)->
 				if e
-					console.log e
-					AdminDashboard.alertFailure 'Error: ' + e
+					hook.done(e)
 				else
-					AdminDashboard.alertSuccess 'Updated'
-					$('.btn-primary').removeClass('disabled')
-					AutoForm.resetForm('admin_insert')
-					$('.btn-primary').removeClass('disabled')
 					adminCallback 'onUpdate', [Session.get 'admin_collection_name', insertDoc, updateDoc, currentDoc], (collection) ->
-						Router.go "/admin/#{collection}"
-			false
-		beginSubmit: (formId, template)->
-			$('.btn-primary').addClass('disabled')
-		onError: (operation, error, template)->
-			AdminDashboard.alertFailure error.message
+						hook.done null, collection
+			return false
+		onSuccess: (formType, collection)->
+			AdminDashboard.alertSuccess 'Successfully updated'
+			Router.go '/admin/#{collection}'
 
 	adminNewUser:
-		onSuccess: (operation, result, template)->
-			Router.go 'adminDashboardUsersView'
-		onError: (operation, error, template)->
-			AdminDashboard.alertFailure error.message
+		onSuccess: (formType, result)->
+			AdminDashboard.alertSuccess 'Created user'
+			Router.go '/admin/Users'
 
-	admin_update_user:
+	adminUpdateUser:
 		onSubmit: (insertDoc, updateDoc, currentDoc)->
-			Meteor.call 'adminUpdateUser', updateDoc, Session.get('admin_id'), (e,r)->
-				$('.btn-primary').removeClass('disabled')
-			false
-		onError: (operation, error, template)->
-			AdminDashboard.alertFailure error.message
+			Meteor.call 'adminUpdateUser', updateDoc, Session.get('admin_id'), @done
+			return false
+		onSuccess: (formType, result)->
+			AdminDashboard.alertSuccess 'Updated user'
+			Router.go '/admin/Users'
 
 	adminSendResetPasswordEmail:
-		onSuccess: (operation, result, template)->
-			AdminDashboard.alertSuccess 'Email Sent'
-		onError: (operation, error, template)->
-			AdminDashboard.alertFailure error.message
+		onSuccess: (formType, result)->
+			AdminDashboard.alertSuccess 'Email sent'
 
 	adminChangePassword:
 		onSuccess: (operation, result, template)->
 			AdminDashboard.alertSuccess 'Password reset'
-		onError: (operation, error, template)->
-			AdminDashboard.alertFailure error.message
-
-# AutoForm.addHooks [
-# 	"admin_insert"
-# 	"admin_update"
-# ],
-# 	onSuccess: (operation, result, template)->
-# 		AdminDashboard.alertSuccess 'Success'
-	 
-# 	onError: (operation, error, template) ->
-# 		console.log error
-# 		AdminDashboard.alertFailure 'Error: ' + error
