@@ -89,7 +89,14 @@ adminPublishTables = (collections) ->
 			check ids, Array
 			check fields, Match.Optional Object
 
+			if not Roles.userIsInRole this.userId, ['admin']
+				return undefined
+
 			@unblock()
+
+			if collection.extraFields?
+				_.forEach collection.extraFields, (field) ->
+					fields[field] = 1
 
 			find: ->
 				@unblock()
