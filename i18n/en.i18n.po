@@ -1,0 +1,114 @@
+msgid ""
+msgstr "Content-Type: text/plain;\n"
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_header.html:7
+msgid "Admin"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_header.html:13
+msgid "Toggle navigation"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_header.html:22
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_header.html:24
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_header.html:30
+msgid "Home"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_header.html:35
+msgid "Your profile"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_header.html:39
+msgid "Sign out"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_layouts.html:18
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_sidebar.html:19
+msgid "Dashboard"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_layouts.html:24
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_sidebar.html:30
+msgid "New"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_layouts.html:28
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:145
+msgid "Edit"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_layouts.html:61
+msgid "Confirm delete"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_layouts.html:64
+msgid "Are you sure you want to delete this?"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_layouts.html:80
+msgid "You need to be an admin to view this page"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_layouts.html:89
+msgid "You need to define an AdminConfig object to use the admin dashboard."
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_layouts.html:91
+msgid ""
+"A basic config to manage the 'Posts' and 'Comments' collection would look "
+"like this:"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_sidebar.html:31
+msgid "View All"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:49
+msgid "There are no visible items in this collection."
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:50
+msgid "Add one"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:70
+msgid "Add User"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:91
+msgid "Click a role to toggle it."
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:93
+msgid "User not in any roles. Click a role to add it to a user."
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:97
+msgid "Reset Password"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:104
+msgid "Send a reset password email to"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:105
+msgid "Send Email"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:109
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:117
+msgid "Change Password"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:112
+msgid "ID"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_templates.html:150
+msgid "Delete"
+msgstr ""
+
+#: /home/xaiki/src/enre/gaz/packages/yogiben:admin/lib/client/html/admin_widgets.html:26
+msgid "See all"
+msgstr ""
