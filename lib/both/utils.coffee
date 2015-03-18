@@ -19,7 +19,7 @@
 		arr = obj.split '.'
 		continue while arr.length and (ref = ref[arr.shift()])
 		if not ref and required
-			throw new Error(obj + ' is not in the ' + root.toString())
+			throw new Error(obj + __ (' is not in the ') + root.toString())
 		else
 			return ref
 	return obj

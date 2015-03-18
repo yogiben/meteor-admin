@@ -1,0 +1,16 @@
+{
+    // The name for the translation function that
+    // will be available in package's namespace.
+    "translation_function_name": "__",
+
+    // the name for the package templates' translation helper
+    "helper_name": "_",
+
+    // tap:i18n automatically separates the translation strings of each package to a
+    // namespace dedicated to that package, which is used by the package's translation
+    // function and helper. Use the namespace option to set a custom namespace for
+    // the package. By using the name of another package you can use your package to
+    // add to that package or modify its translations. You can also set the namespace to
+    // "project" to add translations that will be available in the project level.
+    "namespace": "admin"
+}
