@@ -21,7 +21,7 @@
 			Meteor.call 'adminCheckAdmin'
 			if typeof AdminConfig?.nonAdminRedirectRoute == 'string'
 				Router.go AdminConfig.nonAdminRedirectRoute
-		
+
 		@next()
 
 
@@ -32,7 +32,7 @@ Router.route "adminDashboard",
 	action: ->
 		@render()
 	onAfterAction: ->
-		Session.set 'admin_title', 'Dashboard'
+		Session.set 'admin_title', __ 'Dashboard'
 		Session.set 'admin_collection_name', ''
 		Session.set 'admin_collection_page', ''
 
@@ -43,10 +43,10 @@ Router.route "adminDashboardUsersNew",
 	action: ->
 		@render()
 	onAfterAction: ->
-		Session.set 'admin_title', 'Users'
-		Session.set 'admin_subtitle', 'Create new user'
-		Session.set 'admin_collection_page', 'New'
-		Session.set 'admin_collection_name', 'Users'
+		Session.set 'admin_title', __ 'Users'
+		Session.set 'admin_subtitle', __ 'Create new user'
+		Session.set 'admin_collection_page', __ 'New'
+		Session.set 'admin_collection_name', __ 'Users'
 
 Router.route "adminDashboardUsersEdit",
 	path: "/admin/Users/:_id/edit"
@@ -76,7 +76,7 @@ Router.route "adminDashboardView",
 		@render()
 	onAfterAction: ->
 		Session.set 'admin_title', @params.collection
-		Session.set 'admin_subtitle', 'View'
+		Session.set 'admin_subtitle', __ 'View'
 		Session.set 'admin_collection_name', @params.collection
 
 Router.route "adminDashboardNew",
@@ -87,8 +87,8 @@ Router.route "adminDashboardNew",
 		@render()
 	onAfterAction: ->
 		Session.set 'admin_title', AdminDashboard.collectionLabel(@params.collection)
-		Session.set 'admin_subtitle', 'Create new'
-		Session.set 'admin_collection_page', 'new'
+		Session.set 'admin_subtitle', __ 'Create new'
+		Session.set 'admin_collection_page', __ 'new'
 		Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
 	data: ->
 		admin_collection: adminCollectionObject @params.collection
@@ -103,8 +103,8 @@ Router.route "adminDashboardEdit",
 		@render()
 	onAfterAction: ->
 		Session.set 'admin_title', AdminDashboard.collectionLabel @params.collection
-		Session.set 'admin_subtitle', 'Edit ' + @params._id
-		Session.set 'admin_collection_page', 'edit'
+		Session.set 'admin_subtitle', __ 'Edit ' + @params._id
+		Session.set 'admin_collection_page', __ 'edit'
 		Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
 		Session.set 'admin_id', @params._id
 		Session.set 'admin_doc', adminCollectionObject(@params.collection).findOne _id : @params._id

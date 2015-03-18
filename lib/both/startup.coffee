@@ -4,7 +4,7 @@ adminTablesDom = '<"box"<"box-header"<"box-toolbar"<"pull-left"<lf>><"pull-right
 adminEditDelButtons = [
 	{
 		data: '_id'
-		title: 'Edit'
+		title: __ 'Edit'
 		createdCell: (node, cellData, rowData) ->
 			$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData}, node)
 		width: '40px'
@@ -12,7 +12,7 @@ adminEditDelButtons = [
 	}
 	{
 		data: '_id'
-		title: 'Delete'
+		title: __ 'Delete'
 		createdCell: (node, cellData, rowData) ->
 			$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData}, node)
 		width: '40px'
@@ -26,12 +26,12 @@ defaultColumns = [
 ]
 
 AdminTables.Users = new Tabular.Table
-	name: 'Users'
+	name: __ 'Users'
 	collection: Meteor.users
 	columns: _.union [
 		{
 			data: '_id'
-			title: 'Admin'
+			title: __ 'Admin'
 			# TODO: use `tmpl`
 			createdCell: (node, cellData, rowData) ->
 				$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData}, node)
@@ -39,19 +39,19 @@ AdminTables.Users = new Tabular.Table
 		}
 		{
 			data: 'emails'
-			title: 'Email'
+			title: __ 'Email'
 			render: (value) ->
 				value[0].address
 		}
 		{
 			data: 'emails'
-			title: 'Mail'
+			title: __ 'Mail'
 			# TODO: use `tmpl`
 			createdCell: (node, cellData, rowData) ->
 				$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData}, node)
 			width: '40px'
 		}
-		{ data: 'createdAt', title: 'Joined' }
+		{ data: 'createdAt', title: __ 'Joined' }
 	], adminEditDelButtons
 	dom: adminTablesDom
 

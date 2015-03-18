@@ -16,7 +16,7 @@
 			<ul class="sidebar-menu">
 				<li class="active">
 					<a href="{{pathFor 'adminDashboard'}}">
-						<i class="fa fa-dashboard"></i> <span>Dashboard</span>
+						<i class="fa fa-dashboard"></i> <span>{{_ "Dashboard"}}</span>
 					</a>
 				</li>
 				{{#each admin_collections}}
@@ -27,8 +27,8 @@
 						<i class="fa fa-angle-left pull-right"></i>
 					</a>
 					<ul class="treeview-menu">
-						<li><a href="{{pathFor 'adminDashboardNew' collection=this.name}}"><i class="fa fa-angle-double-right"></i> New</a></li>
-						<li><a href="{{pathFor 'adminDashboardView' collection=this.name}}"><i class="fa fa-angle-double-right"></i> View All</a></li>
+						<li><a href="{{pathFor 'adminDashboardNew' collection=this.name}}"><i class="fa fa-angle-double-right"></i> {{_ "New"}}</a></li>
+						<li><a href="{{pathFor 'adminDashboardView' collection=this.name}}"><i class="fa fa-angle-double-right"></i> {{_ "View All"}}</a></li>
 						{{#each admin_collection_items}}
 						<li><a href="{{url}}"><i class="fa fa-angle-double-right"></i> {{title}}</a></li>
 						{{/each}}

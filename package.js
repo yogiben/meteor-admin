@@ -23,7 +23,8 @@ Package.on_use(function(api){
     'reywood:publish-composite@1.3.5',
     'momentjs:moment@2.9.0',
     'aldeed:tabular@1.0.6',
-    'meteorhacks:unblock@1.1.0'
+    'meteorhacks:unblock@1.1.0',
+    'tap:i18n@1.4.1'
     ],
     both);
 
@@ -32,11 +33,14 @@ Package.on_use(function(api){
   api.use(['email'],'server')
 
   api.add_files([
+    'package-tap.i18n',
     'lib/both/AdminDashboard.coffee',
     'lib/both/router.coffee',
     'lib/both/utils.coffee',
     'lib/both/startup.coffee',
-    'lib/both/collections.coffee'
+    'lib/both/collections.coffee',
+    // tap
+    'i18n/en.i18n.json',
     ], both);
 
   api.add_files([
