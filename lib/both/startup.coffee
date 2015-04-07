@@ -20,6 +20,11 @@ adminEditDelButtons = [
 	}
 ]
 
+defaultColumns = [
+  data: '_id',
+  title: 'ID'
+]
+
 AdminTables.Users = new Tabular.Table
 	name: 'Users'
 	collection: Meteor.users
