@@ -1,11 +1,12 @@
 Template.AdminLayout.events
 	'click .btn-delete': (e,t) ->
 		_id = $(e.target).attr('doc')
-		Session.set 'admin_id', _id
-		if Session.equals 'admin_collection_name', 'Users'
-			Session.set 'admin_doc', Meteor.users.findOne( _id:_id )
+		if Session.equals 'admin_collection_name', 'Users' 
+			Session.set 'admin_id', _id
+			Session.set 'admin_doc', Meteor.users.findOne(_id)
 		else
-			Session.set 'admin_doc', adminCollectionObject(Session.get 'admin_collection_name').findOne( _id:_id )
+			Session.set 'admin_id', parseID(_id)
+			Session.set 'admin_doc', adminCollectionObject(Session.get('admin_collection_name')).findOne(parseID(_id))
 
 Template.AdminDeleteModal.events
 	'click #confirm-delete': () ->
