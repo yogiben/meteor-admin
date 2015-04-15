@@ -166,6 +166,9 @@ Comments: {
               {label: 'Post', name: 'postTitle()'}
               {label: 'User', name: 'owner', template: 'userEmail'}
             ]
+            
+            showEditColumn: true // Set to false to hide the edit button. True by default. 
+            showDelColumn: true // Set to false to hide the edit button. True by default. 
             showWidget: false
             color: 'red'
         }
