@@ -2,7 +2,7 @@ Template.registerHelper('AdminTables', AdminTables);
 
 adminCollections = ->
 	collections = {}
-	
+
 	if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
 		collections = AdminConfig.collections
 
@@ -83,7 +83,7 @@ UI.registerHelper 'adminCollectionLabel', (collection)->
 
 UI.registerHelper 'adminCollectionCount', (collection)->
 	if collection == 'Users'
-		Meteor.users.find().fetch().length
+		Meteor.users.find().count()
 	else
 		AdminCollectionsCount.findOne({collection: collection})?.count
 
