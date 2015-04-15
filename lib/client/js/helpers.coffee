@@ -65,8 +65,13 @@ UI.registerHelper 'adminIsUserInRole', (_id,role)->
 UI.registerHelper 'adminGetUsers', ->
 	Meteor.users
 
-UI.registerHelper 'adminUserSchemaExists', ->
-	typeof Meteor.users._c2 == 'object'
+UI.registerHelper 'adminGetUserSchema', ->
+	if _.has(AdminConfig, 'userSchema')
+		schema = AdminConfig.userSchema
+	else if typeof Meteor.users._c2 == 'object'
+		schema = Meteor.users.simpleSchema()
+
+	return schema
 
 UI.registerHelper 'adminCollectionLabel', (collection)->
 	AdminDashboard.collectionLabel(collection) if collection?
