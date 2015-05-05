@@ -1,3 +1,7 @@
+if Meteor.isClient
+	Session.set 'admin_bootstrap_loaded', false
+	Session.set 'admin_fontawesome_loaded', false
+
 @AdminController = RouteController.extend
 	layoutTemplate: 'AdminLayout'
 	waitOn: ->
@@ -21,6 +25,22 @@
 			Meteor.call 'adminCheckAdmin'
 			if typeof AdminConfig?.nonAdminRedirectRoute == 'string'
 				Router.go AdminConfig.nonAdminRedirectRoute
+		
+		if AdminConfig.lazyLoad?.bootstrap and not Session.get('admin_bootstrap_loaded')
+			$("<link/>", {
+				rel: "stylesheet"
+				type: "text/css"
+				href: "//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"
+			}).appendTo('head')
+			Session.set 'admin_bootstrap_loaded', true
+		
+		if AdminConfig.lazyLoad?.fontawesome and not Session.get('admin_fontawesome_loaded')
+			$("<link/>", {
+				rel: "stylesheet"
+				type: "text/css"
+				href: "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+			}).appendTo('head')
+			Session.set 'admin_fontawesome_loaded', true
 		
 		@next()
 
