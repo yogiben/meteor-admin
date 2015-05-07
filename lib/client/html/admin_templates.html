@@ -47,7 +47,7 @@
 		{{else}}
 			<div class="alert alert-info">
 				<p>There are no visible items in this collection.</p>
-				<p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="btn btn-primary"><i class="fa fa-plus"></i> Add one</a></p>
+				<p><a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="btn btn-primary"><i class="fa fa-plus"></i> {{_ "Add one"}}</a></p>
 			</div>
 		{{/if}}
 	{{/if}}
@@ -67,7 +67,7 @@
 
 	{{/if}}
 
-	<button type="submit" class="btn btn-primary">Add User</button>
+	<button type="submit" class="btn btn-primary">{{_ "Add User"}}</button>
 
 	{{/autoForm}}
 	
@@ -80,7 +80,7 @@
 	<hr/>
 	{{/if}}
 	
-	<h4>User Roles</h4>
+	<h4>{{_ "User Roles"}}</h4>
 	{{#each roles}}
 	<button class="btn btn-primary btn-xs btn-remove-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
 	{{/each}}
@@ -88,25 +88,25 @@
 	<button class="btn btn-default btn-xs btn-add-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
 	{{/each}}
 	{{#if roles}}
-	<p style="margin-top:5px;">Click a role to toggle it.</p>
+	<p style="margin-top:5px;">{{_ "Click a role to toggle it."}}</p>
 	{{else}}
-	<p>User not in any roles. Click a role to add it to a user.</p>
+	<p>{{_ "User not in any roles. Click a role to add it to a user."}}</p>
 	{{/if}}
 
 	<hr/>
-	<h4>Reset Password</h4>
+	<h4>{{_ "Reset Password"}}</h4>
 	{{#autoForm id="adminSendResetPasswordEmail" schema=AdminSchemas.sendResetPasswordEmail type="method" meteormethod="adminSendResetPasswordEmail"}}
 	<div class="form-group hidden">
 		<label class="control-label" for="title">ID</label>
 		<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
 		<span class="help-block"></span>
 	</div>
-	<p>Send a reset password email to {{admin_current_doc.emails.[0].address}}</p>
-	<button type="submit" class="btn btn-primary btn-sm">Send Email</button>
+	<p>{{_ "Send a reset password email to"}} {{admin_current_doc.emails.[0].address}}</p>
+	<button type="submit" class="btn btn-primary btn-sm">{{_ "Send Email"}}</button>
 	{{/autoForm}}
 
 	<hr/>
-	<h4>Change Password</h4>
+	<h4>{{_ "Change Password"}}</h4>
 	{{#autoForm id="adminChangePassword" schema=AdminSchemas.changePassword type="method" meteormethod="adminChangePassword"}}
 	<div class="form-group hidden">
 		<label class="control-label" for="title">ID</label>
@@ -114,7 +114,7 @@
 		<span class="help-block"></span>
 	</div>
 	{{>afQuickField name="password"}}
-	<button type="submit" class="btn btn-primary btn-sm">Change Password</button>
+	<button type="submit" class="btn btn-primary btn-sm">{{_ "Change Password"}}</button>
 	{{/autoForm}}
 </template>
 
@@ -142,10 +142,10 @@
 
 <template name="adminEditBtn">
 	<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="hidden-xs btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-	<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a>
+	<a href="{{pathFor 'adminDashboardEdit' _id=_id collection=admin_collection_name}}" class="visible-xs btn btn-sm btn-primary"><i class="fa fa-pencil"></i>{{_ "Edit"}}</a>
 </template>
 
 <template name="adminDeleteBtn">
 	<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="hidden-xs btn btn-xs btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i></a>
-	<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i> Delete</a>
+	<a data-toggle="modal" doc="{{_id}}" href='#admin-delete-modal' class="visible-xs btn btn-sm btn-danger btn-delete"><i class="fa fa-times" doc="{{_id}}"></i>{{_ "Delete"}}</a>
 </template>

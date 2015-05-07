@@ -1,0 +1,40 @@
+{
+  /* header */
+  "Toggle navigation":"Toggle navigation",
+  "Admin":"Admin",
+  "Home":"Home",
+  "Your Profile":"Your Profile",
+  "Sign out":"Sign out",
+
+  /* sidebar */
+  "Dashboard":"Dashboard",
+  "New":"New",
+  "View All":"View All",
+  
+  /* widgets */
+  "See all":"See all",
+  "Edit":"Edit",
+  "Confirm delete":"Confirm delete",
+  "Are you sure you want to delete this?":"Are you sure you want to delete this?",
+  "Close","Close",
+  "Delete","Delete",
+
+  /* layout */
+  "You need to be an admin to view this page":"You need to be an admin to view this page",
+  "You need to define an AdminConfig object to use the admin dashboard":"You need to define an AdminConfig object to use the admin dashboard",
+  "A basic config to manage the 'Posts' and 'Comments' collection would look like this:":"A basic config to manage the 'Posts' and 'Comments' collection would look like this:",
+
+  /* admin */
+  "Add one":"Add one",
+  "Add User":"Add user",
+  "User Roles":"User Roles",
+  "Click a role to toggle it.":"Click a role to toggle it.",
+  "User not in any roles. Click a role to add it to a user.":"User not in any roles. Click a role to add it to a user.",
+  "Send Email":"Send Email",
+  "Change Password":"Change Password",
+  "Send a reset password email to":"Send a reset password email to",
+  
+
+}
+  
+  

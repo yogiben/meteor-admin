@@ -23,7 +23,8 @@ Package.on_use(function(api){
     'reywood:publish-composite@1.3.5',
     'momentjs:moment@2.9.0',
     'aldeed:tabular@1.0.6',
-    'meteorhacks:unblock@1.1.0'
+    'meteorhacks:unblock@1.1.0',
+    'tap:i18n@1.4.1"
     ],
     both);
 
@@ -36,7 +37,7 @@ Package.on_use(function(api){
     'lib/both/router.coffee',
     'lib/both/utils.coffee',
     'lib/both/startup.coffee',
-    'lib/both/collections.coffee'
+    'lib/both/collections.coffee',
     ], both);
 
   api.add_files([
@@ -53,6 +54,8 @@ Package.on_use(function(api){
     'lib/client/js/events.coffee',
     'lib/client/js/slim_scroll.js',
     'lib/client/js/autoForm.coffee',
+    'i18n/en.i18n.json',
+    'i18n/zh-CN.i18n.json'
     ], 'client');
 
   api.add_files([
