@@ -30,6 +30,16 @@ defaultColumns = [
 ]
 
 AdminTables.Users = new Tabular.Table
+	# Modify selector to allow search by email
+	changeSelector: (selector, userId) ->
+		$or = selector['$or']
+		$or and selector['$or'] = _.map $or, (exp) ->
+			if exp.emails?['$regex']?
+				emails: $elemMatch: address: exp.emails
+			else
+				exp
+		selector
+
 	name: 'Users'
 	collection: Meteor.users
 	columns: _.union [
@@ -46,6 +56,7 @@ AdminTables.Users = new Tabular.Table
 			title: 'Email'
 			render: (value) ->
 				value[0].address
+			searchable: true
 		}
 		{
 			data: 'emails'
