@@ -24,7 +24,7 @@ adminEditDelButtons = [
 	adminDelButton
 ]
 
-defaultColumns = [
+defaultColumns = () -> [
   data: '_id',
   title: 'ID'
 ]
@@ -90,7 +90,7 @@ adminCreateTables = (collections) ->
 			createdCell: createdCell
 
 		if columns.length == 0
-			columns = defaultColumns
+			columns = defaultColumns()
 
 		if collection.showEditColumn
 			columns.push(adminEditButton)
