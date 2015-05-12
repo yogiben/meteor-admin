@@ -1,7 +1,7 @@
 Package.describe({
   name: "yogiben:admin",
   summary: "A complete admin dashboard solution",
-  version: "1.1.0",
+  version: "1.1.1",
   git: "https://github.com/yogiben/meteor-admin"
 });
 
@@ -24,7 +24,7 @@ Package.on_use(function(api){
     'momentjs:moment@2.9.0',
     'aldeed:tabular@1.0.6',
     'meteorhacks:unblock@1.1.0',
-    'tap:i18n@1.4.1"
+    'tap:i18n@1.4.1'
     ],
     both);
 
@@ -41,6 +41,7 @@ Package.on_use(function(api){
     ], both);
 
   api.add_files([
+    'package-tap.i18n',
     'lib/client/html/admin_templates.html',
     'lib/client/html/admin_widgets.html',
     'lib/client/html/admin_layouts.html',
@@ -54,6 +55,7 @@ Package.on_use(function(api){
     'lib/client/js/events.coffee',
     'lib/client/js/slim_scroll.js',
     'lib/client/js/autoForm.coffee',
+    'lib/client/js/i18n.coffee',
     'i18n/en.i18n.json',
     'i18n/zh-CN.i18n.json'
     ], 'client');

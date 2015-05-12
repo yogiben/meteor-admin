@@ -1,30 +1,25 @@
 {
-  /* header */
   "Toggle navigation":"Toggle navigation",
   "Admin":"超级用户",
   "Home":"初始页",
   "Your Profile":"用户资料",
   "Sign out":"登出",
 
-  /* sidebar */
   "Dashboard":"控制面板",
   "New":"新增",
   "View All":"显示全部",
   
-  /* widgets */
   "See all":"展示全部",
   "Edit":"编辑",
   "Confirm delete":"确认删除",
   "Are you sure you want to delete this?":"你确定想要删除它吗？",
-  "Close","关闭",
-  "Delete","删除",
+  "Close":"关闭",
+  "Delete":"删除",
 
-  /* layout */
   "You need to be an admin to view this page":"你是admin才能展示此页",
   "You need to define an AdminConfig object to use the admin dashboard":"你需要定义一个 AdminConfig object 才能使用控制面板",
   "A basic config to manage the 'Posts' and 'Comments' collection would look like this:":"一个基本的设置来管理 'Posts' 和 'Comments' 表，像这样:",
 
-  /* admin */
   "Add one":"添加一个",
   "Add User":"新增用户",
   "User Roles":"用户角色",
@@ -32,7 +27,7 @@
   "User not in any roles. Click a role to add it to a user.":"用户不属于任何一个角色，点击一个角色连接到用户上",
   "Send Email":"发送邮件",
   "Change Password":"更换密码",
-  "Send a reset password email to":"发送一个重置密码邮件到",
+  "Send a reset password email to":"发送一个重置密码邮件到"
   
 
 }
