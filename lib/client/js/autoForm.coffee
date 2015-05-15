@@ -24,7 +24,7 @@ AutoForm.hooks
 					adminCallback 'onInsert', [Session.get 'admin_collection_name', insertDoc, updateDoc, currentDoc], (collection) ->
 						hook.done null, collection
 			return false
-		onSuccess: (formType, result)->
+		onSuccess: (formType, collection)->
 			AdminDashboard.alertSuccess 'Successfully created'
 			Router.go "/admin/#{collection}"
 
