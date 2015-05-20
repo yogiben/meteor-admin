@@ -37,7 +37,7 @@ Meteor.methods
 				user.email = email
 				unless doc.chooseOwnPassword
 					user.password = doc.password
-					
+
 				_id = Accounts.createUser user
 
 				if doc.sendPassword && typeof AdminConfig.fromEmail != 'undefined'
@@ -72,8 +72,9 @@ Meteor.methods
 
 	adminCheckAdmin: ->
 		check arguments, [Match.Any]
-		if this.userId and !Roles.userIsInRole this.userId, ['admin']
-			email = Meteor.users.findOne(_id:this.userId).emails[0].address
+		user = Meteor.users.findOne(_id:this.userId)
+		if this.userId and !Roles.userIsInRole(this.userId, ['admin']) and (user.emails.length > 0)
+			email = user.emails[0].address
 			if typeof Meteor.settings.adminEmails != 'undefined'
 				adminEmails = Meteor.settings.adminEmails
 				if adminEmails.indexOf(email) > -1

@@ -12,13 +12,39 @@ A complete admin dashboard solution for meteor built off the [iron-router](https
 
 ![alt tag](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/screenshot2.png)
 
+## Admin 2.0 ##
+
+We are currently working on the next version of meteor-admin. Main ideas:
+
+1. Remove strong dependency on other packages such as iron:router aldeed:simple-schema etc. to be able to integrate with other packages.
+2. Lazy load admin page assets. We don't want to add unnecessary weight to "user-side" app.
+3. Make the ui more customizable.
+4. Make the api more friendly for plugin-in packages.
+
+To achieve this we are going to work on following in order:
+
+1. AdminLTE 2.x.x as blaze templates. e.g:
+
+```
+{{#AdminLTE skin="blue"}}
+  {{#lteSidebarNav}}
+    ...
+  {{/lteSidebarNav}}
+  ...
+{{/AdminLTE}}
+```
+2. Admin configuration api
+3. Integration of other packages: iron:router, meteorhacks:flow-router, aldeed:tabular, aldeed:autoform etc.
+
 ### Getting started ###
 
 #### 0. Prerequisites####
 This package is designed to work with certain types of projects. Your project should be using and have configured
 * Iron Router - `meteor add iron:router`
 * Collection Helpers - `meteor add dburles:collection-helpers`
+* Collection2 - `meteor add aldeed:collection2`
 * An accounts system - e.g. `meteor add accounts-base accounts-password`
+* Roles - `meteor add alanning:roles`
 * Bootstrap 3 - e.g. `meteor add twbs:bootstrap`
 * Fontawesome - e.g. `meteor add fortawesome:fontawesome`
 
@@ -64,13 +90,13 @@ Schemas.Posts = new SimpleSchema
 		type: String
 		autoform:
 			rows: 5
-	createdAt: 
+	createdAt:
 		type: Date
 		label: 'Date'
 		autoValue: ->
 			if this.isInsert
 				return new Date()
-	owner: 
+	owner:
 		type: String
 		regEx: SimpleSchema.RegEx.Id
 		autoValue: ->
@@ -92,7 +118,7 @@ The admin dashboard is heavily customisable. Most of the possibilities are repre
 ```
 @AdminConfig =
     nonAdminRedirectRoute: 'entrySignIn',
-    collections: 
+    collections:
         Posts: {
             icon: 'pencil'
             tableColumns: [
@@ -108,7 +134,7 @@ The admin dashboard is heavily customisable. Most of the possibilities are repre
               edit:
                 name: 'postWYSIGEditor'
                 data:
-                  post: Session.get 'admin_doc' if Meteor.isClient
+                  post: ()-> Session.get 'admin_doc' if Meteor.isClient
         },
         Comments: {
             icon: 'comment'
@@ -120,7 +146,7 @@ The admin dashboard is heavily customisable. Most of the possibilities are repre
             ]
             showWidget: false
         }
-    autoForm: 
+    autoForm:
         omitFields: ['createdAt', 'updatedAt']
     dashboard:
         homeUrl: '/dashboard'
@@ -166,6 +192,9 @@ Comments: {
               {label: 'Post', name: 'postTitle()'}
               {label: 'User', name: 'owner', template: 'userEmail'}
             ]
+
+            showEditColumn: true // Set to false to hide the edit button. True by default.
+            showDelColumn: true // Set to false to hide the edit button. True by default.
             showWidget: false
             color: 'red'
         }
@@ -192,12 +221,37 @@ Comments: {
 
 `color` styles the widget. See the [LTE Admin documentation](http://almsaeedstudio.com/preview/).
 
+#### Users ####
+
+The Meteor.users collection is automatically added to the admin panel.
+You can create, view and delete users.
+
+If you have attached a schema to the user, it will automatically be used for the edit form.
+You can disable this functionality, or customize the schema that is used.
+
+```javascript
+@AdminConfig =
+    ...
+    // Disable editing of user fields:
+    userSchema: null,
+
+    // Use a custom SimpleSchema:
+    userSchema: new SimpleSchema({
+      'profile.gender': {
+        type: String,
+        allowedValues: ['male', 'female']
+      }
+    }),
+
+```
+
+
 #### Custom Templates ####
 The default admin templates are autoForm instances based on the schemas assigned to the collections. If they don't do the job, you specify a custom template to use for each of the `new`,`edit` and `view` screens for each collection.
 ```
 @AdminConfig =
     ...
-    collections: 
+    collections:
         Posts: {
             templates:
               new:
@@ -215,7 +269,7 @@ Custom templates are most used when you need to use an {{#autoForm}} instead of 
 ```
 @AdminConfig =
     ...
-    autoForm: 
+    autoForm:
         omitFields: ['createdAt', 'updatedAt']
 ```
 Here you can specify globally the fields that should never appear in your `new` and `update` views. This is typically meta information likes dates.

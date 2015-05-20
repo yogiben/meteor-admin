@@ -1,19 +1,24 @@
 Template.registerHelper('AdminTables', AdminTables);
 
-UI.registerHelper 'AdminConfig', ->
-	AdminConfig if typeof AdminConfig != 'undefined'
-
-UI.registerHelper 'admin_collections', ->
+adminCollections = ->
 	collections = {}
+
 	if typeof AdminConfig != 'undefined'  and typeof AdminConfig.collections == 'object'
 		collections = AdminConfig.collections
+
 	collections.Users =
 		collectionObject: Meteor.users
 		icon: 'user'
+		label: 'Users'
 
 	_.map collections, (obj, key) ->
 		obj = _.extend obj, {name:key}
 		obj = _.defaults obj, {label: key,icon:'plus',color:'blue'}
+
+UI.registerHelper 'AdminConfig', ->
+	AdminConfig if typeof AdminConfig != 'undefined'
+
+UI.registerHelper 'admin_collections', adminCollections
 
 UI.registerHelper 'admin_collection_name', ->
 	Session.get 'admin_collection_name'
@@ -65,24 +70,29 @@ UI.registerHelper 'adminIsUserInRole', (_id,role)->
 UI.registerHelper 'adminGetUsers', ->
 	Meteor.users
 
-UI.registerHelper 'adminUserSchemaExists', ->
-	typeof Meteor.users._c2 == 'object'
+UI.registerHelper 'adminGetUserSchema', ->
+	if _.has(AdminConfig, 'userSchema')
+		schema = AdminConfig.userSchema
+	else if typeof Meteor.users._c2 == 'object'
+		schema = Meteor.users.simpleSchema()
+
+	return schema
 
 UI.registerHelper 'adminCollectionLabel', (collection)->
 	AdminDashboard.collectionLabel(collection) if collection?
 
 UI.registerHelper 'adminCollectionCount', (collection)->
 	if collection == 'Users'
-		Meteor.users.find().fetch().length
+		Meteor.users.find().count()
 	else
 		AdminCollectionsCount.findOne({collection: collection})?.count
 
 UI.registerHelper 'adminTemplate', (collection,mode)->
-	if collection.toLowerCase() != 'users' && typeof AdminConfig.collections[collection].templates != 'undefined'
+	if collection.toLowerCase() != 'users' && typeof AdminConfig.collections?[collection].templates != 'undefined'
 		AdminConfig.collections[collection].templates[mode]
 
 UI.registerHelper 'adminGetCollection', (collection)->
-	AdminConfig.collections[collection]
+	_.find adminCollections(), (item) -> item.name == collection
 
 UI.registerHelper 'adminWidgets', ->
 	if typeof AdminConfig.dashboard != 'undefined' and typeof AdminConfig.dashboard.widgets != 'undefined'

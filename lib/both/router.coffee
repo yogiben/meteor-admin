@@ -98,7 +98,7 @@ Router.route "adminDashboardEdit",
 	template: "AdminDashboardEdit"
 	controller: "AdminController"
 	waitOn: ->
-		Meteor.subscribe('adminCollectionDoc', @params.collection, @params._id)
+		Meteor.subscribe('adminCollectionDoc', @params.collection, parseID(@params._id))
 	action: ->
 		@render()
 	onAfterAction: ->
@@ -106,7 +106,7 @@ Router.route "adminDashboardEdit",
 		Session.set 'admin_subtitle', 'Edit ' + @params._id
 		Session.set 'admin_collection_page', 'edit'
 		Session.set 'admin_collection_name', @params.collection.charAt(0).toUpperCase() + @params.collection.slice(1)
-		Session.set 'admin_id', @params._id
-		Session.set 'admin_doc', adminCollectionObject(@params.collection).findOne _id : @params._id
+		Session.set 'admin_id', parseID(@params._id)
+		Session.set 'admin_doc', adminCollectionObject(@params.collection).findOne _id : parseID(@params._id)
 	data: ->
 		admin_collection: adminCollectionObject @params.collection
