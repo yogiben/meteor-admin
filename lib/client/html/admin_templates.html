@@ -13,7 +13,11 @@
 		{{> UI.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
-		{{> quickForm id="admin_insert" collection=admin_collection fields=admin_fields omitFields=admin_omit_fields buttonContent='Create'}}
+		<div class="box box-default">
+			<div class="box-body">
+				{{> quickForm id="admin_insert" collection=admin_collection fields=admin_fields omitFields=admin_omit_fields buttonContent='Create'}}
+			</div>
+		</div>
 	{{/if}}
 </template>
 
@@ -24,9 +28,13 @@
 		{{> UI.dynamic template=name data=data }}
 		{{/with}}
 	{{else}}
-		{{#if admin_current_doc}}
-		{{> quickForm id="admin_update" collection=admin_collection doc=admin_current_doc fields=admin_fields omitFields=admin_omit_fields buttonContent='Update'}}
-		{{/if}}
+		<div class="box box-default">
+			<div class="box-body">
+				{{#if admin_current_doc}}
+				{{> quickForm id="admin_update" collection=admin_collection doc=admin_current_doc fields=admin_fields omitFields=admin_omit_fields buttonContent='Update'}}
+				{{/if}}
+			</div>
+		</div>
 	{{/if}}
 </template>
 
@@ -70,7 +78,7 @@
 	<button type="submit" class="btn btn-primary">Add User</button>
 
 	{{/autoForm}}
-	
+
 </template>
 
 <template name="AdminDashboardUsersEdit">
@@ -79,7 +87,7 @@
 	{{> quickForm id="adminUpdateUser" buttonContent="Update" buttonClasses="btn btn-primary btn-sm" collection=adminGetUsers schema=adminGetUserSchema doc=admin_current_doc omitFields="roles,services"}}
 	<hr/>
 	{{/if}}
-	
+
 	<h4>User Roles</h4>
 	{{#each roles}}
 	<button class="btn btn-primary btn-xs btn-remove-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
