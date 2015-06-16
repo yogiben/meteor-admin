@@ -62,68 +62,75 @@
 </template>
 
 <template name="AdminDashboardUsersNew">
-	{{> adminAlert}}
-	{{# autoForm id="adminNewUser" schema=AdminSchemas.newUser type="method" meteormethod="adminNewUser"}}
+	<div class="box box-default">
+		<div class="box-body">
+			{{> adminAlert}}
+			{{# autoForm id="adminNewUser" schema=AdminSchemas.newUser type="method" meteormethod="adminNewUser"}}
 
-	{{>afQuickField name="email"}}
-	{{>afQuickField name="chooseOwnPassword"}}
+			{{>afQuickField name="email"}}
+			{{>afQuickField name="chooseOwnPassword"}}
 
-	{{#if afFieldValueIs name="chooseOwnPassword" value=false}}
+			{{#if afFieldValueIs name="chooseOwnPassword" value=false}}
 
-	{{>afQuickField name="password"}}
-	{{>afQuickField name="sendPassword"}}
+			{{>afQuickField name="password"}}
+			{{>afQuickField name="sendPassword"}}
 
-	{{/if}}
+			{{/if}}
 
-	<button type="submit" class="btn btn-primary">Add User</button>
+			<button type="submit" class="btn btn-primary">Add User</button>
 
-	{{/autoForm}}
-
+			{{/autoForm}}
+		</div>
+	</div>
 </template>
 
 <template name="AdminDashboardUsersEdit">
-	{{> adminAlert}}
-	{{#if adminGetUserSchema}}
-	{{> quickForm id="adminUpdateUser" buttonContent="Update" buttonClasses="btn btn-primary btn-sm" collection=adminGetUsers schema=adminGetUserSchema doc=admin_current_doc omitFields="roles,services"}}
-	<hr/>
-	{{/if}}
+	<div class="box box-default">
+		<div class="box-body">
+			{{> adminAlert}}
+			{{#if adminGetUserSchema}}
+			{{> quickForm id="adminUpdateUser" buttonContent="Update" buttonClasses="btn btn-primary btn-sm" collection=adminGetUsers schema=adminGetUserSchema doc=admin_current_doc omitFields="roles,services"}}
+			<hr/>
+			{{/if}}
 
-	<h4>User Roles</h4>
-	{{#each roles}}
-	<button class="btn btn-primary btn-xs btn-remove-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
-	{{/each}}
-	{{#each otherRoles}}
-	<button class="btn btn-default btn-xs btn-add-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
-	{{/each}}
-	{{#if roles}}
-	<p style="margin-top:5px;">Click a role to toggle it.</p>
-	{{else}}
-	<p>User not in any roles. Click a role to add it to a user.</p>
-	{{/if}}
+			<h4>User Roles</h4>
+			{{#each roles}}
+			<button class="btn btn-primary btn-xs btn-remove-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
+			{{/each}}
+			{{#each otherRoles}}
+			<button class="btn btn-default btn-xs btn-add-role" role="{{this}}" user="{{admin_current_id}}">{{this}}</button>
+			{{/each}}
+			{{#if roles}}
+			<p style="margin-top:5px;">Click a role to toggle it.</p>
+			{{else}}
+			<p>User not in any roles. Click a role to add it to a user.</p>
+			{{/if}}
 
-	<hr/>
-	<h4>Reset Password</h4>
-	{{#autoForm id="adminSendResetPasswordEmail" schema=AdminSchemas.sendResetPasswordEmail type="method" meteormethod="adminSendResetPasswordEmail"}}
-	<div class="form-group hidden">
-		<label class="control-label" for="title">ID</label>
-		<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
-		<span class="help-block"></span>
+			<hr/>
+			<h4>Reset Password</h4>
+			{{#autoForm id="adminSendResetPasswordEmail" schema=AdminSchemas.sendResetPasswordEmail type="method" meteormethod="adminSendResetPasswordEmail"}}
+			<div class="form-group hidden">
+				<label class="control-label" for="title">ID</label>
+				<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
+				<span class="help-block"></span>
+			</div>
+			<p>Send a reset password email to {{admin_current_doc.emails.[0].address}}</p>
+			<button type="submit" class="btn btn-primary btn-sm">Send Email</button>
+			{{/autoForm}}
+
+			<hr/>
+			<h4>Change Password</h4>
+			{{#autoForm id="adminChangePassword" schema=AdminSchemas.changePassword type="method" meteormethod="adminChangePassword"}}
+			<div class="form-group hidden">
+				<label class="control-label" for="title">ID</label>
+				<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
+				<span class="help-block"></span>
+			</div>
+			{{>afQuickField name="password"}}
+			<button type="submit" class="btn btn-primary btn-sm">Change Password</button>
+			{{/autoForm}}
+		</div>
 	</div>
-	<p>Send a reset password email to {{admin_current_doc.emails.[0].address}}</p>
-	<button type="submit" class="btn btn-primary btn-sm">Send Email</button>
-	{{/autoForm}}
-
-	<hr/>
-	<h4>Change Password</h4>
-	{{#autoForm id="adminChangePassword" schema=AdminSchemas.changePassword type="method" meteormethod="adminChangePassword"}}
-	<div class="form-group hidden">
-		<label class="control-label" for="title">ID</label>
-		<input value="{{admin_current_id}}" type="text" name="_id" omitfields="createdAtupdatedAt" required="" data-schema-key="_id" class="form-control" autocomplete="off" />
-		<span class="help-block"></span>
-	</div>
-	{{>afQuickField name="password"}}
-	<button type="submit" class="btn btn-primary btn-sm">Change Password</button>
-	{{/autoForm}}
 </template>
 
 <template name="adminAlert">
