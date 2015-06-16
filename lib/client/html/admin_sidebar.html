@@ -1,7 +1,7 @@
 <template name="AdminSidebar">
-	<aside class="left-side sidebar-offcanvas">
+	<aside class="main-sidebar" style="padding-top: 0;">
 		<!-- sidebar: style can be found in sidebar.less -->
-		<section class="sidebar">		
+		<div class="sidebar">
 			<!-- search form -->
 			<!-- <form class="sidebar-form">
 				<div class="input-group">
@@ -13,7 +13,7 @@
 			</form> -->
 			<!-- /.search form -->
 			<!-- sidebar menu: : style can be found in sidebar.less -->
-			<ul class="sidebar-menu">
+			<ul class="nav sidebar-menu">
 				<li class="active">
 					<a href="{{pathFor 'adminDashboard'}}">
 						<i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -43,7 +43,7 @@
 					{{/if}}
 				{{/each}}
 			</ul>
-		</section>
+		</div>
 	</aside>
 </template>
 

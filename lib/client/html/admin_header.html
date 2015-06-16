@@ -1,5 +1,5 @@
 <template name="AdminHeader">
-    <header class="header">
+    <header class="main-header">
         <a href="/admin" class="logo">
             {{#if AdminConfig.name}}
             {{AdminConfig.name}}
@@ -9,13 +9,13 @@
         </a>
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
-            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <div class="navbar-right">
+            <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li>
                         {{#if AdminConfig.dashboard.homeUrl}}
