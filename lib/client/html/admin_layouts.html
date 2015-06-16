@@ -14,27 +14,25 @@
   							{{$.Session.get 'admin_title'}}
   							<small>{{$.Session.get 'admin_subtitle'}}</small>
   						</h1>
-  						<div class="header-right">
-  							<ol class="breadcrumb">
-  								<li><a href="/admin/">Dashboard</a></li>
-  								{{#if $.Session.get 'admin_collection'}}
-  								<li><a href="/admin/{{admin_collection}}/">{{adminCollectionLabel admin_collection_name}}</a></li>
-  								{{/if}}
+							<ol class="breadcrumb">
+								<li><a href="/admin/">Dashboard</a></li>
+								{{#if $.Session.get 'admin_collection'}}
+								<li><a href="/admin/{{admin_collection}}/">{{adminCollectionLabel admin_collection_name}}</a></li>
+								{{/if}}
 
-  								{{#if $.Session.equals 'admin_collection_page' 'new'}}
-  								<li><a href="/admin/{{admin_collection}}/new">New</a></li>
-  								{{/if}}
+								{{#if $.Session.equals 'admin_collection_page' 'new'}}
+								<li><a href="/admin/{{admin_collection}}/new">New</a></li>
+								{{/if}}
 
-  								{{#if $.Session.equals 'admin_collection_page' 'edit'}}
-  								<li><a href="/admin/{{admin_collection}}/edit">Edit</a></li>
-  								{{/if}}
+								{{#if $.Session.equals 'admin_collection_page' 'edit'}}
+								<li><a href="/admin/{{admin_collection}}/edit">Edit</a></li>
+								{{/if}}
 
 
-  							</ol>
-  							{{#if $.Session.get 'admin_collection_name'}}
-  							<a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="new-document"><i class="fa fa-plus"></i></a>
-  							{{/if}}
-  						</div>
+							</ol>
+							{{#if $.Session.get 'admin_collection_name'}}
+							<a href="{{pathFor 'adminDashboardNew' collection=admin_collection_name}}" class="new-document"><i class="fa fa-plus"></i></a>
+							{{/if}}
   					</section>
   					<section class="content">
   						{{> yield }}
