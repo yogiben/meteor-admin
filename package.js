@@ -55,6 +55,7 @@ Package.on_use(function(api){
     'lib/client/js/events.coffee',
     'lib/client/js/slim_scroll.js',
     'lib/client/js/autoForm.coffee',
+    'lib/client/js/app.js'
     ], 'client');
 
   api.add_files([
@@ -62,8 +63,5 @@ Package.on_use(function(api){
     'lib/server/methods.coffee'
     ], 'server');
 
-
-
   api.export('AdminDashboard',both)
-
 });
