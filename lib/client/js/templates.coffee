@@ -47,3 +47,7 @@ Template.AdminDashboardView.rendered = ->
 Template.AdminDashboardView.helpers
 	hasDocuments: ->
 		AdminCollectionsCount.findOne({collection: Session.get 'admin_collection_name'})?.count > 0
+
+Template.adminEditBtn.helpers
+	path: ->
+		Router.path "adminDashboard" + Session.get('admin_collection_name') + "Edit", _id: @_id

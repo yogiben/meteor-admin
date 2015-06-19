@@ -12,8 +12,11 @@ adminCollections = ->
 		label: 'Users'
 
 	_.map collections, (obj, key) ->
-		obj = _.extend obj, {name:key}
-		obj = _.defaults obj, {label: key,icon:'plus',color:'blue'}
+		obj = _.extend obj, {name: key}
+		obj = _.defaults obj, {label: key, icon: 'plus', color: 'blue'}
+		obj = _.extend obj,
+			viewPath: Router.path "adminDashboard#{key}View"
+			newPath: Router.path "adminDashboard#{key}New"
 
 UI.registerHelper 'AdminConfig', ->
 	AdminConfig if typeof AdminConfig != 'undefined'
@@ -90,8 +93,8 @@ UI.registerHelper 'adminCollectionCount', (collection)->
 	else
 		AdminCollectionsCount.findOne({collection: collection})?.count
 
-UI.registerHelper 'adminTemplate', (collection,mode)->
-	if collection.toLowerCase() != 'users' && typeof AdminConfig.collections?[collection]?.templates != 'undefined'
+UI.registerHelper 'adminTemplate', (collection, mode)->
+	if collection?.toLowerCase() != 'users' && typeof AdminConfig?.collections?[collection]?.templates != 'undefined'
 		AdminConfig.collections[collection].templates[mode]
 
 UI.registerHelper 'adminGetCollection', (collection)->

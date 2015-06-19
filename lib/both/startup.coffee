@@ -106,6 +106,59 @@ adminCreateTables = (collections) ->
 			extraFields: collection.extraFields
 			dom: adminTablesDom
 
+adminCreateRoutes = (collections) ->
+	_.each collections, adminCreateRouteView
+	_.each collections,	adminCreateRouteNew
+	_.each collections, adminCreateRouteEdit
+
+adminCreateRouteView = (collection, collectionName) ->
+	Router.route "adminDashboard#{collectionName}View",
+		path: "/admin/#{collectionName}"
+		template: "AdminDashboardViewWrapper"
+		controller: "AdminController"
+		data: ->
+	  		admin_table: AdminTables[collectionName]
+		action: ->
+			@render()
+		onAfterAction: ->
+			Session.set 'admin_title', collectionName
+			Session.set 'admin_subtitle', 'View'
+			Session.set 'admin_collection_name', collectionName
+
+adminCreateRouteNew = (collection, collectionName) ->
+	Router.route "adminDashboard#{collectionName}New",
+		path: "/admin/#{collectionName}/new"
+		template: "AdminDashboardNew"
+		controller: "AdminController"
+		action: ->
+			@render()
+		onAfterAction: ->
+			Session.set 'admin_title', AdminDashboard.collectionLabel collectionName
+			Session.set 'admin_subtitle', 'Create new'
+			Session.set 'admin_collection_page', 'new'
+			Session.set 'admin_collection_name', collectionName.charAt(0).toUpperCase() + collectionName.slice(1)
+		data: ->
+			admin_collection: adminCollectionObject collectionName
+
+adminCreateRouteEdit = (collection, collectionName) ->
+	Router.route "adminDashboard#{collectionName}Edit",
+		path: "/admin/#{collectionName}/:_id/edit"
+		template: "AdminDashboardEdit"
+		controller: "AdminController"
+		waitOn: ->
+			Meteor.subscribe 'adminCollectionDoc', collectionName, parseID(@params._id)
+		action: ->
+			@render()
+		onAfterAction: ->
+			Session.set 'admin_title', AdminDashboard.collectionLabel collectionName
+			Session.set 'admin_subtitle', 'Edit ' + @params._id
+			Session.set 'admin_collection_page', 'edit'
+			Session.set 'admin_collection_name', collectionName.charAt(0).toUpperCase() + collectionName.slice(1)
+			Session.set 'admin_id', parseID(@params._id)
+			Session.set 'admin_doc', adminCollectionObject(collectionName).findOne _id : parseID(@params._id)
+		data: ->
+			admin_collection: adminCollectionObject collectionName
+
 adminPublishTables = (collections) ->
 	_.each collections, (collection, name) ->
 		if not collection.children then return undefined
@@ -123,4 +176,5 @@ adminPublishTables = (collections) ->
 
 Meteor.startup ->
 	adminCreateTables AdminConfig?.collections
+	adminCreateRoutes AdminConfig?.collections
 	adminPublishTables AdminConfig?.collections if Meteor.isServer
