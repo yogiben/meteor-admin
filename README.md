@@ -300,7 +300,7 @@ Here you can customise the look and feel of the dashboard.
 ```
 `homeUrl` is the `href` property of the 'Home' button. Defaults to `/`.
 
-`skin` defaults to 'blue' but there is also a black skin avaiable.
+`skin` defaults to 'blue'. Available skins: `black black-light blue blue-light green green-light purple purple-light red red-light yellow yellow-light`
 
 `widgets` is an array of objects specifying template names and data contexts. Make sure to specify the `class` in the data context. If set, the `widgets` property will override the collection widgets which appear by default.
 
