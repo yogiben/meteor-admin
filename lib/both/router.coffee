@@ -21,7 +21,10 @@
 			Meteor.call 'adminCheckAdmin'
 			if typeof AdminConfig?.nonAdminRedirectRoute == 'string'
 				Router.go AdminConfig.nonAdminRedirectRoute
-		
+
+		cssUrl = Meteor.absoluteUrl 'packages/yogiben_admin/lib/client/css/AdminLTE.css'
+		$(document.body).append("<link rel=\"stylesheet\" href=\"#{cssUrl}\">")
+
 		@next()
 
 

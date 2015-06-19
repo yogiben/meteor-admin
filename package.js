@@ -46,7 +46,6 @@ Package.on_use(function(api){
     'lib/client/html/admin_layouts.html',
     'lib/client/html/admin_sidebar.html',
     'lib/client/html/admin_header.html',
-    'lib/client/css/AdminLTE.less',
     'lib/client/css/skin-blue.less',
     'lib/client/css/admin-custom.less',
     'lib/client/js/admin_layout.js',
@@ -62,6 +61,10 @@ Package.on_use(function(api){
     'lib/server/publish.coffee',
     'lib/server/methods.coffee'
     ], 'server');
+
+  api.add_files([
+    'lib/client/css/AdminLTE.css'
+  ], 'client', { isAsset: true });
 
   api.export('AdminDashboard',both)
 });
