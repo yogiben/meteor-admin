@@ -2,7 +2,7 @@
   {{#if AdminConfig}}
   {{#if isInRole 'admin'}}
 	<div class="admin-layout">
-    <div class="skin-blue">
+    <div class="skin-{{admin_skin}}">
   		<div class="wrapper" style="min-height: {{minHeight}}">
   			{{> AdminHeader}}
   			{{> AdminSidebar }}

@@ -46,7 +46,6 @@ Package.on_use(function(api){
     'lib/client/html/admin_layouts.html',
     'lib/client/html/admin_sidebar.html',
     'lib/client/html/admin_header.html',
-    'lib/client/css/skin-blue.less',
     'lib/client/css/admin-custom.less',
     'lib/client/js/admin_layout.js',
     'lib/client/js/helpers.coffee',
@@ -63,7 +62,19 @@ Package.on_use(function(api){
     ], 'server');
 
   api.add_files([
-    'lib/client/css/AdminLTE.css'
+    'lib/client/css/AdminLTE.min.css',
+    'lib/client/css/skins/skin-black-light.min.css',
+    'lib/client/css/skins/skin-black.min.css',
+    'lib/client/css/skins/skin-blue-light.min.css',
+    'lib/client/css/skins/skin-blue.min.css',
+    'lib/client/css/skins/skin-green-light.min.css',
+    'lib/client/css/skins/skin-green.min.css',
+    'lib/client/css/skins/skin-purple-light.min.css',
+    'lib/client/css/skins/skin-purple.min.css',
+    'lib/client/css/skins/skin-red-light.min.css',
+    'lib/client/css/skins/skin-red.min.css',
+    'lib/client/css/skins/skin-yellow-light.min.css',
+    'lib/client/css/skins/skin-yellow.min.css'
   ], 'client', { isAsset: true });
 
   api.export('AdminDashboard',both)
