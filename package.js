@@ -24,7 +24,8 @@ Package.on_use(function(api){
     'reywood:publish-composite@1.3.6',
     'momentjs:moment@2.10.3',
     'aldeed:tabular@1.2.0',
-    'meteorhacks:unblock@1.1.0'
+    'meteorhacks:unblock@1.1.0',
+    'zimme:active-route@2.0.0'
     ],
     both);
 
