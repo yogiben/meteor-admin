@@ -22,8 +22,9 @@
 			if typeof AdminConfig?.nonAdminRedirectRoute == 'string'
 				Router.go AdminConfig.nonAdminRedirectRoute
 
-		cssUrl = Meteor.absoluteUrl 'packages/yogiben_admin/lib/client/css/AdminLTE.css'
-		$(document.body).append("<link rel=\"stylesheet\" href=\"#{cssUrl}\">")
+		if not $(document.head).find('link.js-yogiben-admin-lte').length
+			cssUrl = Meteor.absoluteUrl 'packages/yogiben_admin/lib/client/css/AdminLTE.css'
+			$(document.head).append("<link rel=\"stylesheet\" href=\"#{cssUrl}\" class=\"js-yogiben-admin-lte\">")
 
 		@next()
 
