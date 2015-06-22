@@ -108,8 +108,12 @@ Posts.attachSchema(Schemas.Posts)
 ```javascript
 AdminConfig = {
   collections: {
-    Posts: {},
-    Comments: {}
+    Posts: {
+      // collection options
+    },
+    Comments: {
+      // collection options
+    }
   }
 };
 ```
@@ -129,6 +133,8 @@ Comments: {
   color: 'red'
 }
 ```
+
+##### Collection options #####
 `icon` is the icon code from [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/).
 
 `tableColumns` an array of objects that describe the columns that will appear in the admin dashboard.
@@ -144,6 +150,8 @@ Comments: {
 ```
 
 `fields` is an array of field names - set when the form should only show these fields. From [AutoForm](https://github.com/aldeed/meteor-autoform).
+
+`extraFields` fields to be subscribed but not displayed in the table. Can be used if collection helper depends on the field which is not in the table.
 
 `omitFields` hides fields that we don't want appearing in the add / edit screens like 'updatedAt' for example. From [AutoForm](https://github.com/aldeed/meteor-autoform).
 
