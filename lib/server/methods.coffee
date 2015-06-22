@@ -40,13 +40,15 @@ Meteor.methods
 
 				_id = Accounts.createUser user
 
-				if doc.sendPassword && typeof AdminConfig.fromEmail != 'undefined'
-					Email.send(
+				if doc.sendPassword and AdminConfig.fromEmail?
+					Email.send
 						to: user.email
 						from: AdminConfig.fromEmail
 						subject: 'Your account has been created'
 						html: 'You\'ve just had an account created for ' + Meteor.absoluteUrl() + ' with password ' + doc.password
-						)
+
+				if not doc.sendPassword
+					Accounts.sendEnrollmentEmail _id
 
 	adminUpdateUser: (modifier,_id)->
 		check arguments, [Match.Any]
