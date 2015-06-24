@@ -167,6 +167,12 @@ adminPublishTables = (collections) ->
 			check ids, Array
 			check fields, Match.Optional Object
 
+			extraFields = _.reduce collection.extraFields, (fields, name) ->
+				fields[name] = 1
+				fields
+			, {}
+			_.extend fields, extraFields
+
 			@unblock()
 
 			find: ->
