@@ -25,7 +25,8 @@ Package.on_use(function(api){
     'momentjs:moment@2.10.3',
     'aldeed:tabular@1.2.0',
     'meteorhacks:unblock@1.1.0',
-    'zimme:active-route@2.0.0'
+    'zimme:active-route@2.0.0',
+    'mfactory:admin-lte@0.0.1'
     ],
     both);
 
@@ -53,30 +54,13 @@ Package.on_use(function(api){
     'lib/client/js/templates.coffee',
     'lib/client/js/events.coffee',
     'lib/client/js/slim_scroll.js',
-    'lib/client/js/autoForm.coffee',
-    'lib/client/js/app.js'
+    'lib/client/js/autoForm.coffee'
     ], 'client');
 
   api.add_files([
     'lib/server/publish.coffee',
     'lib/server/methods.coffee'
     ], 'server');
-
-  api.add_files([
-    'lib/client/css/AdminLTE.min.css',
-    'lib/client/css/skins/skin-black-light.min.css',
-    'lib/client/css/skins/skin-black.min.css',
-    'lib/client/css/skins/skin-blue-light.min.css',
-    'lib/client/css/skins/skin-blue.min.css',
-    'lib/client/css/skins/skin-green-light.min.css',
-    'lib/client/css/skins/skin-green.min.css',
-    'lib/client/css/skins/skin-purple-light.min.css',
-    'lib/client/css/skins/skin-purple.min.css',
-    'lib/client/css/skins/skin-red-light.min.css',
-    'lib/client/css/skins/skin-red.min.css',
-    'lib/client/css/skins/skin-yellow-light.min.css',
-    'lib/client/css/skins/skin-yellow.min.css'
-  ], 'client', { isAsset: true });
 
   api.export('AdminDashboard',both)
 });
