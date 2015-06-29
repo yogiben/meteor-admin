@@ -1,8 +1,10 @@
-Meteor.publish 'adminCollectionDoc', (collection, id) ->
+Meteor.publishComposite 'adminCollectionDoc', (collection, id) ->
 	check collection, String
 	check id, Match.OneOf(String, Mongo.ObjectID)
 	if Roles.userIsInRole this.userId, ['admin']
-		adminCollectionObject(collection).find(id)
+		find: ->
+			adminCollectionObject(collection).find(id)
+		children: AdminConfig?.collections?[collection]?.children or []
 	else
 		@ready()
 
@@ -32,7 +34,7 @@ Meteor.publish 'adminCollectionsCount', ->
 				count -= 1
 				ready and self.changed 'adminCollectionsCount', id, {count: count}
 		ready = true
-		
+
 		self.added 'adminCollectionsCount', id, {collection: name, count: count}
 
 	self.onStop ->
