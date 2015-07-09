@@ -50,6 +50,19 @@ AdminConfig = {
   }
 };
 ```
+
+By default, the `"admin"` role will be used to identify administrators. To identify administrators by another role, you can use the `adminRole` property:
+
+```javascript
+AdminConfig = {
+  name: 'My App',
+  adminRole: 'Owner',
+  collections: {
+    Posts: {}
+  }
+};
+```
+
 #### 3. Define your data models ####
 If you are unfamiliar with [autoform](https://github.com/aldeed/meteor-autoform) or [collection2](https://github.com/aldeed/meteor-collection2) or [collection-helpers](https://github.com/dburles/meteor-collection-helpers) you should check them out now.
 

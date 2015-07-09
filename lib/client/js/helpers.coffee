@@ -21,6 +21,9 @@ adminCollections = ->
 UI.registerHelper 'AdminConfig', ->
 	AdminConfig if typeof AdminConfig != 'undefined'
 
+UI.registerHelper 'adminRole', ->
+  AdminConfig?.adminRole or 'admin'
+
 UI.registerHelper 'admin_skin', ->
 	AdminConfig?.skin or 'blue'
 
