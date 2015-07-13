@@ -99,7 +99,7 @@ Meteor.methods
 	adminRemoveUserToRole: (_id,role)->
 		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, [AdminConfig?.adminRole or 'admin']
-			Roles.removeUsersFromRoles _id, role
+			Roles.removeUsersFromRoles _id, role, Roles.GLOBAL_GROUP
 
 	adminSetCollectionSort: (collection, _sort) ->
 		check arguments, [Match.Any]
