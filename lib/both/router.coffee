@@ -17,7 +17,7 @@
 		Session.set 'admin_id', null
 		Session.set 'admin_doc', null
 
-		if not Roles.userIsInRole Meteor.userId(), ['admin']
+		if not Roles.userIsInRole Meteor.userId(), [AdminConfig?.adminRole or 'admin']
 			Meteor.call 'adminCheckAdmin'
 			if typeof AdminConfig?.nonAdminRedirectRoute == 'string'
 				Router.go AdminConfig.nonAdminRedirectRoute

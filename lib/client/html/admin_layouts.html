@@ -1,6 +1,6 @@
 <template name="AdminLayout">
   {{#if AdminConfig}}
-  {{#if isInRole 'admin'}}
+  {{#if isInRole adminRole}}
     <div class="admin-layout">
     {{#AdminLTE}}
   			{{> AdminHeader}}

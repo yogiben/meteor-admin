@@ -1,7 +1,7 @@
 Meteor.publishComposite 'adminCollectionDoc', (collection, id) ->
 	check collection, String
 	check id, Match.OneOf(String, Mongo.ObjectID)
-	if Roles.userIsInRole this.userId, ['admin']
+	if Roles.userIsInRole this.userId, [AdminConfig?.adminRole or 'admin']
 		find: ->
 			adminCollectionObject(collection).find(id)
 		children: AdminConfig?.collections?[collection]?.children or []
@@ -9,7 +9,7 @@ Meteor.publishComposite 'adminCollectionDoc', (collection, id) ->
 		@ready()
 
 Meteor.publish 'adminUsers', ->
-	if Roles.userIsInRole @userId, ['admin']
+	if Roles.userIsInRole @userId, [AdminConfig?.adminRole or 'admin']
 		Meteor.users.find()
 	else
 		@ready()
