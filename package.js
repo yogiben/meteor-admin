@@ -1,5 +1,5 @@
 Package.describe({
-  name: "yogiben:admin",
+  name: "carlosbaraza:admin",
   summary: "A complete admin dashboard solution",
   version: "1.2.2",
   git: "https://github.com/yogiben/meteor-admin"

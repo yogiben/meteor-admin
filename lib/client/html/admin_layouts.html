@@ -2,7 +2,7 @@
   {{#if AdminConfig}}
   {{#if isInRole 'admin'}}
     <div class="admin-layout">
-    {{#AdminLTE}}
+    {{# AdminLTE skin=admin_skin }}
   			{{> AdminHeader}}
   			{{> AdminSidebar }}
 				<div class="content-wrapper" style="min-height: {{minHeight}}">
@@ -30,7 +30,7 @@
 						{{> yield }}
 					</section>
 				</div>
-    {{/AdminLTE}}
+    {{/ AdminLTE }}
     </div>
 	{{> AdminDeleteModal }}
 	{{else}}
