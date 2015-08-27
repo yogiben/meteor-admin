@@ -210,6 +210,53 @@ The `/admin/Posts/new` and `/admin/Posts/edit` will not use the `postWYSIGEditor
 
 Custom templates are most used when you need to use an {{#autoForm}} instead of the default {{> quickForm}}.
 
+#### Custom route options ####
+It is possible to setup some custom options that will be used during the
+generation of the routes for your collections. If no options are given, default
+ones will be used.
+
+This could be useful in order to set up `waitOn` or `onAfterAction` hooks:
+
+```javascript
+AdminConfig = {
+  // ...
+  collections: {
+    Posts: {
+      routes: {
+        new: {
+          waitOn: function () { return Meteor.subscribe('images'); }
+        },
+        view: {
+          waitOn: function () { return Meteor.subscribe('images'); }
+        },
+        edit: {
+          waitOn: function () { return Meteor.subscribe('images'); }
+        }
+      }
+    }
+  }
+  // ...
+}
+```
+
+All the options that Iron Router accept are also accepted here, except:
+`path`, `template`, `controller`, `action` and `data`.
+
+However, `data` context could be set up using the `collectionObject` key:
+```javascript
+AdminConfig = {
+  // ...
+  collections: {
+    Posts: {
+      collectionObject: {
+        key: 'value'
+      }
+    }
+  }
+  // ...
+}
+```
+
 #### Autoform ####
 ```javascript
 AdminConfig = {
