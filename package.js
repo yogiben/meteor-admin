@@ -9,8 +9,6 @@ Package.on_use(function(api){
 
   both = ['client','server']
 
-  api.versionsFrom('METEOR@1.0');
-
   api.use(
     ['iron:router@1.0.9',
     'coffeescript',
