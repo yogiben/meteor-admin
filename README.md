@@ -206,7 +206,7 @@ AdminConfig = {
   }
 };
 ```
-The `/admin/Posts/new` and `/admin/Posts/edit` will not use the `postWYSIGEditor` template that you've defined somewhere in your code. The `edit` view will be rendered with a data context (here the document being edited).
+The `/admin/Posts/new` and `/admin/Posts/edit` will now use the `postWYSIGEditor` template that you've defined somewhere in your code. The `edit` view will be rendered with a data context (here the document being edited).
 
 Custom templates are most used when you need to use an {{#autoForm}} instead of the default {{> quickForm}}.
 
