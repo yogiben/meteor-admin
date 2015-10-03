@@ -269,6 +269,19 @@ Here you can specify globally the fields that should never appear in your `new` 
 
 **Important** don't omit fields unless the schema specifies either an `autoValue` or `optional` is set to `true`. See [autoForm](https://github.com/aldeed/meteor-autoform).
 
+#### AdminLTE Skin ####
+In order to customise the skin, add the key `skin` with one of the allowed values. `skin` defaults to `"blue"`.
+
+Available skins: `black black-light blue blue-light green green-light purple purple-light red red-light yellow yellow-light`
+
+```javascript
+AdminConfig = {
+  // ...
+  skin: 'black-light',
+  // ...
+}
+```
+
 #### Dashboard ####
 Here you can customise the look and feel of the dashboard.
 ```javascript
@@ -276,7 +289,6 @@ AdminConfig = {
   // ...
   dashboard: {
     homeUrl: '/dashboard',
-    skin: 'black',
     widgets: [
       {
         template: 'adminCollectionWidget',
@@ -296,8 +308,6 @@ AdminConfig = {
 };
 ```
 `homeUrl` is the `href` property of the 'Home' button. Defaults to `/`.
-
-`skin` defaults to 'blue'. Available skins: `black black-light blue blue-light green green-light purple purple-light red red-light yellow yellow-light`
 
 `widgets` is an array of objects specifying template names and data contexts. Make sure to specify the `class` in the data context. If set, the `widgets` property will override the collection widgets which appear by default.
 
