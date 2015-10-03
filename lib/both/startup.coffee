@@ -114,20 +114,30 @@ adminCreateRoutes = (collections) ->
 
 adminCreateRouteView = (collection, collectionName) ->
 	Router.route "adminDashboard#{collectionName}View",
+		adminCreateRouteViewOptions collection, collectionName
+
+adminCreateRouteViewOptions = (collection, collectionName) ->
+	options =
 		path: "/admin/#{collectionName}"
 		template: "AdminDashboardViewWrapper"
 		controller: "AdminController"
 		data: ->
-	  		admin_table: AdminTables[collectionName]
+  		admin_table: AdminTables[collectionName]
 		action: ->
 			@render()
 		onAfterAction: ->
 			Session.set 'admin_title', collectionName
 			Session.set 'admin_subtitle', 'View'
 			Session.set 'admin_collection_name', collectionName
+			collection.routes?.view?.onAfterAction
+	_.defaults options, collection.routes?.view
 
 adminCreateRouteNew = (collection, collectionName) ->
 	Router.route "adminDashboard#{collectionName}New",
+		adminCreateRouteNewOptions collection, collectionName
+
+adminCreateRouteNewOptions = (collection, collectionName) ->
+	options =
 		path: "/admin/#{collectionName}/new"
 		template: "AdminDashboardNew"
 		controller: "AdminController"
@@ -138,16 +148,23 @@ adminCreateRouteNew = (collection, collectionName) ->
 			Session.set 'admin_subtitle', 'Create new'
 			Session.set 'admin_collection_page', 'new'
 			Session.set 'admin_collection_name', collectionName
+			collection.routes?.new?.onAfterAction
 		data: ->
 			admin_collection: adminCollectionObject collectionName
+	_.defaults options, collection.routes?.new
 
 adminCreateRouteEdit = (collection, collectionName) ->
 	Router.route "adminDashboard#{collectionName}Edit",
+		adminCreateRouteEditOptions collection, collectionName
+
+adminCreateRouteEditOptions = (collection, collectionName) ->
+	options =
 		path: "/admin/#{collectionName}/:_id/edit"
 		template: "AdminDashboardEdit"
 		controller: "AdminController"
 		waitOn: ->
 			Meteor.subscribe 'adminCollectionDoc', collectionName, parseID(@params._id)
+			collection.routes?.edit?.waitOn
 		action: ->
 			@render()
 		onAfterAction: ->
@@ -157,8 +174,10 @@ adminCreateRouteEdit = (collection, collectionName) ->
 			Session.set 'admin_collection_name', collectionName
 			Session.set 'admin_id', parseID(@params._id)
 			Session.set 'admin_doc', adminCollectionObject(collectionName).findOne _id : parseID(@params._id)
+			collection.routes?.edit?.onAfterAction
 		data: ->
 			admin_collection: adminCollectionObject collectionName
+	_.defaults options, collection.routes?.edit
 
 adminPublishTables = (collections) ->
 	_.each collections, (collection, name) ->
