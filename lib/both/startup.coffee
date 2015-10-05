@@ -6,7 +6,7 @@ adminEditButton = {
 	data: '_id'
 	title: 'Edit'
 	createdCell: (node, cellData, rowData) ->
-		$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData}, node)
+		$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData})
 	width: '40px'
 	orderable: false
 }
@@ -14,7 +14,7 @@ adminDelButton = {
 	data: '_id'
 	title: 'Delete'
 	createdCell: (node, cellData, rowData) ->
-		$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData}, node)
+		$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData})
 	width: '40px'
 	orderable: false
 }
