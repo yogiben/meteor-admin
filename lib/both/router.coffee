@@ -2,7 +2,6 @@
 	layoutTemplate: 'AdminLayout'
 	waitOn: ->
 		[
-			Meteor.subscribe 'adminUsers'
 			Meteor.subscribe 'adminUser'
 			Meteor.subscribe 'adminCollectionsCount'
 		]
