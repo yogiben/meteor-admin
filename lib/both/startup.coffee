@@ -6,7 +6,7 @@ adminEditButton = {
 	data: '_id'
 	title: 'Edit'
 	createdCell: (node, cellData, rowData) ->
-		$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData}, node)
+		$(node).html(Blaze.toHTMLWithData Template.adminEditBtn, {_id: cellData})
 	width: '40px'
 	orderable: false
 }
@@ -14,7 +14,7 @@ adminDelButton = {
 	data: '_id'
 	title: 'Delete'
 	createdCell: (node, cellData, rowData) ->
-		$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData}, node)
+		$(node).html(Blaze.toHTMLWithData Template.adminDeleteBtn, {_id: cellData})
 	width: '40px'
 	orderable: false
 }
@@ -48,7 +48,7 @@ AdminTables.Users = new Tabular.Table
 			title: 'Admin'
 			# TODO: use `tmpl`
 			createdCell: (node, cellData, rowData) ->
-				$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData}, node)
+				$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData})
 			width: '40px'
 		}
 		{
@@ -63,7 +63,7 @@ AdminTables.Users = new Tabular.Table
 			title: 'Mail'
 			# TODO: use `tmpl`
 			createdCell: (node, cellData, rowData) ->
-				$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData}, node)
+				$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData})
 			width: '40px'
 		}
 		{ data: 'createdAt', title: 'Joined' }
@@ -84,7 +84,7 @@ adminCreateTables = (collections) ->
 			if column.template
 				createdCell = (node, cellData, rowData) ->
 					$(node).html ''
-					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData}, node)
+					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData})
 
 			data: column.name
 			title: column.label
