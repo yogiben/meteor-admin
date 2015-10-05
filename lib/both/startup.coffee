@@ -70,6 +70,8 @@ AdminTables.Users = new Tabular.Table
 	], adminEditDelButtons
 	dom: adminTablesDom
 
+adminCollectionObject['Meteor.users'] = Meteor.users
+
 adminTablePubName = (collection) ->
 	"admin_tabular_#{collection}"
 

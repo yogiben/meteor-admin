@@ -68,6 +68,8 @@ Router.route "adminDashboardUsersEdit",
 		user: Meteor.users.find(@params._id).fetch()
 		roles: Roles.getRolesForUser @params._id
 		otherRoles: _.difference _.map(Meteor.roles.find().fetch(), (role) -> role.name), Roles.getRolesForUser(@params._id)
+	waitOn: ->
+		Meteor.subscribe 'adminCollectionDoc', 'Meteor.users', parseID(@params._id)
 	action: ->
 		@render()
 	onAfterAction: ->
