@@ -43,7 +43,7 @@ adminCreateTables = (collections) ->
 			if column.template
 				createdCell = (node, cellData, rowData) ->
 					$(node).html ''
-					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData}, node)
+					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData})
 
 			data: column.name
 			title: column.label
@@ -163,9 +163,9 @@ Meteor.startup ->
 	adminCreateTables AdminConfig?.collections
 	adminCreateRoutes AdminConfig?.collections
 	adminPublishTables AdminConfig?.collections if Meteor.isServer
-	
+
 	if AdminTables.Users then return undefined
-	
+
 	AdminTables.Users = new Tabular.Table
 		# Modify selector to allow search by email
 		changeSelector: (selector, userId) ->
@@ -176,7 +176,7 @@ Meteor.startup ->
 				else
 					exp
 			selector
-	
+
 		name: 'Users'
 		collection: Meteor.users
 		columns: _.union [
@@ -185,7 +185,7 @@ Meteor.startup ->
 				title: 'Admin'
 				# TODO: use `tmpl`
 				createdCell: (node, cellData, rowData) ->
-					$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData}, node)
+					$(node).html(Blaze.toHTMLWithData Template.adminUsersIsAdmin, {_id: cellData})
 				width: '40px'
 			}
 			{
@@ -200,7 +200,7 @@ Meteor.startup ->
 				title: 'Mail'
 				# TODO: use `tmpl`
 				createdCell: (node, cellData, rowData) ->
-					$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData}, node)
+					$(node).html(Blaze.toHTMLWithData Template.adminUsersMailBtn, {emails: cellData})
 				width: '40px'
 			}
 			{ data: 'createdAt', title: 'Joined' }
