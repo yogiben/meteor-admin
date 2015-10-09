@@ -14,6 +14,7 @@ Package.on_use(function(api){
   api.use(
     ['iron:router@1.0.9',
     'coffeescript',
+    'check',
     'underscore',
     'reactive-var',
     'aldeed:collection2@2.5.0',
