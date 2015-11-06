@@ -26,4 +26,4 @@ Template.AdminDashboardUsersEdit.events
 Template.AdminHeader.events
 	'click .btn-sign-out': () ->
 		Meteor.logout ->
-			Router.go('/')
+			Router.go(AdminConfig?.logoutRedirect or '/')
