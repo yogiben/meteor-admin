@@ -26,7 +26,8 @@ Package.on_use(function(api){
     'aldeed:tabular@1.4.0',
     'meteorhacks:unblock@1.1.0',
     'zimme:active-route@2.3.2',
-    'mfactory:admin-lte@0.0.2'
+    'mfactory:admin-lte@0.0.2',
+    'check'
     ],
     both);
 
