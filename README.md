@@ -121,6 +121,7 @@ It is possible to configure the way the collection is managed.
 ```
 Comments: {
   icon: 'comment'
+  label: 'sidebar-comment'
   omitFields: ['updatedAt']
   tableColumns: [
    { label: 'Content', name: 'content' },
@@ -136,6 +137,8 @@ Comments: {
 
 ##### Collection options #####
 `icon` is the icon code from [Font Awesome](http://fortawesome.github.io/Font-Awesome/icons/).
+
+`label` is a string, will display in admin dashboard sidebar instead of collection name.
 
 `tableColumns` an array of objects that describe the columns that will appear in the admin dashboard.
 
