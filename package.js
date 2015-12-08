@@ -16,6 +16,7 @@ Package.on_use(function(api){
     'coffeescript',
     'underscore',
     'reactive-var',
+    'check',
     'aldeed:collection2@2.5.0',
     'aldeed:autoform@5.5.1',
     'aldeed:template-extension@3.4.3',
