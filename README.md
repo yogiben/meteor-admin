@@ -376,3 +376,13 @@ Router.route('analytics', {
   }
 });
 ```
+
+#### Logout Redirects ####
+
+If you want to redirect to a custom route after the user is loggged out, you can use the `logoutRedirect` setting.
+
+```javascript
+AdminConfig = {
+  logoutRedirect: 'login' // Redirect to the route named 'login' after logging out.
+}
+```
