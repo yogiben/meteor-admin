@@ -37,6 +37,7 @@ adminCreateTables = (collections) ->
 		_.defaults collection, {
 			showEditColumn: true
 			showDelColumn: true
+			showInSideBar: true
 		}
 
 		columns = _.map collection.tableColumns, (column) ->
@@ -163,9 +164,9 @@ Meteor.startup ->
 	adminCreateTables AdminConfig?.collections
 	adminCreateRoutes AdminConfig?.collections
 	adminPublishTables AdminConfig?.collections if Meteor.isServer
-	
+
 	if AdminTables.Users then return undefined
-	
+
 	AdminTables.Users = new Tabular.Table
 		# Modify selector to allow search by email
 		changeSelector: (selector, userId) ->
@@ -176,7 +177,7 @@ Meteor.startup ->
 				else
 					exp
 			selector
-	
+
 		name: 'Users'
 		collection: Meteor.users
 		columns: _.union [
