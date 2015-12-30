@@ -19,7 +19,7 @@ Package.on_use(function(api){
     'check',
     'aldeed:collection2@2.5.0',
     'aldeed:autoform@5.5.1',
-    'aldeed:template-extension@3.4.3',
+    'aldeed:template-extension@4.0.0',
     'alanning:roles@1.2.13',
     'raix:handlebar-helpers@0.2.5',
     'reywood:publish-composite@1.4.2',
