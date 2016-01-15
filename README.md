@@ -12,6 +12,10 @@ A complete admin dashboard solution for meteor built off the [iron-router](https
 
 ![alt tag](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/screenshot2.png)
 
+Maintained by [Meteor Factory](https://meteorfactory.io). Professional Meteor development.
+
+[![Meteor autoform file](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/meteor-factory.jpg)](http://meteorfactory.io)
+
 ### Getting started ###
 
 #### 0. Prerequisites####
