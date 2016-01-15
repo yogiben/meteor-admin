@@ -14,13 +14,13 @@ A complete admin dashboard solution for meteor built off the [iron-router](https
 
 Maintained by [Meteor Factory](https://meteorfactory.io). Professional Meteor development.
 
-[![Meteor autoform file](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/meteor-factory.jpg)](http://meteorfactory.io)
+[![Meteor admin](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/meteor-factory.jpg)](http://meteorfactory.io)
 
 ### Getting started ###
 
 #### 0. Prerequisites####
 This package is designed to work with certain types of projects. Your project should be using and have configured
-* Iron Router - `meteor add iron:router`
+* Iron Router - `meteor add  iron:router`
 * Collection Helpers - `meteor add dburles:collection-helpers`
 * Collection2 - `meteor add aldeed:collection2`
 * An accounts system - e.g. `meteor add accounts-base accounts-password`
@@ -390,3 +390,6 @@ AdminConfig = {
   logoutRedirect: 'login' // Redirect to the route named 'login' after logging out.
 }
 ```
+
+### Premium Support ###
+Have an urgent issue or want help with implementation? Start a conversation with [Meteor Factory](http://meteorfactory.io).
