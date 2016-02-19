@@ -47,11 +47,11 @@ This config will make the **first user** admin.
 You can also set the adminEmails property which will will override this.
 ```javascript
 AdminConfig = {
-  name: 'My App'
-  adminEmails: ['ben@code2create.com']
+  name: 'My App',
+  adminEmails: ['ben@code2create.com'],
   collections: {
     Posts: {}
-  }
+  },
 };
 ```
 #### 3. Define your data models ####
