@@ -1,4 +1,5 @@
 Meteor.publishComposite 'adminCollectionDoc', (collection, id) ->
+	console.log 'adminCollectionDoc'
 	check collection, String
 	check id, Match.OneOf(String, Mongo.ObjectID)
 	if Roles.userIsInRole this.userId, ['admin']
@@ -18,8 +19,6 @@ Meteor.publish 'adminUser', ->
 	Meteor.users.find @userId
 
 Meteor.publish 'adminCollectionsCount', ->
-	console.log('adminCollectionsCount')
-
 	handles = []
 	self = @
 

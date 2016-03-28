@@ -5,10 +5,11 @@
 			subscriptions.push collection.countSubscription() if collection.countSubscription
 			subscriptions
 		, []
+		console.log('customSubscriptions', customSubscriptions)
 		_.union [
 			Meteor.subscribe 'adminUsers'
 			Meteor.subscribe 'adminUser'
-			Meteor.subscribe 'adminCollectionsCount'
+			# Meteor.subscribe 'adminCollectionsCount'
 		], customSubscriptions
 	onBeforeAction: ->
 		Session.set 'adminSuccess', null
