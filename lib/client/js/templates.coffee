@@ -45,8 +45,8 @@ Template.AdminDashboardView.rendered = ->
 		table.page.len(parseInt @value).draw()
 
 Template.AdminDashboardView.helpers
-	hasDocuments: -> true
-		# AdminCollectionsCount.findOne({collection: Session.get 'admin_collection_name'})?.count > 0
+	hasDocuments: ->
+		AdminCollectionsCount.findOne({collection: Session.get 'admin_collection_name'})?.count > 0
 	newPath: ->
 		Router.path 'adminDashboard' + Session.get('admin_collection_name') + 'New'
 
