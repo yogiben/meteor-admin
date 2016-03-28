@@ -1,11 +1,15 @@
 @AdminController = RouteController.extend
 	layoutTemplate: 'AdminLayout'
 	waitOn: ->
-		[
+		customSubscriptions = _.reduce AdminConfig?.collections, (subscriptions, collection) ->
+			subscriptions.push collection.countSubscription() if collection.countSubscription
+			subscriptions
+		, []
+		_.union [
 			Meteor.subscribe 'adminUsers'
 			Meteor.subscribe 'adminUser'
-			# Meteor.subscribe 'adminCollectionsCount'
-		]
+			Meteor.subscribe 'adminCollectionsCount'
+		], customSubscriptions
 	onBeforeAction: ->
 		Session.set 'adminSuccess', null
 		Session.set 'adminError', null

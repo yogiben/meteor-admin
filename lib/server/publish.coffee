@@ -23,12 +23,22 @@ Meteor.publish 'adminCollectionsCount', ->
 	handles = []
 	self = @
 
-	_.each AdminTables, (table, name) ->
+	collectionsWithoutCustomCounter = _.reduce AdminConfig?.collections, (result, collection, name) ->
+		result[name] = collection if not collection.countSubscription and not collection.count
+		result
+	, {}
+
+	collectionsWithCountFn = _.reduce AdminConfig?.collections, (result, collection, name) ->
+		result[name] = collection if collection.count
+		result
+	, {}
+
+	_.each collectionsWithoutCustomCounter, (collection, name) ->
 		id = new Mongo.ObjectID
-		count = 0
+		count = 1
 
 		ready = false
-		handles.push table.collection.find().observeChanges
+		handles.push adminCollectionObject(name).find().observeChanges
 			added: ->
 				count += 1
 				ready and self.changed 'adminCollectionsCount', id, {count: count}
@@ -37,6 +47,11 @@ Meteor.publish 'adminCollectionsCount', ->
 				ready and self.changed 'adminCollectionsCount', id, {count: count}
 		ready = true
 
+		self.added 'adminCollectionsCount', id, {collection: name, count: count}
+
+	_.each collectionsWithCountFn, (collection, name) ->
+		id = new Mongo.ObjectID
+		count = collection.count()
 		self.added 'adminCollectionsCount', id, {collection: name, count: count}
 
 	self.onStop ->

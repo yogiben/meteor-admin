@@ -4,7 +4,7 @@ Meteor Admin
 
 To get a working example, clone and run my [Meteor starter](https://github.com/yogiben/meteor-starter) repo and then go to `/admin`.
 
-A complete admin dashboard solution for meteor built off the [iron-router](https://github.com/EventedMind/iron-router),  [roles](https://github.com/alanning/meteor-roles/) and [autoform](https://github.com/aldeed/meteor-autoform) packages and frontend from the open source admin dashboard template, [Admin LTE](https://github.com/almasaeed2010/AdminLTE).
+A complete admin dashboard solution for meteor built off the [iron-router](https://github.com/iron-meteor/iron-router),  [roles](https://github.com/alanning/meteor-roles/) and [autoform](https://github.com/aldeed/meteor-autoform) packages and frontend from the open source admin dashboard template, [Admin LTE](https://github.com/almasaeed2010/AdminLTE).
 
 **Feedback Welcome.** Please create an issue.
 
@@ -12,11 +12,15 @@ A complete admin dashboard solution for meteor built off the [iron-router](https
 
 ![alt tag](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/screenshot2.png)
 
+Maintained by [Meteor Factory](https://meteorfactory.io). Professional Meteor development.
+
+[![Meteor admin](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/meteor-factory.jpg)](http://meteorfactory.io)
+
 ### Getting started ###
 
 #### 0. Prerequisites####
 This package is designed to work with certain types of projects. Your project should be using and have configured
-* Iron Router - `meteor add iron:router`
+* Iron Router - `meteor add  iron:router`
 * Collection Helpers - `meteor add dburles:collection-helpers`
 * Collection2 - `meteor add aldeed:collection2`
 * An accounts system - e.g. `meteor add accounts-base accounts-password`
@@ -157,7 +161,7 @@ Comments: {
 
 `showWidget` when set to false hides the corresponding widget from the dashboard.
 
-`color` styles the widget. See the [LTE Admin documentation](http://almsaeedstudio.com/preview/).
+`color` styles the widget. See the [LTE Admin documentation](https://almsaeedstudio.com/preview).
 
 #### Users ####
 
@@ -386,3 +390,6 @@ AdminConfig = {
   logoutRedirect: 'login' // Redirect to the route named 'login' after logging out.
 }
 ```
+
+### Premium Support ###
+Have an urgent issue or want help with implementation? Start a conversation with [Meteor Factory](http://meteorfactory.io).
