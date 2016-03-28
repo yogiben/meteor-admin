@@ -53,3 +53,6 @@ Template.AdminDashboardView.helpers
 Template.adminEditBtn.helpers
 	path: ->
 		Router.path "adminDashboard" + Session.get('admin_collection_name') + "Edit", _id: @_id
+
+Template.AdminDashboard.helpers
+	isDefined: (obj) -> obj?

@@ -18,6 +18,8 @@ Meteor.publish 'adminUser', ->
 	Meteor.users.find @userId
 
 Meteor.publish 'adminCollectionsCount', ->
+	console.log('adminCollectionsCount')
+
 	handles = []
 	self = @
 
