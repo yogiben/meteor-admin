@@ -49,11 +49,7 @@ Meteor.methods
 	adminUpdateUser: (modifier,_id)->
 		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, [AdminConfig?.adminRole or 'admin']
-			Future = Npm.require('fibers/future');
-			fut = new Future();
-			Meteor.users.update {_id:_id},modifier,(e,r)->
-				fut['return']( {e:e,r:r} )
-			return fut.wait()
+			Meteor.users.update {_id:_id},modifier
 
 	adminSendResetPasswordEmail: (doc)->
 		check arguments, [Match.Any]
