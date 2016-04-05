@@ -12,9 +12,7 @@ Meteor.methods
 	adminUpdateDoc: (modifier,collection,_id)->
 		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, [AdminConfig?.adminRole or 'admin']
-			Future = Npm.require('fibers/future');
-			fut = new Future();
-			return adminCollectionObject(collection).update {_id:_id},modifier,(e,r)->
+			return adminCollectionObject(collection).update {_id:_id},modifier
 
 	adminRemoveDoc: (collection,_id)->
 		check arguments, [Match.Any]
