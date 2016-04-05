@@ -2,12 +2,7 @@ Meteor.methods
 	adminInsertDoc: (doc,collection)->
 		check arguments, [Match.Any]
 		if Roles.userIsInRole this.userId, [AdminConfig?.adminRole or 'admin']
-			Future = Npm.require('fibers/future');
-			fut = new Future();
-
-			adminCollectionObject(collection).insert doc, (e,_id)->
-				fut['return']( {e:e,_id:_id} )
-			return fut.wait()
+			return adminCollectionObject(collection).insert doc
 
 	adminUpdateDoc: (modifier,collection,_id)->
 		check arguments, [Match.Any]
