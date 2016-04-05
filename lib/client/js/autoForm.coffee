@@ -33,7 +33,7 @@ AutoForm.hooks
 			hook = @
 			Meteor.call 'adminUpdateDoc', updateDoc, Session.get('admin_collection_name'), Session.get('admin_id'), (e,r)->
 				if e
-					hook.done(e)
+					alert(e); hook.done(e)
 				else
 					adminCallback 'onUpdate', [Session.get 'admin_collection_name', insertDoc, updateDoc, currentDoc], (collection) ->
 						hook.done null, collection
