@@ -18,6 +18,10 @@ Meteor.publish 'adminUser', ->
 	Meteor.users.find @userId
 
 Meteor.publish 'adminCollectionsCount', ->
+	console.log('adminCollectionsCount')
+	# Disabled due to poor performance.
+	return
+
 	handles = []
 	self = @
 
