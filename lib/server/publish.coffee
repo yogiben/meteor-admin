@@ -18,11 +18,8 @@ Meteor.publish 'adminUser', ->
 	Meteor.users.find @userId
 
 Meteor.publish 'adminCollectionsCount', ->
-	console.log('adminCollectionsCount')
-	# Disabled due to poor performance.
-	return
-
 	handles = []
+	hookHandles = []
 	self = @
 
 	collectionsWithoutCustomCounter = _.reduce AdminConfig?.collections, (result, collection, name) ->
@@ -37,17 +34,16 @@ Meteor.publish 'adminCollectionsCount', ->
 
 	_.each collectionsWithoutCustomCounter, (collection, name) ->
 		id = new Mongo.ObjectID
-		count = 1
+		docCollection = adminCollectionObject(name)
+		count = docCollection.find().count()
 
-		ready = false
-		handles.push adminCollectionObject(name).find().observeChanges
-			added: ->
-				count += 1
-				ready and self.changed 'adminCollectionsCount', id, {count: count}
-			removed: ->
-				count -= 1
-				ready and self.changed 'adminCollectionsCount', id, {count: count}
-		ready = true
+		update = -> self.changed 'adminCollectionsCount', id, {count: count}
+		hookHandles.push docCollection.after.insert ->
+			count++
+			update()
+		hookHandles.push docCollection.after.remove ->
+			count--
+			update()
 
 		self.added 'adminCollectionsCount', id, {collection: name, count: count}
 
@@ -58,6 +54,7 @@ Meteor.publish 'adminCollectionsCount', ->
 
 	self.onStop ->
 		_.each handles, (handle) -> handle.stop()
+		_.each hookHandles.push , (handle) -> handle.remove()
 	self.ready()
 
 Meteor.publish null, ->
