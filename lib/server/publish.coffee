@@ -54,7 +54,7 @@ Meteor.publish 'adminCollectionsCount', ->
 
 	self.onStop ->
 		_.each handles, (handle) -> handle.stop()
-		_.each hookHandles.push , (handle) -> handle.remove()
+		_.each hookHandles, (handle) -> handle.remove()
 	self.ready()
 
 Meteor.publish null, ->
