@@ -135,7 +135,7 @@ adminCreateRouteEditOptions = (collection, collectionName) ->
 			Session.set 'admin_collection_name', collectionName
 			Session.set 'admin_id', parseID(@params._id)
 			Session.set 'admin_doc', adminCollectionObject(collectionName).findOne _id : parseID(@params._id)
-			collection.routes?.edit?.onAfterAction
+			collection.routes?.edit?.onAfterAction?.apply(@, arguments)
 		data: ->
 			admin_collection: adminCollectionObject collectionName
 	_.defaults options, collection.routes?.edit
