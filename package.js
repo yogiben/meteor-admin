@@ -24,7 +24,7 @@ Package.on_use(function(api){
     'raix:handlebar-helpers@0.2.5',
     'reywood:publish-composite@1.4.2',
     'momentjs:moment@2.10.6',
-    'aldeed:tabular@1.4.0',
+    'aldeed:tabular@1.5.5',
     'meteorhacks:unblock@1.1.0',
     'zimme:active-route@2.3.2',
     'mfactory:admin-lte@0.0.2',
