@@ -65,6 +65,7 @@ adminCreateTables = (collections) ->
 			sub: collection.sub
 			columns: columns
 			extraFields: collection.extraFields
+			order: collection.order || []
 			dom: adminTablesDom
 			selector: collection.selector || ->
 				return {}
