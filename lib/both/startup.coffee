@@ -125,8 +125,9 @@ adminCreateRouteEditOptions = (collection, collectionName) ->
 		template: "AdminDashboardEdit"
 		controller: "AdminController"
 		waitOn: ->
-			Meteor.subscribe 'adminCollectionDoc', collectionName, parseID(@params._id)
-			collection.routes?.edit?.waitOn
+			handle = Meteor.subscribe 'adminCollectionDoc', collectionName, parseID(@params._id)
+			handles = collection.routes?.edit?.waitOn?.apply(@, arguments) ? []
+			_.union([handle], handles)
 		action: ->
 			@render()
 		onAfterAction: ->
