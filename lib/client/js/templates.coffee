@@ -53,3 +53,10 @@ Template.AdminDashboardView.helpers
 Template.adminEditBtn.helpers
 	path: ->
 		Router.path "adminDashboard" + Session.get('admin_collection_name') + "Edit", _id: @_id
+		
+	color: ->
+		order = Orders.findOne(this._id)
+		if order? && order.manualState in ['red', 'yellow', 'green']
+			order.manualState
+		else
+			'inherit'
