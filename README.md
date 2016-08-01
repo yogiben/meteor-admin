@@ -20,6 +20,7 @@ Maintained by [Meteor Factory](http://meteorfactory.io). Professional Meteor dev
 
 #### 0. Prerequisites####
 This package is designed to work with certain types of projects. Your project should be using and have configured
+* Session - `meteor add session`
 * Iron Router - `meteor add  iron:router`
 * Collection Helpers - `meteor add dburles:collection-helpers`
 * Collection2 - `meteor add aldeed:collection2`
