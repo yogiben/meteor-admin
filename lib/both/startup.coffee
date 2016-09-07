@@ -194,7 +194,7 @@ Meteor.startup ->
 				data: 'emails'
 				title: 'Email'
 				render: (value) ->
-					value[0].address
+					value?[0]?.address
 				searchable: true
 			}
 			{
