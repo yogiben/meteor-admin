@@ -44,7 +44,7 @@ adminCreateTables = (collections) ->
 			if column.template
 				createdCell = (node, cellData, rowData) ->
 					$(node).html ''
-					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData}, node)
+					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData})
 
 			data: column.name
 			title: column.label
@@ -195,7 +195,8 @@ Meteor.startup ->
 				data: 'emails'
 				title: 'Email'
 				render: (value) ->
-					value[0].address
+					if value && value.length
+						value[0].address
 				searchable: true
 			}
 			{
