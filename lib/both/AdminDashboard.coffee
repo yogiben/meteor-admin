@@ -18,7 +18,7 @@ AdminDashboard =
 	collectionLabel: (collection)->
 		if collection == 'Users'
 			'Users'
-		else if collection? and typeof AdminConfig.collections[collection].label == 'string'
+		else if collection? and typeof AdminConfig.collections[collection]?.label == 'string'
 			AdminConfig.collections[collection].label
 		else Session.get 'admin_collection_name'
 

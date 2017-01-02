@@ -12,7 +12,7 @@ A complete admin dashboard solution for meteor built off the [iron-router](https
 
 ![alt tag](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/screenshot2.png)
 
-Maintained by [Meteor Factory](https://meteorfactory.io). Professional Meteor development.
+Maintained by [Meteor Factory](http://meteorfactory.io). Professional Meteor development.
 
 [![Meteor admin](https://raw.githubusercontent.com/yogiben/meteor-admin/master/readme/meteor-factory.jpg)](http://meteorfactory.io)
 
@@ -47,59 +47,110 @@ This config will make the **first user** admin.
 You can also set the adminEmails property which will will override this.
 ```javascript
 AdminConfig = {
-  name: 'My App'
-  adminEmails: ['ben@code2create.com']
+  name: 'My App',
+  adminEmails: ['ben@code2create.com'],
   collections: {
     Posts: {}
-  }
+  },
 };
 ```
 #### 3. Define your data models ####
 If you are unfamiliar with [autoform](https://github.com/aldeed/meteor-autoform) or [collection2](https://github.com/aldeed/meteor-collection2) or [collection-helpers](https://github.com/dburles/meteor-collection-helpers) you should check them out now.
 
 You need to define and attach a schema to the collections that you want to edit via the admin dashboard. Check out the [documentation](https://github.com/aldeed/meteor-collection2).
-```javascript
-Schemas = {};
+```
+@Schemas = {}
 
-Posts = new Meteor.Collection('posts');
+@Posts = new Meteor.Collection('posts');
 
-Schemas.Posts = new SimpleSchema({
-  title: {
-    type: String,
-    max: 60
-  },
-  content: {
-    type: String,
-    autoform: {
-      rows: 5
-    }
-  },
-  createdAt: {
-    type: Date,
-    label: 'Date',
-    autoValue: function () {
-      if (this.isInsert) {
-        return new Date();
-      }
-    }
-  },
-  owner: {
-    type: String,
-    regEx: SimpleSchema.RegEx.Id,
-    autoValue: function () {
-      if (this.isInsert) {
-        return Meteor.userId();
-      }
-    },
-    autoform: {
-      options: function () {
-        _.map(Meteor.users.find().fetch(), function (user) {
-          return {
-            label: user.emails[0].address,
-            value: user._id
-          };
-        });
-      }
+Schemas.Posts = new SimpleSchema
+	title:
+		type: String
+		max: 60
+	content:
+		type: String
+		autoform:
+			rows: 5
+	createdAt:
+		type: Date
+		label: 'Date'
+		autoValue: ->
+			if this.isInsert
+				return new Date()
+	owner:
+		type: String
+		regEx: SimpleSchema.RegEx.Id
+		autoValue: ->
+			if this.isInsert
+				return Meteor.userId()
+		autoform:
+			options: ->
+				_.map Meteor.users.find().fetch(), (user)->
+					label: user.emails[0].address
+					value: user._id
+
+Posts.attachSchema(Schemas.Posts)
+```
+#### 4. Enjoy ####
+Go to `/admin`. If you are not made an admin, re-read step 2.
+
+### Customization ###
+The admin dashboard is heavily customisable. Most of the possibilities are represented in the config option below.
+```
+@AdminConfig =
+    nonAdminRedirectRoute: 'entrySignIn',
+    collections:
+        Posts: {
+            icon: 'pencil'
+            tableColumns: [
+              {label: 'Title', name: 'title'}
+	            {label: 'Published', name: 'published'}
+	            {label: 'User', name: 'owner', template: 'userEmail'}
+            ]
+            templates:
+              new:
+                name: 'postWYSIGEditor'
+                data:
+                  post: Session.get 'admin_doc' if Meteor.isClient
+              edit:
+                name: 'postWYSIGEditor'
+                data:
+                  post: ()-> Session.get 'admin_doc' if Meteor.isClient
+            selector: (userId)->
+              return {ownerId: userId}
+        },
+        Comments: {
+            icon: 'comment'
+            omitFields: ['owner']
+            tableColumns: [
+              {label: 'Content', name: 'content'}
+              {label: 'Post', name: 'postTitle()'}
+              {label: 'User', name: 'owner', template: 'userEmail'}
+            ]
+            showWidget: false
+        }
+    autoForm:
+        omitFields: ['createdAt', 'updatedAt']
+    dashboard:
+        homeUrl: '/dashboard'
+        widgets: [
+          {
+            template: 'adminCollectionWidget'
+            data:
+              collection: 'Posts'
+              class: 'col-lg-3 col-xs-6'
+          }
+          {
+            template: 'adminUserWidget'
+            data:
+              class: 'col-lg-3 col-xs-6'
+          }
+        ]
+
+Comments.helpers({
+  postTitle: function () {
+    if (this.post) {
+      return Posts.findOne(this.post).title;
     }
   }
 });
