@@ -19,27 +19,26 @@ Meteor.publish 'adminUser', ->
 
 Meteor.publish 'adminCollectionsCount', ->
 	handles = []
+	hookHandles = []
 	self = @
 
 	_.each AdminTables, (table, name) ->
 		id = new Mongo.ObjectID
-		count = 0
-		table = AdminTables[name]
-		ready = false
-		selector = if table.selector then table.selector(self.userId) else {}
-		handles.push table.collection.find().observeChanges
-			added: ->
-				count += 1
-				ready and self.changed 'adminCollectionsCount', id, {count: count}
-			removed: ->
-				count -= 1
-				ready and self.changed 'adminCollectionsCount', id, {count: count}
-		ready = true
-
+		docCollection = adminCollectionObject(name)
+		count = docCollection.find().count()
 		self.added 'adminCollectionsCount', id, {collection: name, count: count}
+
+		update = -> self.changed 'adminCollectionsCount', id, {count: count}
+		hookHandles.push docCollection.after.insert ->
+			count++
+			update()
+		hookHandles.push docCollection.after.remove ->
+			count--
+			update()
 
 	self.onStop ->
 		_.each handles, (handle) -> handle.stop()
+		_.each hookHandles, (handle) -> handle.remove()
 	self.ready()
 
 Meteor.publish null, ->

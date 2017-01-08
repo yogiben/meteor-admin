@@ -14,7 +14,7 @@ Template.AdminDashboardViewWrapper.destroyed = ->
 	Blaze.remove @data.view
 
 Template.AdminDashboardView.rendered = ->
-	table = @$('.dataTable').DataTable();
+	table = @$('.dataTable').DataTable()
 	filter = @$('.dataTables_filter')
 	length = @$('.dataTables_length')
 
@@ -46,10 +46,15 @@ Template.AdminDashboardView.rendered = ->
 
 Template.AdminDashboardView.helpers
 	hasDocuments: ->
-		AdminCollectionsCount.findOne({collection: Session.get 'admin_collection_name'})?.count > 0
+		count = AdminCollectionsCount.findOne({collection: Session.get 'admin_collection_name'})
+		# Default to true to iterate over docs if count is not stored.
+		if count? then count.count > 0 else true
 	newPath: ->
 		Router.path 'adminDashboard' + Session.get('admin_collection_name') + 'New'
 
 Template.adminEditBtn.helpers
 	path: ->
 		Router.path "adminDashboard" + Session.get('admin_collection_name') + "Edit", _id: @_id
+
+Template.AdminDashboard.helpers
+	isDefined: (obj) -> obj?

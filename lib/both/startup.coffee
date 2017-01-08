@@ -44,7 +44,9 @@ adminCreateTables = (collections) ->
 			if column.template
 				createdCell = (node, cellData, rowData) ->
 					$(node).html ''
-					Blaze.renderWithData(Template[column.template], {value: cellData, doc: rowData}, node)
+					Blaze.renderWithData(Template[column.template], {
+						value: cellData, doc: rowData, column: column}
+					, node)
 
 			data: column.name
 			title: column.label
@@ -125,8 +127,9 @@ adminCreateRouteEditOptions = (collection, collectionName) ->
 		template: "AdminDashboardEdit"
 		controller: "AdminController"
 		waitOn: ->
-			Meteor.subscribe 'adminCollectionDoc', collectionName, parseID(@params._id)
-			collection.routes?.edit?.waitOn
+			handle = Meteor.subscribe 'adminCollectionDoc', collectionName, parseID(@params._id)
+			handles = collection.routes?.edit?.waitOn?.apply(@, arguments) ? []
+			_.union([handle], handles)
 		action: ->
 			@render()
 		onAfterAction: ->
@@ -136,7 +139,7 @@ adminCreateRouteEditOptions = (collection, collectionName) ->
 			Session.set 'admin_collection_name', collectionName
 			Session.set 'admin_id', parseID(@params._id)
 			Session.set 'admin_doc', adminCollectionObject(collectionName).findOne _id : parseID(@params._id)
-			collection.routes?.edit?.onAfterAction
+			collection.routes?.edit?.onAfterAction?.apply(@, arguments)
 		data: ->
 			admin_collection: adminCollectionObject collectionName
 	_.defaults options, collection.routes?.edit
@@ -195,7 +198,7 @@ Meteor.startup ->
 				data: 'emails'
 				title: 'Email'
 				render: (value) ->
-					value[0].address
+					value?[0]?.address
 				searchable: true
 			}
 			{

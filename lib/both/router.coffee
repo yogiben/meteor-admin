@@ -1,11 +1,13 @@
 @AdminController = RouteController.extend
 	layoutTemplate: 'AdminLayout'
 	waitOn: ->
-		[
+		subs = [
 			Meteor.subscribe 'adminUsers'
 			Meteor.subscribe 'adminUser'
 			Meteor.subscribe 'adminCollectionsCount'
 		]
+		if AdminConfig?.waitOn? then subs = subs.concat(AdminConfig?.waitOn.call(this))
+		subs
 	onBeforeAction: ->
 		Session.set 'adminSuccess', null
 		Session.set 'adminError', null
