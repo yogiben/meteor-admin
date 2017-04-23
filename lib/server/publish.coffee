@@ -27,7 +27,7 @@ Meteor.publish 'adminCollectionsCount', ->
 		table = AdminTables[name]
 		ready = false
 		selector = if table.selector then table.selector(self.userId) else {}
-		handles.push table.collection.find().observeChanges
+		handles.push table.collection.find(selector, {fields: {}}).observeChanges
 			added: ->
 				count += 1
 				ready and self.changed 'adminCollectionsCount', id, {count: count}

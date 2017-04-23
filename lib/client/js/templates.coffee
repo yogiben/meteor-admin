@@ -46,10 +46,17 @@ Template.AdminDashboardView.rendered = ->
 
 Template.AdminDashboardView.helpers
 	hasDocuments: ->
-		AdminCollectionsCount.findOne({collection: Session.get 'admin_collection_name'})?.count > 0
+		Blaze._globalHelpers.adminCollectionCount(Session.get 'admin_collection_name') > 0
 	newPath: ->
 		Router.path 'adminDashboard' + Session.get('admin_collection_name') + 'New'
 
 Template.adminEditBtn.helpers
 	path: ->
 		Router.path "adminDashboard" + Session.get('admin_collection_name') + "Edit", _id: @_id
+		
+	color: ->
+		order = Orders.findOne(this._id)
+		if order? && order.manualState in ['red', 'yellow', 'green']
+			order.manualState
+		else
+			'inherit'

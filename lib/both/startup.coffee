@@ -91,7 +91,7 @@ adminCreateRouteViewOptions = (collection, collectionName) ->
 			Session.set 'admin_title', collectionName
 			Session.set 'admin_subtitle', 'View'
 			Session.set 'admin_collection_name', collectionName
-			collection.routes?.view?.onAfterAction
+			collection.routes?.view?.onAfterAction()
 	_.defaults options, collection.routes?.view
 
 adminCreateRouteNew = (collection, collectionName) ->
@@ -110,7 +110,7 @@ adminCreateRouteNewOptions = (collection, collectionName) ->
 			Session.set 'admin_subtitle', 'Create new'
 			Session.set 'admin_collection_page', 'new'
 			Session.set 'admin_collection_name', collectionName
-			collection.routes?.new?.onAfterAction
+			collection.routes?.new?.onAfterAction()
 		data: ->
 			admin_collection: adminCollectionObject collectionName
 	_.defaults options, collection.routes?.new
@@ -126,7 +126,7 @@ adminCreateRouteEditOptions = (collection, collectionName) ->
 		controller: "AdminController"
 		waitOn: ->
 			Meteor.subscribe 'adminCollectionDoc', collectionName, parseID(@params._id)
-			collection.routes?.edit?.waitOn
+			collection.routes?.edit?.waitOn?()
 		action: ->
 			@render()
 		onAfterAction: ->
@@ -136,7 +136,7 @@ adminCreateRouteEditOptions = (collection, collectionName) ->
 			Session.set 'admin_collection_name', collectionName
 			Session.set 'admin_id', parseID(@params._id)
 			Session.set 'admin_doc', adminCollectionObject(collectionName).findOne _id : parseID(@params._id)
-			collection.routes?.edit?.onAfterAction
+			collection.routes?.edit?.onAfterAction()
 		data: ->
 			admin_collection: adminCollectionObject collectionName
 	_.defaults options, collection.routes?.edit
