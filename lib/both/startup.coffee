@@ -68,6 +68,7 @@ adminCreateTables = (collections) ->
 			dom: adminTablesDom
 			selector: collection.selector || ->
 				return {}
+			stateSave: true
 
 adminCreateRoutes = (collections) ->
 	_.each collections, adminCreateRouteView
